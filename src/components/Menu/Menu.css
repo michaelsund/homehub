@@ -19,3 +19,11 @@
 .active {
   background-color: #4CAF50; /* Add an active/current color */
 }
+
+.nav-link {
+  border-right: 4px solid #333333;
+}
+
+.nav-link-active {
+  border-right: 4px solid orangered;
+}

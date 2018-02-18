@@ -1,18 +1,31 @@
+// @flow
+
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import FaTh from 'react-icons/lib/fa/th'
 import FaTelevision from 'react-icons/lib/fa/television'
 import './Menu.css'
 
-const Menu = () => (
-  <div className="icon-bar">
-    <Link to="/">
-      <FaTelevision />
-    </Link>
-    <Link to="/about">
-      <FaTh />
-    </Link>
-  </div>
-)
+type Props = {
+  location: Object
+}
 
-export default Menu
+class Menu extends React.Component<Props> {
+  isActive = (route) => route === this.props.location.pathname ?
+    'nav-link-active' : 'nav-link'
+
+  render() {
+    return (
+      <div className="icon-bar">
+        <Link to="/" className={this.isActive('/')}>
+          <FaTelevision />
+        </Link>
+        <Link to="/about" className={this.isActive('/about')}>
+          <FaTh />
+        </Link>
+      </div>
+    )
+  }
+}
+
+export default withRouter(Menu)
