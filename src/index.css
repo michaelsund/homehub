@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  height: 100%;
+}
+
+.sidebar-container {
+  height: 100%;
+  position:fixed;
+  left:0px;
+  top:0px;
+  background-color:gray;
+}
+
+.content-area {
+  width: 93%;
+  height: 100%;
+  float: right;
+}

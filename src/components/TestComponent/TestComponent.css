@@ -1,0 +1,32 @@
+.component-card {
+  background-color: gray;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  line-height: 200px;
+}
+
+.component-card-text {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.box {
+  background-color: #333;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #FFFFFF;
+}
