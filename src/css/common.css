@@ -1,3 +1,19 @@
+.sidebar-container {
+  width: 86px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color:gray;
+  overflow: hidden;
+}
+
+.content-area {
+  margin-left: 90px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
+}
+
 .box {
   background-color: #FFFFFF;
   border: 1px solid #FFFFFF;

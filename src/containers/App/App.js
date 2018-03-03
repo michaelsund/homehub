@@ -1,14 +1,14 @@
 // @flow
 
 import React from 'react'
-import TestComponent from '../../components/TestComponent'
+import CardGrid from '../../components/CardGrid'
 
 
 class App extends React.Component<{}> {
   render() {
     return (
       <div>
-        <TestComponent />
+        <CardGrid />
       </div>
     )
   }

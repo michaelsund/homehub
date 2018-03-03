@@ -1,38 +1,50 @@
 // @flow
 
 import React from 'react'
-import Moment from 'react-moment';
-// import 'moment-timezone';
+import Moment from 'moment'
 import './Countdown.css'
 
 type Props = {
   title: string,
-  description: string,
-  dueDate: any
+  description?: string,
+  dueDate: Date,
 }
 
 type State = {
-  nowDate: any,
   diffDays: number
 }
 
 class Countdown extends React.Component<Props, State> {
   state = {
-    nowDate: Moment(new Date()),
-    diffDays: 0
+    diffDays: this.calcEvent(this.props.dueDate)
   }
-  componentDidMount() {
-    const diff = this.props.dueDate.diff(this.state.nowDate)
-    this.setState({ diffDays: diff })
+
+  calcEvent(date: Date) {
+    const event = Moment(date)
+    const today = Moment().format('YYYY-MM-DD')
+    return event.diff(today, 'days')
+  }
+
+  timeLeft = () => {
+    switch (this.state.diffDays) {
+      case 0:
+        return (<h1 className="days-left_0">Today!</h1>)
+      case 1:
+        return (<h1 className="days-left_1">Tomorrow!</h1>)
+      case 2:
+        return (<h1 className="days-left_2">{this.state.diffDays} days!</h1>)
+      default:
+        return (<h1>{this.state.diffDays} days</h1>)
+    }
   }
 
   render() {
     return (
       <div className="countdown-wrapper">
         <h3>{this.props.title}</h3>
+        <h4>{Moment(new Date(this.props.dueDate)).format('YY-MM-DD')}</h4>
         <p className="countdown-description-text">{this.props.description}</p>
-        <h1>{this.state.diffDays} days</h1>
-        <h3>{this.props.dueDate}</h3>
+        {this.timeLeft()}
       </div>
     )
   }
