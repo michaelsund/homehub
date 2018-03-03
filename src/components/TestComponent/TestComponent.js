@@ -2,23 +2,13 @@
 
 import React from 'react'
 import { WidthProvider, Responsive } from 'react-grid-layout'
+import Countdown from '../Countdown'
 import './TestComponent.css'
+import '../../css/common.css'
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive)
 
-type State = {
-  layouts: Object
-}
-
-class TestComponent extends React.Component<{}, State> {
-  state = {
-    className: 'layout',
-    cols: {
-      lg: 12, md: 10, sm: 6, xs: 4, xxs: 2
-    },
-    rowHeight: 30
-  }
-
+class TestComponent extends React.Component<{}> {
   render() {
     return (
       <div>
@@ -28,17 +18,24 @@ class TestComponent extends React.Component<{}, State> {
             lg: 12, md: 10, sm: 6, xs: 4, xxs: 2
           }}
           rowHeight={30}
-          layouts={this.state.layouts}
         >
           <div className="box" key="1" data-grid={{
-            w: 2, h: 3, x: 0, y: 0, minW: 2, minH: 3
+            w: 2, h: 5, x: 0, y: 0, minW: 2, maxW: 2, minH: 5, maxH: 5
           }}>
-            <span className="text">1</span>
+            <Countdown
+              title="Pannan"
+              description="bladiblabla bladiblabla bladiblabla"
+              dueDate={new Date()}
+            />
           </div>
           <div className="box" key="2" data-grid={{
-            w: 2, h: 3, x: 2, y: 0, minW: 2, minH: 3
+            w: 2, h: 5, x: 2, y: 0, minW: 2, minH: 5
           }}>
-            <span className="text">2</span>
+            <Countdown
+              title="Pannan 2"
+              description="bladiblabla"
+              dueDate={new Date()}
+            />
           </div>
           <div className="box" key="3" data-grid={{
             w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3
@@ -54,6 +51,21 @@ class TestComponent extends React.Component<{}, State> {
             w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3
           }}>
             <span className="text">5</span>
+          </div>
+          <div className="box" key="6" data-grid={{
+            w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3
+          }}>
+            <span className="text">6</span>
+          </div>
+          <div className="box" key="7" data-grid={{
+            w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3
+          }}>
+            <span className="text">7</span>
+          </div>
+          <div className="box" key="8" data-grid={{
+            w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3
+          }}>
+            <span className="text">8</span>
           </div>
         </ResponsiveReactGridLayout>
       </div>

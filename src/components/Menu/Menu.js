@@ -2,8 +2,10 @@
 
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import FaTh from 'react-icons/lib/fa/th'
-import FaTelevision from 'react-icons/lib/fa/television'
+import {
+  FaTh,
+  FaTelevision
+} from 'react-icons/lib/fa'
 import './Menu.css'
 
 type Props = {
