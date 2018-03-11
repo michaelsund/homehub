@@ -1,0 +1,3 @@
+
+☐ If a change to the grid is made, it does not load the latest change if switching to About and back to App.
+☐ Setup dockercontainers for node (with telldusd) and mongodb, forward tellstick to node container.

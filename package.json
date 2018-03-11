@@ -4,10 +4,13 @@
   "private": true,
   "dependencies": {
     "babel-eslint": "^8.2.1",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "flow-typed": "^2.3.0",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
+    "mongoose": "^5.0.9",
+    "morgan": "^1.9.0",
     "react": "^16.2.0",
     "react-dnd": "^2.5.4",
     "react-dom": "^16.2.0",
@@ -37,6 +40,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serverdev": "nodemon server/index.js"
   }
 }

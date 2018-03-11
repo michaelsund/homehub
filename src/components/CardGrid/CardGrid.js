@@ -15,14 +15,18 @@ type State = {
 
 class CardGrid extends React.Component<{}, State> {
   state = {
-    layouts: JSON.parse(originalLayouts)
+    layouts: {}
+  }
+
+  componentDidMount = () => {
+    this.setState({ layouts: JSON.parse(originalLayouts) })
   }
 
   static defaultProps() {
     return {
       className: 'layout',
       cols: {
-        lg: 12, md: 10, sm: 6, xs: 4, xxs: 2
+        lg: 10, md: 10, sm: 6, xs: 4, xxs: 2
       },
       rowHeight: 30
     };
