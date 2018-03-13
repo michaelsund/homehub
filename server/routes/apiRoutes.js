@@ -4,11 +4,11 @@ const db = require('../schema')
 const apiRouter = express.Router()
 
 apiRouter.get('/sensors', (req, res) => {
-  db.Sensor.find({}, (err, data) => {
+  db.Sensor.find({}, (err, sensors) => {
     if (err) {
       console.log(err)
     }
-    res.json({ success: true, status: 'Fetched all sensors.', data })
+    res.json({ success: true, status: 'Fetched all sensors.', sensors })
   })
 })
 
@@ -17,6 +17,10 @@ apiRouter.post('/newsensor', (req, res) => {
     const newSensor = new db.Sensor({
       name: req.body.name,
       description: req.body.description || '',
+      measurementType: req.body.measurementType || '',
+      measurementUnit: req.body.measurementUnit || '',
+      scaling: req.body.scaling || 0,
+      external: req.body.external || true,
       maxAge: req.body.maxAge || null,
       maxAgeAlarm: req.body.maxAgeAlarm || false,
       maxAgeAlarmActive: req.body.maxAgeAlarmActive || false,
@@ -44,11 +48,11 @@ apiRouter.post('/updatesensor', (req, res) => {
   // Should be safe to just update everything from body.
 })
 
-// TODO: Logic needed for triggering alarms and such.
+// TODO: Logic needed for triggering alarms and such, this is for external sensors posting in.
 apiRouter.post('/newsensorvalue', (req, res) => {
   if (req.body.sensorId && req.body.value) {
     // Check if the sensorId correlates with a Sensor
-    db.Sensor.findOne({ _id: req.body.sensorId }, (err) => {
+    db.Sensor.findOne({ _id: req.body.sensorId }, err => {
       if (!err) {
         const newSensorValue = db.SensorValue({
           sensorId: req.body.sensorId,

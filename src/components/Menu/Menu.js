@@ -13,7 +13,7 @@ type Props = {
 }
 
 class Menu extends React.Component<Props> {
-  isActive = (route) => route === this.props.location.pathname ?
+  isActive = route => route === this.props.location.pathname ?
     'nav-link-active' : 'nav-link'
 
   render() {
