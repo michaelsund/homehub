@@ -1,8 +1,8 @@
 version: '2'
 services:
-    homehub:
+    hut:
         build: .
-        container_name: "homehub1"
+        container_name: "hut1"
         environment:
             - NODE_ENV=development
             - FOO=bar
