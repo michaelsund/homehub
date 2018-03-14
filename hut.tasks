@@ -1,3 +1,4 @@
-☐ Write api part for sensor adding, values, delete, and such.
+☐ Write api part for sensor adding, editing, delete (removes all measurements aswell), adding values.
+☐ Checkout express-validator for validating post input, implement if its any good.
 ☐ If a change to the grid is made, it does not load the latest change if switching to About and back to App.
 ☐ Setup dockercontainers for node (with telldusd) and mongodb, forward tellstick to node container.

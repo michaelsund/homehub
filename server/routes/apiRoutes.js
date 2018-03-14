@@ -19,7 +19,6 @@ apiRouter.post('/newsensor', (req, res) => {
       description: req.body.description || '',
       measurementType: req.body.measurementType || '',
       measurementUnit: req.body.measurementUnit || '',
-      scaling: req.body.scaling || 0,
       external: req.body.external || true,
       maxAge: req.body.maxAge || null,
       maxAgeAlarm: req.body.maxAgeAlarm || false,
@@ -48,12 +47,26 @@ apiRouter.post('/updatesensor', () => {
   // Should be safe to just update everything from body.
 })
 
+apiRouter.post('/delsensor', (req, res) => {
+  if (req.body.sensorId) {
+    db.Sensor.findOne({ _id: req.body.sensorId }, (err, sensor) => {
+      if (sensor) {
+        db.Sensor.remove({ _id: req.body.sensorId }, () =>
+          db.SensorValue.remove({ sensorId: req.body.sensorId }, () =>
+            res.json({ success: true, status: 'Sensor deleted.' })))
+      } else {
+        res.json({ success: false, status: 'Cannot delete sensor.' })
+      }
+    })
+  }
+})
+
 // TODO: Logic needed for triggering alarms and such, this is for external sensors posting in.
 apiRouter.post('/newsensorvalue', (req, res) => {
-  if (req.body.sensorId && req.body.sensorId !== '' && req.body.value) {
+  if (req.body.sensorId && req.body.value) {
     // Check if the sensorId correlates with a Sensor
-    db.Sensor.findOne({ _id: req.body.sensorId }, err => {
-      if (!err) {
+    db.Sensor.findOne({ _id: req.body.sensorId }, (err, sensor) => {
+      if (sensor) {
         const newSensorValue = db.SensorValue({
           sensorId: req.body.sensorId,
           value: req.body.value,
