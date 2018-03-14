@@ -12,4 +12,4 @@ app.use(bodyParser.json())
 app.use('/', router)
 app.use('/api', apiRouter)
 
-app.listen(8080, () => console.log('Example app listening on port 8080!'))
+app.listen(8080, '0.0.0.0', () => console.log('Example app listening on port 8080!'))

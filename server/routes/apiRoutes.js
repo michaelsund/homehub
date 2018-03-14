@@ -43,14 +43,14 @@ apiRouter.post('/newsensor', (req, res) => {
   }
 })
 
-apiRouter.post('/updatesensor', (req, res) => {
+apiRouter.post('/updatesensor', () => {
   // TODO: The post should contains the current data, new and old.
   // Should be safe to just update everything from body.
 })
 
 // TODO: Logic needed for triggering alarms and such, this is for external sensors posting in.
 apiRouter.post('/newsensorvalue', (req, res) => {
-  if (req.body.sensorId && req.body.value) {
+  if (req.body.sensorId && req.body.sensorId !== '' && req.body.value) {
     // Check if the sensorId correlates with a Sensor
     db.Sensor.findOne({ _id: req.body.sensorId }, err => {
       if (!err) {
