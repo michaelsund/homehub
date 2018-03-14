@@ -6,6 +6,8 @@
 # development db
 /server/db
 
+/server/settings.json
+
 # testing
 /coverage
 
