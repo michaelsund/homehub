@@ -1,5 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')('combined')
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const router = require('./routes').routes
 const apiRouter = require('./routes').apiRoutes
@@ -12,6 +13,10 @@ const apiRouter = require('./routes').apiRoutes
 //   "pusBulletChannel": "mychannel"
 // }
 
+mongoose.connect('mongodb://localhost/hut')
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'MongoDB connection error:'))
+db.once('open', () => console.log('Connected to db!'))
 
 // const pusher = new PushBullet(settings.pushBulletKey)
 const app = express()
