@@ -5,6 +5,7 @@ import {
   Switch,
   Route
 } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import Menu from './components/Menu'
 import App from './containers/App'
 import About from './containers/About'
@@ -13,21 +14,24 @@ import './index.css'
 import '../node_modules/react-grid-layout/css/styles.css'
 import '../node_modules/react-resizable/css/styles.css'
 import './css/common.css'
+import configureStore from './store/configurestore'
 
 ReactDOM.render(
-  <BrowserRouter>
-    <div>
-      <div className="sidebar-container">
-        <Menu />
+  <Provider store={configureStore}>
+    <BrowserRouter>
+      <div>
+        <div className="sidebar-container">
+          <Menu />
+        </div>
+        <div className="content-area">
+          <Switch>
+            <Route exact path='/' component={App}/>
+            <Route path='/about' component={About}/>
+          </Switch>
+        </div>
       </div>
-      <div className="content-area">
-        <Switch>
-          <Route exact path='/' component={App}/>
-          <Route path='/about' component={About}/>
-        </Switch>
-      </div>
-    </div>
-  </BrowserRouter>,
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 )
 registerServiceWorker()

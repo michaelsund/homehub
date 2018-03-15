@@ -3,6 +3,7 @@
 import React from 'react'
 import { WidthProvider, Responsive } from 'react-grid-layout'
 import Countdown from '../Countdown'
+import Sensor from '../Sensor'
 import './CardGrid.css'
 import '../../css/common.css'
 
@@ -62,15 +63,13 @@ class CardGrid extends React.Component<{}, State> {
             />
           </div>
           <div className="box" key="2" data-grid={{
-            w: 2, h: 5, x: 2, y: 0, minW: 2, minH: 5
+            w: 3, h: 6, x: 2, y: 0, minW: 3, minH: 6
           }}>
-            <Countdown
-              title="Pannan 2"
-              description="bladiblabla"
-              dueDate={new Date('Sat Mar 28 2018 15:29:37 GMT+0100 (W. Europe Standard Time)')}
+            <Sensor
+              sensorId="5aaace08609e33b9d524d681"
             />
           </div>
-          <div className="box" key="3" data-grid={{
+          {/* <div className="box" key="3" data-grid={{
             w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3
           }}>
             <span className="text">3</span>
@@ -94,7 +93,7 @@ class CardGrid extends React.Component<{}, State> {
             w: 2, h: 3, x: 12, y: 0, minW: 2, minH: 3
           }}>
             <span className="text">7</span>
-          </div>
+          </div> */}
         </ResponsiveReactGridLayout>
       </div>
     )

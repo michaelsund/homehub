@@ -1,0 +1,23 @@
+.countdown-wrapper {
+  text-align: center;
+  line-height: 8px;
+  padding-top: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.countdown-description-text {
+  line-height: 18px;
+}
+
+.days-left_0 {
+  color: red;
+}
+
+.days-left_1 {
+  color: orangered;
+}
+
+.days-left_2 {
+  color: orange;
+}

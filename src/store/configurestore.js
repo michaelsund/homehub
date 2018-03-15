@@ -1,17 +1,16 @@
 import { createStore, applyMiddleware } from 'redux'
-import devtools from 'remote-redux-devtools'
+import devtoolsEnhancer from 'remote-redux-devtools'
 import socketMiddleware from '../middlewares/websockets'
-import testMiddleware from '../middlewares/test'
 import reducers from '../reducers'
 
-const middleware = applyMiddleware(testMiddleware, socketMiddleware)
+const middleware = applyMiddleware(socketMiddleware)
 
-const configurestore = () => (
-  createStore(
-    reducers,
-    devtools(),
-    middleware,
-  )
-);
+console.log('loading store...')
 
-export default configurestore
+const configureStore = createStore(
+  reducers,
+  devtoolsEnhancer({ hostname: 'localhost', port: 8000, realtime: true }),
+  middleware
+)
+
+export default configureStore

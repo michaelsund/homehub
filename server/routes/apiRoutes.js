@@ -1,7 +1,25 @@
 const express = require('express')
 const db = require('../schema')
+const WebSocket = require('ws')
+const { check, validationResult } = require('express-validator/check');
+// const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
+const wss = new WebSocket.Server({ port: 40510 })
+
+// We intend to only use websockets on stuff from api.
+wss.on('connection', ws => {
+  ws.on('message', message => {
+    // TODO: Verify its a valid message! to prevent spam
+    wss.clients.forEach(client => {
+      // Send to everyone
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify(message))
+      }
+    })
+  })
+  ws.on('error', () => {});
+})
 
 apiRouter.get('/sensors', (req, res) => {
   db.Sensor.find({}, (err, sensors) => {
@@ -12,8 +30,30 @@ apiRouter.get('/sensors', (req, res) => {
   })
 })
 
-apiRouter.post('/newsensor', (req, res) => {
-  if (req.body.name) {
+apiRouter.post('/sensor', [
+  check('sensorId').exists().isLength({ min: 1 })
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ success: false, errors: errors.mapped() });
+  } else {
+    db.Sensor.find({ _id: req.body.sensorId }, (err, data) => {
+      if (err) {
+        console.log(err)
+      }
+      console.log(data)
+      res.json({ success: true, status: 'Sensor fetched', sensor: data[0] })
+    })
+  }
+})
+
+apiRouter.post('/newsensor', [
+  check('name').exists().isLength({ min: 1 }).trim()
+], (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(422).json({ success: false, errors: errors.mapped() });
+  } else {
     const newSensor = new db.Sensor({
       name: req.body.name,
       description: req.body.description || '',
@@ -37,8 +77,6 @@ apiRouter.post('/newsensor', (req, res) => {
       }
       res.json({ success: true, status: 'New sensor created', _id: data._id || 'no _id found' })
     })
-  } else {
-    res.json({ success: false, status: 'Could not create new sensor, wrong input.' })
   }
 })
 
@@ -72,7 +110,25 @@ apiRouter.post('/newsensorvalue', (req, res) => {
           value: req.body.value,
           time: new Date()
         })
-        newSensorValue.save(() => res.json({ success: true, status: 'Sensor value saved' }))
+        newSensorValue.save(err => {
+          if (!err) {
+            // Update the sensors latest value and time
+            sensor.update({
+              lastReportedValue: req.body.value,
+              lastReportedTime: new Date()
+            }, () => {
+              // Update websocket client with the new value
+              wss.clients.forEach(client => {
+                if (client.readyState === WebSocket.OPEN) {
+                  client.send(JSON.stringify({ type: 'NEW_SENSOR_VALUE', newSensorValue }))
+                }
+              })
+              res.json({ success: true, status: 'Sensor value saved' })
+            })
+          } else {
+            res.json({ success: false, status: 'Error saving new sensor value' })
+          }
+        })
       } else {
         console.log(err)
         res.json({ success: false, status: 'Sensor with that id could not be found.' })
@@ -100,7 +156,7 @@ apiRouter.get('/sensorvalues', (req, res) => {
 // Sensorvalues POST version
 apiRouter.post('/sensorvalues', (req, res) => {
   if (req.body.sensorId) {
-    db.Sensor.find({ sensorId: req.body.sensorId }, (err, data) => {
+    db.SensorValue.find({ sensorId: req.body.sensorId }, (err, data) => {
       if (err) {
         console.log(err)
       }
