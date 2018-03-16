@@ -1,4 +1,4 @@
-export const setSensors = sensor => ({
-  type: 'SET_SENSORS',
-  sensor
+export const newSensorValue = sensorValue => ({
+  type: 'NEW_SENSOR_VALUE',
+  sensorValue
 })

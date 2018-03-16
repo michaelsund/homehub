@@ -142,7 +142,7 @@ apiRouter.post('/newsensorvalue', (req, res) => {
 // Sensorvalues GET version /api/sensorvalues/?sensorId=blabla?daysback
 apiRouter.get('/sensorvalues', (req, res) => {
   if (req.query.sensorId) {
-    db.SensorValue.find({ sensorId: req.query.sensorId }, (err, data) => {
+    db.SensorValue.find({ sensorId: req.query.sensorId }).sort('-time').exec((err, data) => {
       if (err) {
         console.log(err)
       }
@@ -156,7 +156,7 @@ apiRouter.get('/sensorvalues', (req, res) => {
 // Sensorvalues POST version
 apiRouter.post('/sensorvalues', (req, res) => {
   if (req.body.sensorId) {
-    db.SensorValue.find({ sensorId: req.body.sensorId }, (err, data) => {
+    db.SensorValue.find({ sensorId: req.body.sensorId }).sort('-time').exec((err, data) => {
       if (err) {
         console.log(err)
       }
