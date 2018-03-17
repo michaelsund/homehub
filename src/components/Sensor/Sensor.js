@@ -12,6 +12,7 @@ type Props = {
 
 type State = {
   sensor: Object,
+  percentage: number,
   sensorValues: []
 }
 
@@ -20,6 +21,7 @@ const mapStateToProps = state => state
 class Sensor extends React.Component<Props, State> {
   state = {
     sensor: {},
+    percentage: 0,
     sensorValues: []
   }
 
@@ -55,7 +57,14 @@ class Sensor extends React.Component<Props, State> {
     })
       .then(response => response.json())
       .then(response => {
-        this.setState({ sensor: response.sensor })
+        this.setState({
+          sensor: response.sensor,
+          percentage: this.calcPercentageValue(
+            response.sensor.lastReportedValue,
+            response.sensor.minValue,
+            response.sensor.maxValue
+          )
+        })
       })
 
     fetch('http://localhost:8080/api/sensorvalues', {
@@ -74,24 +83,17 @@ class Sensor extends React.Component<Props, State> {
       })
   }
 
+  // TODO: Needs to handle values larger or smaller than min/max
+  calcPercentageValue = (current, min, max) => Math.round(((current - min) * 100) / (max - min))
+
   render() {
     return (
       <div className="sensor-wrapper">
         <p>name: {this.state.sensor.name}</p>
         <p>desc: {this.state.sensor.description}</p>
-        <p>type: {this.state.sensor.measurementType}</p>
-        <p>
-          lastValue: {this.state.sensor.lastReportedValue} min: {this.state.sensor.minValue}
-          --max: {this.state.sensor.maxValue}
-        </p>
-        {/* TODO: Needs to handle values larger or smaller than min/max */}
-        {/* <p>
-          calcValue: {Math.round(((this.state.sensor.lastReportedValue -
-          this.state.sensor.minValue) * 100) /
-          (this.state.sensor.maxValue - this.state.sensor.minValue))}
-          {this.state.sensor.measurementUnit}
-        </p> */}
+        <p>lastRawValue: {this.state.sensor.lastReportedValue}</p>
         <p>lastTime: {this.state.sensor.lastReportedTime}</p>
+        <h4>{this.state.percentage}</h4>
       </div>
     )
   }
