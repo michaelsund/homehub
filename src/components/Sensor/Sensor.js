@@ -11,6 +11,7 @@ type Props = {
 }
 
 type State = {
+  errorFetchingData: bool,
   sensor: Object,
   percentage: number,
   sensorValues: []
@@ -20,6 +21,7 @@ const mapStateToProps = state => state
 
 class Sensor extends React.Component<Props, State> {
   state = {
+    erroFetchingData: false,
     sensor: {},
     percentage: 0,
     sensorValues: []
@@ -57,14 +59,19 @@ class Sensor extends React.Component<Props, State> {
     })
       .then(response => response.json())
       .then(response => {
-        this.setState({
-          sensor: response.sensor,
-          percentage: this.calcPercentageValue(
-            response.sensor.lastReportedValue,
-            response.sensor.minValue,
-            response.sensor.maxValue
-          )
-        })
+        if (response.data) {
+          this.setState({
+            errorFetchingData: false,
+            sensor: response.sensor,
+            percentage: this.calcPercentageValue(
+              response.sensor.lastReportedValue,
+              response.sensor.minValue,
+              response.sensor.maxValue
+            )
+          })
+        } else {
+          this.setState({ errorFetchingData: true })
+        }
       })
 
     fetch('http://localhost:8080/api/sensorvalues', {
@@ -89,11 +96,20 @@ class Sensor extends React.Component<Props, State> {
   render() {
     return (
       <div className="sensor-wrapper">
-        <p>name: {this.state.sensor.name}</p>
-        <p>desc: {this.state.sensor.description}</p>
-        <p>lastRawValue: {this.state.sensor.lastReportedValue}</p>
-        <p>lastTime: {this.state.sensor.lastReportedTime}</p>
-        <h4>{this.state.percentage}</h4>
+        {this.state.errorFetchingData ? (
+          <div>
+            <p>Error fetching sensor data!</p>
+            <p>sensorId: {this.props.sensorId}</p>
+          </div>
+        ) : (
+          <div>
+            <p>name: {this.state.sensor.name}</p>
+            <p>desc: {this.state.sensor.description}</p>
+            <p>lastRawValue: {this.state.sensor.lastReportedValue}</p>
+            <p>lastTime: {this.state.sensor.lastReportedTime}</p>
+            <h4>{this.state.percentage}</h4>
+          </div>
+        )}
       </div>
     )
   }
