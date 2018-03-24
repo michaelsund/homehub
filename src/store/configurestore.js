@@ -9,7 +9,7 @@ console.log('loading store...')
 
 const configureStore = createStore(
   reducers,
-  devtoolsEnhancer({ hostname: 'localhost', port: 8000, realtime: true }),
+  devtoolsEnhancer({ realtime: true }),
   middleware
 )
 

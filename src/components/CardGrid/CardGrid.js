@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { WidthProvider, Responsive } from 'react-grid-layout'
-import Countdown from '../Countdown'
+import RecurringEvent from '../RecurringEvent'
 import Sensor from '../Sensor'
 import './CardGrid.css'
 import '../../css/common.css'
@@ -56,10 +56,10 @@ class CardGrid extends React.Component<{}, State> {
           <div className="box" key="1" data-grid={{
             w: 2, h: 5, x: 0, y: 0, minW: 2, maxW: 2, minH: 5, maxH: 5
           }}>
-            <Countdown
+            <RecurringEvent
               title="Pannan"
-              description="bladiblabla bladiblabla bladiblabla"
-              dueDate={new Date('Sat Mar 03 2018 15:29:37 GMT+0100 (W. Europe Standard Time)')}
+              note="Tömma aska"
+              eventInterval="thu"
             />
           </div>
           <div className="box" key="2" data-grid={{

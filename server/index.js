@@ -6,18 +6,18 @@ const cors = require('cors')
 const path = require('path')
 const router = require('./routes').routes
 const apiRouter = require('./routes').apiRoutes
-const remotedev = require('remotedev-server')
+// const remotedev = require('remotedev-server')
 // const PushBullet = require('pushbullet')
 // const settings = require('./settings.json')
 
 // settings.json example
 // {
 //   "pushBulletKey": "your_key_here",
-//   "pusBulletChannel": "mychannel"
+//   "pusBulletChannel": "mychannel"2
 // }
 
 // Local remote dev server
-remotedev({ hostname: 'localhost', port: 8000 });
+// remotedev({ hostname: 'localhost', port: 8000 });
 
 mongoose.connect('mongodb://localhost/hut')
 const db = mongoose.connection
