@@ -2,7 +2,9 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
+import Moment from 'moment'
 import './Sensor.css'
+import GaugeLiquid from '../GaugeLiquid'
 // import Loading from '../Loading'
 
 type Props = {
@@ -21,7 +23,7 @@ const mapStateToProps = state => state
 
 class Sensor extends React.Component<Props, State> {
   state = {
-    erroFetchingData: false,
+    errorFetchingData: false,
     sensor: {},
     percentage: 0,
     sensorValues: []
@@ -40,7 +42,12 @@ class Sensor extends React.Component<Props, State> {
       sensor.lastReportedTime = nextProps.sensorValues[0].time
       this.setState({
         sensor,
-        sensorValues: [nextSensorValue, ...this.state.sensorValues]
+        sensorValues: [nextSensorValue, ...this.state.sensorValues],
+        percentage: this.calcPercentageValue(
+          nextProps.sensorValues[0].value,
+          this.state.sensor.minValue,
+          this.state.sensor.maxValue
+        )
       })
     }
   }
@@ -59,21 +66,21 @@ class Sensor extends React.Component<Props, State> {
     })
       .then(response => response.json())
       .then(response => {
-        if (response.data) {
-          this.setState({
-            errorFetchingData: false,
-            sensor: response.sensor,
-            percentage: this.calcPercentageValue(
-              response.sensor.lastReportedValue,
-              response.sensor.minValue,
-              response.sensor.maxValue
-            )
-          })
-        } else {
-          this.setState({ errorFetchingData: true })
-        }
+        this.setState({
+          errorFetchingData: false,
+          sensor: response.sensor,
+          percentage: this.calcPercentageValue(
+            response.sensor.lastReportedValue,
+            response.sensor.minValue,
+            response.sensor.maxValue
+          )
+        })
+        this.fetchValues()
       })
+      .catch(() => this.setState({ errorFetchingData: true }))
+  }
 
+  fetchValues = () => {
     fetch('http://localhost:8080/api/sensorvalues', {
       method: 'POST',
       headers: {
@@ -103,11 +110,10 @@ class Sensor extends React.Component<Props, State> {
           </div>
         ) : (
           <div>
-            <p>name: {this.state.sensor.name}</p>
-            <p>desc: {this.state.sensor.description}</p>
-            <p>lastRawValue: {this.state.sensor.lastReportedValue}</p>
-            <p>lastTime: {this.state.sensor.lastReportedTime}</p>
-            <h4>{this.state.percentage}</h4>
+            <h3>{this.state.sensor.name}</h3>
+            <p className="sensor-description-text">{this.state.sensor.description}</p>
+            <GaugeLiquid value={this.state.percentage} />
+            <p className="sensor-lastReportedTime-text">{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
           </div>
         )}
       </div>

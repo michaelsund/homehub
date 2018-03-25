@@ -63,37 +63,10 @@ class CardGrid extends React.Component<{}, State> {
             />
           </div>
           <div className="box" key="2" data-grid={{
-            w: 3, h: 6, x: 2, y: 0, minW: 3, minH: 6
+            w: 3, h: 8, x: 2, y: 0, minW: 3, maxW: 3, minH: 8, maxH: 8
           }}>
-            <Sensor
-              sensorId="5aaace08609e33b9d524d681"
-            />
+            <Sensor sensorId="5aaace08609e33b9d524d681" />
           </div>
-          {/* <div className="box" key="3" data-grid={{
-            w: 2, h: 3, x: 4, y: 0, minW: 2, minH: 3
-          }}>
-            <span className="text">3</span>
-          </div>
-          <div className="box" key="4" data-grid={{
-            w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3
-          }}>
-            <span className="text">4</span>
-          </div>
-          <div className="box" key="6" data-grid={{
-            w: 2, h: 3, x: 6, y: 0, minW: 2, minH: 3
-          }}>
-            <span className="text">6</span>
-          </div>
-          <div className="box" key="5" data-grid={{
-            w: 2, h: 3, x: 8, y: 0, minW: 2, minH: 3
-          }}>
-            <span className="text">5</span>
-          </div>
-          <div className="box" key="7" data-grid={{
-            w: 2, h: 3, x: 12, y: 0, minW: 2, minH: 3
-          }}>
-            <span className="text">7</span>
-          </div> */}
         </ResponsiveReactGridLayout>
       </div>
     )

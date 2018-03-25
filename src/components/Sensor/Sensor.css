@@ -1,4 +1,4 @@
-.countdown-wrapper {
+.sensor-wrapper {
   text-align: center;
   line-height: 8px;
   padding-top: 18px;
@@ -6,7 +6,11 @@
   margin-right: 10px;
 }
 
-.countdown-description-text {
+.sensor-description-text {
+  line-height: 18px;
+}
+
+.sensor-lastReportedTime-text {
   line-height: 18px;
 }
 
