@@ -4,7 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
 import './Sensor.css'
-import GaugeLiquid from '../GaugeLiquid'
+import GaugeVolume from '../GaugeVolume'
 // import Loading from '../Loading'
 
 type Props = {
@@ -100,21 +100,39 @@ class Sensor extends React.Component<Props, State> {
   // TODO: Needs to handle values larger or smaller than min/max
   calcPercentageValue = (current, min, max) => Math.round(((current - min) * 100) / (max - min))
 
+  sensorRenderer = type => {
+    if (type === 'volume') {
+      return (
+        <div>
+          <p>{this.state.sensor.name}</p>
+          <p>{this.state.sensor.description}</p>
+          <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+          <GaugeVolume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+        </div>
+      )
+    }
+    // Show loading while state is updating
+    return (
+      <div>
+        <p>{this.state.sensor.name}</p>
+        <p>{this.state.sensor.description}</p>
+        <p>Last raw value: {this.state.sensor.lastReportedValue}</p>
+        <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+        <p>No sensortype defined</p>
+      </div>
+    )
+  }
+
   render() {
     return (
-      <div className="sensor-wrapper">
+      <div className="col-wrapper">
         {this.state.errorFetchingData ? (
           <div>
             <p>Error fetching sensor data!</p>
             <p>sensorId: {this.props.sensorId}</p>
           </div>
         ) : (
-          <div>
-            <h3>{this.state.sensor.name}</h3>
-            <p className="sensor-description-text">{this.state.sensor.description}</p>
-            <GaugeLiquid value={this.state.percentage} />
-            <p className="sensor-lastReportedTime-text">{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
-          </div>
+          this.sensorRenderer(this.state.sensor.measurementType)
         )}
       </div>
     )

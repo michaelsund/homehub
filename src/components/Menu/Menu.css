@@ -1,6 +1,6 @@
 .icon-bar {
-  width: 90px; /* Set a specific width */
-  background-color: #555; /* Dark-grey background */
+  width: 70px; /* Set a specific width */
+  background-color: #333232; /* Dark-grey background */
 }
 
 .icon-bar a {
@@ -13,7 +13,7 @@
 }
 
 .icon-bar a:hover {
-  background-color: #000; /* Add a hover color */
+  color: #000; /* Add a hover color */
 }
 
 .active {
