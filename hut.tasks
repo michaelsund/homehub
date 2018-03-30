@@ -1,3 +1,5 @@
+☐ The App container should loop through sensors and recurringevents and list them.
+☐ New sensors and recurringevents should be added from setting panel later on (manual add in db for now)
 ☐ Write api part for sensor adding, editing, delete (removes all measurements aswell), adding values.
 ☐ Checkout express-validator for validating post input, implement if its any good.
 ☐ If a change to the grid is made, it does not load the latest change if switching to About and back to App.
