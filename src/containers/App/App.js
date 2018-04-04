@@ -20,7 +20,7 @@ class App extends React.Component<{}> {
               title="Pannan"
               note="Tömma aska"
               everyWeek
-              eventDay="fri"
+              eventDay="thu"
             />
           </Col>
         </Row>
