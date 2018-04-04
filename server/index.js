@@ -8,18 +8,17 @@ const router = require('./routes').routes
 const apiRouter = require('./routes').apiRoutes
 // const remotedev = require('remotedev-server')
 // const PushBullet = require('pushbullet')
-// const settings = require('./settings.json')
-
-// settings.json example
-// {
-//   "pushBulletKey": "your_key_here",
-//   "pusBulletChannel": "mychannel"2
-// }
+const settings = require('./settings.json')
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
 
-mongoose.connect('mongodb://localhost/hut')
+if (settings.mongoUser === '') {
+  mongoose.connect(`mongodb://${settings.mongoServer}/hut`)
+} else {
+  mongoose.connect(`mongodb://${settings.mongoUser}:${settings.mongoPass}@${settings.mongoServer}/hut`)
+}
+
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 db.once('open', () => console.log('Connected to db!'))

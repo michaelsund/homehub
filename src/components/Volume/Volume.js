@@ -10,7 +10,7 @@ type Props = {
 class Volume extends React.Component<Props> {
   render() {
     return (
-      <p className="volume-value">{this.props.value}{this.props.unit}</p>
+      <p className="volume-value">{this.props.value}%</p>
     )
   }
 }

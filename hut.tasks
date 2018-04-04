@@ -1,7 +1,7 @@
 ✔ The App container should loop through sensors and recurringevents and list them. @done (3/30/2018, 9:04:39 PM)
+☐ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props.
 ☐ UI Alarm component, and ack alarm api route for sensor.
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
-☐ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props.
 ☐ New sensors and recurringevents should be added from setting panel later on (manual add in db for now)
 ☐ Write api part for sensor adding, editing, delete (removes all measurements aswell), adding values.
 ☐ Checkout express-validator for validating post input, implement if its any good.
