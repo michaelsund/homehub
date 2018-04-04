@@ -1,3 +1,20 @@
-.sensor-wrapper {
-  position: relative;
+.left-container {
+  height: 130px;
+}
+
+.right-container {
+  height: 130px;
+}
+
+.bottom-container {
+  line-height: 50px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+  .right-container {
+    padding-left: 10px;
+  }
 }

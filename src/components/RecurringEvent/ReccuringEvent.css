@@ -1,15 +1,11 @@
-.recurringevent-description-text {
-  line-height: 18px;
+.time-left-text_short {
+  line-height: 70px;
+  text-align: center;
+  font-size: 30px;
 }
 
-.days-left_0 {
-  color: red;
-}
-
-.days-left_1 {
-  color: orangered;
-}
-
-.days-left_2 {
-  color: orange;
+.time-left-text_long {
+  line-height: 70px;
+  text-align: center;
+  font-size: 20px;
 }

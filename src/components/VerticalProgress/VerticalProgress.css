@@ -1,0 +1,18 @@
+.progress-container {
+  height: 100%;
+  width: 30px;
+  -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  border: 0;
+  border-radius: 4px;
+}
+
+.progress {
+  width: 30px;
+  border-radius: 4px;
+  -webkit-transition: height 2s;
+    transition: height 2s;
+}

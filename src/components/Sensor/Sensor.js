@@ -3,8 +3,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
+import { Row, Col } from 'react-simple-flex-grid'
 import './Sensor.css'
-import GaugeVolume from '../GaugeVolume'
+import Volume from '../Volume'
+import VerticalProgress from '../VerticalProgress'
 // import Loading from '../Loading'
 
 type Props = {
@@ -53,7 +55,6 @@ class Sensor extends React.Component<Props, State> {
   }
 
   fetchSensorAndValues = () => {
-    console.log(`fetching sensor and values for ${this.props.sensorId}`)
     fetch('http://localhost:8080/api/sensor', {
       method: 'POST',
       headers: {
@@ -98,27 +99,49 @@ class Sensor extends React.Component<Props, State> {
   }
 
   // TODO: Needs to handle values larger or smaller than min/max
-  calcPercentageValue = (current, min, max) => Math.round(((current - min) * 100) / (max - min))
+  calcPercentageValue = (current, min, max) => {
+    const percent = Math.round(((current - min) * 100) / (max - min))
+    if (percent < 0) {
+      return 0
+    } else if (percent > 100) {
+      return 100
+    }
+    return percent
+  }
 
   sensorRenderer = type => {
     if (type === 'volume') {
       return (
-        <div>
-          <p>{this.state.sensor.name}</p>
-          <p>{this.state.sensor.description}</p>
-          <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
-          <GaugeVolume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+        <div className="generic-wrapper">
+          <Row>
+            <Col className="left-container" span={8}>
+              <p className="name">{this.state.sensor.name}</p>
+              <p className="desc">{this.state.sensor.description}</p>
+              <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+            </Col>
+            <Col className="right-container" span={2} offset={2}>
+              <VerticalProgress
+                value={this.state.percentage}
+                bgColor="#1C1B1B"
+              />
+            </Col>
+          </Row>
+          <div className="bottom-container">
+            <Volume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+          </div>
         </div>
       )
     }
-    // Show loading while state is updating
+    // Default if type is not defined
     return (
-      <div>
-        <p>{this.state.sensor.name}</p>
-        <p>{this.state.sensor.description}</p>
-        <p>Last raw value: {this.state.sensor.lastReportedValue}</p>
-        <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
-        <p>No sensortype defined</p>
+      <div className="generic-wrapper">
+        <div className="text-container">
+          <p className="name">{this.state.sensor.name}</p>
+          <p className="desc">{this.state.sensor.description}</p>
+          <p>Last raw value: {this.state.sensor.lastReportedValue}</p>
+          <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+          <p>No sensortype defined</p>
+        </div>
       </div>
     )
   }

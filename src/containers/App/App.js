@@ -11,18 +11,19 @@ class App extends React.Component<{}> {
   render() {
     return (
       <div>
+        {/* Sensors fetched from db */}
+        <SensorList />
         <Row className="row-style" gutter={10}>
           {/* Recurring events are hardcoded */}
-          <Col lg={2} md={2} sm={6} xs={6}>
+          <Col lg={2} md={2} sm={4} xs={12}>
             <RecurringEvent
               title="Pannan"
               note="Tömma aska"
-              eventInterval="thu"
+              everyWeek
+              eventDay="fri"
             />
           </Col>
         </Row>
-        {/* Sensors fetched from db */}
-        <SensorList />
       </div>
     )
   }
