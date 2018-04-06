@@ -30,23 +30,55 @@ class ReccuringEvent extends React.Component<Props, State> {
     everyWeek: true,
     oddWeeks: false,
     evenWeels: false,
-    onceAMonth: false
+    onceAMonth: false,
+    weekInMonth: null
   }
 
   componentDidMount = () => {
     this.calcDaysLeft()
   }
 
+  weekdayCounter = (first, second) => {
+    if (first > second) {
+      return (WeekDays.length - first) + second
+    }
+    return second - first
+  }
+
+  weekOfMonth() {
+    return (Moment(new Date()).isoWeek() - Moment(new Date()).startOf('month').isoWeek()) + 1;
+  }
+
   calcDaysLeft = () => {
     const today = Moment().format('dddd').substring(0, 3).toLowerCase()
     const eventIndex = WeekDays.indexOf(this.props.eventDay.toLowerCase())
     const todayIndex = WeekDays.indexOf(today)
-    // Implement logic for everyOtherWeek and onceAMonth
     if (this.props.everyWeek) {
-      if (todayIndex > eventIndex) {
-        this.setState({ daysToEvent: (WeekDays.length - todayIndex) + eventIndex })
+      this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) })
+    } else if (this.props.evenWeeks) {
+      if (Moment(new Date()).isoWeek() % 2 === 0) {
+        this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) })
       } else {
-        this.setState({ daysToEvent: eventIndex - todayIndex })
+        this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) + 7 })
+      }
+    } else if (this.props.oddWeeks) {
+      if (Moment(new Date()).isoWeek() % 2 !== 0) {
+        this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) })
+      } else {
+        this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) + 7 })
+      }
+    } else if (this.props.onceAMonth) {
+      const monthWeek = this.weekOfMonth()
+      console.log(`monthWeek: ${monthWeek}`)
+      if (monthWeek === this.props.weekInMonth) {
+        console.log('this week!')
+        this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) })
+      } else {
+        // TODO:
+        this.setState({
+          daysToEvent: this.weekdayCounter(todayIndex, eventIndex) +
+            ((4 - monthWeek) * 7)
+        })
       }
     }
   }

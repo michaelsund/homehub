@@ -23,6 +23,25 @@ class App extends React.Component<{}> {
               eventDay="thu"
             />
           </Col>
+          <Col lg={2} md={2} sm={4} xs={12}>
+            <RecurringEvent
+              title="Sophämtning"
+              note="Ställ ut kärl"
+              everyWeek={false}
+              evenWeeks
+              eventDay="fri"
+            />
+          </Col>
+          <Col lg={2} md={2} sm={4} xs={12}>
+            <RecurringEvent
+              title="Pannan"
+              note="Sota ur och töm"
+              everyWeek={false}
+              onceAMonth
+              weekInMonth={1}
+              eventDay="thu"
+            />
+          </Col>
         </Row>
       </div>
     )

@@ -1,9 +1,8 @@
 ✔ The App container should loop through sensors and recurringevents and list them. @done (3/30/2018, 9:04:39 PM)
-✔ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props. @done (4/4/2018, 7:08:21 PM)
+✔ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props. @done (4/4/2018, 7:08:21 PM)x
 ☐ UI Alarm component, and ack alarm api route for sensor.
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
 ☐ New sensors and recurringevents should be added from setting panel later on (manual add in db for now)
 ☐ Write api part for sensor adding, editing, delete (removes all measurements aswell), adding values.
 ☐ Checkout express-validator for validating post input, implement if its any good.
-☐ If a change to the grid is made, it does not load the latest change if switching to About and back to App.
-☐ Setup dockercontainers for node (with telldusd) and mongodb, forward tellstick to node container.
+☐ Setup dockercontainers for node (with telldusd), forward tellstick to node container.
