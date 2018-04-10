@@ -4,6 +4,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
+import { GoAlert } from 'react-icons/lib/go'
 import './Sensor.css'
 import Volume from '../Volume'
 import VerticalProgress from '../VerticalProgress'
@@ -98,7 +99,6 @@ class Sensor extends React.Component<Props, State> {
       })
   }
 
-  // TODO: Needs to handle values larger or smaller than min/max
   calcPercentageValue = (current, min, max) => {
     const percent = Math.round(((current - min) * 100) / (max - min))
     if (percent < 0) {
@@ -107,6 +107,16 @@ class Sensor extends React.Component<Props, State> {
       return 100
     }
     return percent
+  }
+
+  alarmStatus = () => {
+    // min max value and max age
+    if (this.state.sensor.maxValueAlarmActive ||
+      this.state.sensor.minValueAlarmActive ||
+      this.state.sensor.maxAgeAlarmActive) {
+      return <GoAlert className="alarm-icon_inactive" />
+    }
+    return null
   }
 
   sensorRenderer = type => {
@@ -127,7 +137,12 @@ class Sensor extends React.Component<Props, State> {
             </Col>
           </Row>
           <div className="bottom-container">
-            <Volume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+            <div className="bottom-container_left">
+              {this.alarmStatus()}
+            </div>
+            <div className="bottom-container_right">
+              <Volume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+            </div>
           </div>
         </div>
       )

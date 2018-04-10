@@ -45,6 +45,13 @@ class ReccuringEvent extends React.Component<Props, State> {
     return second - first
   }
 
+  weeksCounter = (currW, eventW) => {
+    if (currW > eventW) {
+      return (5 - currW) * 7
+    }
+    return (eventW - currW) * 7
+  }
+
   weekOfMonth() {
     return (Moment(new Date()).isoWeek() - Moment(new Date()).startOf('month').isoWeek()) + 1;
   }
@@ -69,15 +76,12 @@ class ReccuringEvent extends React.Component<Props, State> {
       }
     } else if (this.props.onceAMonth) {
       const monthWeek = this.weekOfMonth()
-      console.log(`monthWeek: ${monthWeek}`)
       if (monthWeek === this.props.weekInMonth) {
-        console.log('this week!')
         this.setState({ daysToEvent: this.weekdayCounter(todayIndex, eventIndex) })
       } else {
-        // TODO:
         this.setState({
           daysToEvent: this.weekdayCounter(todayIndex, eventIndex) +
-            ((4 - monthWeek) * 7)
+            this.weeksCounter(this.weekOfMonth(), this.props.weekInMonth)
         })
       }
     }

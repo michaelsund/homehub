@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-import { Row, Col } from 'react-simple-flex-grid'
+import { Col } from 'react-simple-flex-grid'
 import * as actions from '../../actions'
 import Sensor from '../Sensor'
 import './SensorList.css'
@@ -43,13 +43,11 @@ class SensorList extends React.Component<Props> {
   render() {
     return (
       this.props.sensors.length > 0 ? (
-        <Row className="row-style" gutter={10}>
-          {this.props.sensors.map(sensor => (
-            <Col key={sensor._id} lg={2} md={2} sm={4} xs={12}>
-              <Sensor sensorId={sensor._id} />
-            </Col>
-          ))}
-        </Row>
+        this.props.sensors.map(sensor => (
+          <Col className="col-without-row-style" key={sensor._id} lg={2} md={3} sm={3} xs={12}>
+            <Sensor sensorId={sensor._id} />
+          </Col>
+        ))
       ) : (
         null
       )

@@ -10,7 +10,24 @@
   line-height: 50px;
   margin-top: 4px;
   display: flex;
-  justify-content: flex-end;
+}
+
+.bottom-container_right {
+  line-height: 40px;
+  margin-top: 4px;
+  width: 50%;
+  text-align: right;
+}
+
+.bottom-container_left {
+  line-height: 50px;
+  margin-left: 8px;
+  width: 50%;
+}
+
+.alarm-icon_inactive {
+  color: white;
+  font-size: 30px;
 }
 
 @media only screen and (max-width: 600px) {
