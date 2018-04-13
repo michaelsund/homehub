@@ -4,9 +4,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import {
-  FaTh,
-  FaTelevision
-} from 'react-icons/lib/fa'
+  GoDashboard,
+  GoGear,
+  GoCircuitBoard
+} from 'react-icons/lib/go'
 import './Menu.css'
 
 type Props = {
@@ -36,10 +37,13 @@ class Menu extends React.Component<Props> {
     return (
       <div className="icon-bar">
         <Link to="/" className={this.isActive('/')}>
-          <FaTelevision />
+          <GoDashboard />
         </Link>
-        <Link to="/about" className={this.isActive('/about')}>
-          <FaTh />
+        <Link to="/controls" className={this.isActive('/controls')}>
+          <GoCircuitBoard />
+        </Link>
+        <Link to="/settings" className={this.isActive('/settings')}>
+          <GoGear />
         </Link>
       </div>
     )

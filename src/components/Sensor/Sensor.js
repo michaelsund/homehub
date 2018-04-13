@@ -6,7 +6,6 @@ import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
 import { GoAlert } from 'react-icons/lib/go'
 import './Sensor.css'
-import Volume from '../Volume'
 import VerticalProgress from '../VerticalProgress'
 // import Loading from '../Loading'
 
@@ -141,7 +140,33 @@ class Sensor extends React.Component<Props, State> {
               {this.alarmStatus()}
             </div>
             <div className="bottom-container_right">
-              <Volume value={this.state.percentage} unit={this.state.sensor.measurementUnit} />
+              <p className="value-text_big">{this.state.percentage}%</p>
+            </div>
+          </div>
+        </div>
+      )
+    } else if (type === 'temperature') {
+      return (
+        <div className="generic-wrapper">
+          <Row>
+            <Col className="left-container" span={8}>
+              <p className="name">{this.state.sensor.name}</p>
+              <p className="desc">{this.state.sensor.description}</p>
+              <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+            </Col>
+            <Col className="right-container" span={2} offset={2}>
+              {/* <VerticalProgress
+                value={this.state.percentage}
+                bgColor="#1C1B1B"
+              /> */}
+            </Col>
+          </Row>
+          <div className="bottom-container">
+            <div className="bottom-container_left">
+              {this.alarmStatus()}
+            </div>
+            <div className="bottom-container_right">
+              <p className="value-text_big">{this.state.sensor.lastReportedValue}{this.state.sensor.measurementUnit}</p>
             </div>
           </div>
         </div>

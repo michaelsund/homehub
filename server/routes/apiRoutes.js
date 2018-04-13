@@ -1,13 +1,32 @@
-const express = require('express')
-const db = require('../schema')
-const WebSocket = require('ws')
-const { check, validationResult } = require('express-validator/check');
+import express from 'express'
+import WebSocket from 'ws'
+import { check, validationResult } from 'express-validator/check'
+import db from '../schema'
+import config from '../settings.json'
 // const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
 const wss = new WebSocket.Server({ port: 40510 })
 
-// We intend to only use websockets on stuff from api.
+if (config.telldusDuoConnected) {
+  // eslint-disable-next-line
+  const telldus = require('telldus')
+  // TODO: Will not be own routes, but will be included from sensors and controllers db calls.
+  // Its rather the eventListeners that will not work and not push telldus information
+  apiRouter.get('/telldustest', (req, res) => {
+    telldus.getDevices((err, devices) => {
+      if (err) {
+        console.log(`Error: ${err}`)
+      } else {
+        console.log(devices)
+      }
+    })
+    res.json({ success: true })
+  })
+} else {
+  console.log('no tellstick duo connected, ignoring routes')
+}
+
 wss.on('connection', ws => {
   ws.on('message', message => {
     // TODO: Verify its a valid message! to prevent spam
@@ -167,4 +186,4 @@ apiRouter.post('/sensorvalues', (req, res) => {
   }
 })
 
-module.exports = apiRouter
+export default apiRouter

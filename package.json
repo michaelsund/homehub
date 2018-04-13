@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
     "express-validator": "^5.0.3",
     "flow-typed": "^2.3.0",
+    "graphql": "^0.13.2",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
     "mongoose": "^5.0.10",
@@ -34,6 +37,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
+    "babel-preset-node6": "^11.0.0",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^16.1.0",

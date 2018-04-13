@@ -8,7 +8,8 @@ import {
 import { Provider } from 'react-redux'
 import Menu from './components/Menu'
 import App from './containers/App'
-import About from './containers/About'
+import Controls from './containers/Controls'
+import Settings from './containers/Settings'
 import registerServiceWorker from './registerServiceWorker'
 import '../node_modules/react-grid-layout/css/styles.css'
 import '../node_modules/react-resizable/css/styles.css'
@@ -24,8 +25,9 @@ ReactDOM.render(
         </div>
         <div className="content-area">
           <Switch>
-            <Route exact path='/' component={App}/>
-            <Route path='/about' component={About}/>
+            <Route exact path='/' component={App} />
+            <Route path='/Controls' component={Controls} />
+            <Route path='/Settings' component={Settings} />
           </Switch>
         </div>
       </div>

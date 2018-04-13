@@ -1,7 +1,9 @@
-const Sensor = require('./SensorModel')
-const SensorValue = require('./SensorValueModel')
+import Sensor from './SensorModel'
+import SensorValue from './SensorValueModel'
+import Controller from './ControllerModel'
 
-module.exports = {
+export default {
   Sensor,
-  SensorValue
+  SensorValue,
+  Controller
 }

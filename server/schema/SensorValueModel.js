@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const sensorValue = mongoose.Schema({
   sensorId: { type: String, default: null },
@@ -8,4 +8,4 @@ const sensorValue = mongoose.Schema({
 
 const SensorValue = mongoose.model('Sensorvalue', sensorValue)
 
-module.exports = SensorValue
+export default SensorValue

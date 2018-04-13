@@ -26,8 +26,13 @@
 }
 
 .alarm-icon_inactive {
-  color: white;
+  color: #FF7A59;
   font-size: 30px;
+}
+
+.value-text_big {
+  margin: 0;
+  font-size: 50px;
 }
 
 @media only screen and (max-width: 600px) {
