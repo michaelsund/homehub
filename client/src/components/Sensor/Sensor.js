@@ -55,7 +55,7 @@ class Sensor extends React.Component<Props, State> {
   }
 
   fetchSensorAndValues = () => {
-    fetch('http://localhost:8080/api/sensor', {
+    fetch('/api/sensor', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -82,7 +82,7 @@ class Sensor extends React.Component<Props, State> {
   }
 
   fetchValues = () => {
-    fetch('http://localhost:8080/api/sensorvalues', {
+    fetch('/api/sensorvalues', {
       method: 'POST',
       headers: {
         Accept: 'application/json',

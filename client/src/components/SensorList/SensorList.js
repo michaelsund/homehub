@@ -27,7 +27,7 @@ class SensorList extends React.Component<Props> {
   }
 
   fetchAllSensors = () => {
-    fetch('http://localhost:8080/api/sensors', {
+    fetch('/api/sensors', {
       method: 'GET',
       headers: {
         Accept: 'application/json',
