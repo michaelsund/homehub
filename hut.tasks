@@ -2,6 +2,7 @@
 ✔ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props. @done (4/4/2018, 7:08:21 PM)x
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
 ☐ Implement graphql, can it be used instead of http calls, if so rewrite the api and update clientside (test on controllers)
+☐ fix problem with controllers graphql queries does not get anything back from the request....
 ☐ Controllers (telldus switches) api calls and frontend ui
 ☐ UI Alarm component, and ack alarm api route for sensor.
 ☐ New sensors and recurringevents should be added from setting panel later on (manual add in db for now)

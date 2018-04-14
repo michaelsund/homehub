@@ -60,7 +60,6 @@ apiRouter.post('/sensor', [
       if (err) {
         console.log(err)
       }
-      console.log(data)
       res.json({ success: true, status: 'Sensor fetched', sensor: data[0] })
     })
   }

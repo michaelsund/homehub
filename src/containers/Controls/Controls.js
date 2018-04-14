@@ -3,14 +3,14 @@
 import React from 'react'
 import { Row } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
-import ControllerList from '../../components/ControllerList'
+import ControllersList from '../../components/ControllersList'
 
 class Controls extends React.Component<{}> {
   render() {
     return (
       <Row className="row-style">
-        {/* Controllers fetched from db */}
-        <ControllerList />
+        {/* Controllers fetched from db via graphql */}
+        <ControllersList />
       </Row>
     )
   }

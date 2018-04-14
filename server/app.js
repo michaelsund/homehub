@@ -11,15 +11,6 @@ import apiRoutes from './routes/apiRoutes'
 // import PushBullet from 'pushbullet'
 import settings from './settings.json'
 import schema from './graphql'
-// const { buildSchema } = require('graphql')
-// const schema = buildSchema(`
-//   type Query {
-//     message: String
-//   }
-// `)
-// const root = {
-//   message: () => 'Hello World!'
-// }
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -36,7 +27,7 @@ db.once('open', () => console.log('Connected to db!'))
 
 // const pusher = new PushBullet(settings.pushBulletKey)
 const app = express()
-app.use(cors({ origin: '*', optionsSuccessStatus: 200 }))
+app.use(cors())
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
 // pusher.note({
 //  channel_tag: settings.pushBulletChannel
@@ -48,17 +39,15 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 //   }
 // })
 
-app.use('/graphql', graphqlHTTP(() => ({
-  schema,
-  // rootValue: root,
-  pretty: true,
-  graphiql: true
-})))
-
 app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/', routes)
 app.use('/api', apiRoutes)
+app.use('/graphql', graphqlHTTP(() => ({
+  schema,
+  pretty: true,
+  graphiql: true
+})))
 
-app.listen(8080, '0.0.0.0', () => console.log('Example app listening on port 8080'))
+app.listen(8080, '0.0.0.0', () => console.log('Listening on port 8080'))
