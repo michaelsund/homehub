@@ -49,5 +49,5 @@
     "eject": "react-scripts eject",
     "serverdev": "nodemon server/index.js"
   },
-  "proxy": "http://localhost:8080/"
+  "proxy": "http://localhost:5000/"
 }

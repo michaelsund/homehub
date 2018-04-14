@@ -7,7 +7,6 @@ export default {
   type: new GraphQLList(controllerType),
   args: {},
   resolve(root, params, info, fieldASTs) {
-    console.log('CONTROLLERS!!!!!')
     const projections = getProjection(fieldASTs)
     return ControllerModel
       .find()
