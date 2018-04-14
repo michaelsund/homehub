@@ -8,6 +8,4 @@ const controller = mongoose.Schema({
   lastReportedTime: { type: Date, default: null }
 })
 
-const Controller = mongoose.model('Controller', controller)
-
-export default Controller
+export default mongoose.model('Controller', controller);

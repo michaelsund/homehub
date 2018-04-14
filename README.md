@@ -9,5 +9,6 @@ create server/settings.json with the following content for pushbullet messages.
   "mongoUser": "",
   "mongoPass": "",
   "pushBulletKey": "your_api_key",
-  "pusBulletChannel": "your_channel"
+  "pusBulletChannel": "your_channel",
+  "telldusDuoConnected": false
 }

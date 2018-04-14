@@ -6,7 +6,6 @@ import 'react-simple-flex-grid/lib/main.css'
 import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 
-
 class App extends React.Component<{}> {
   render() {
     return (

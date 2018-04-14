@@ -4,11 +4,22 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
 import morgan from 'morgan'
+import graphqlHTTP from 'express-graphql'
 import routes from './routes/routes'
 import apiRoutes from './routes/apiRoutes'
 // import remotedev from 'remotedev-server'
 // import PushBullet from 'pushbullet'
 import settings from './settings.json'
+import schema from './graphql'
+// const { buildSchema } = require('graphql')
+// const schema = buildSchema(`
+//   type Query {
+//     message: String
+//   }
+// `)
+// const root = {
+//   message: () => 'Hello World!'
+// }
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -36,6 +47,13 @@ app.use(express.static(path.resolve(__dirname, '..', 'build')));
 //     console.log(res)
 //   }
 // })
+
+app.use('/graphql', graphqlHTTP(() => ({
+  schema,
+  // rootValue: root,
+  pretty: true,
+  graphiql: true
+})))
 
 app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: true }))
