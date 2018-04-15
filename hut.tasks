@@ -2,11 +2,13 @@
 ✔ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props. @done (4/4/2018, 7:08:21 PM)x
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
 ✔ Implement graphql @done (4/15/2018, 10:21:00 AM)
+☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql
-☐ fix problem with controllers graphql queries does not get anything back from the request....
+✔ fix problem with controllers graphql queries does not get anything back from the request.... @done (4/15/2018, 10:34:57 AM)
 ☐ Controllers (telldus switches) api calls and frontend ui
 ☐ UI Alarm component, and ack alarm api route for sensor.
 ☐ New sensors and recurringevents should be added from setting panel later on (manual add in db for now)
 ☐ Write api part for sensor adding, editing, delete (removes all measurements aswell), adding values.
 ☐ Checkout express-validator for validating post input, implement if its any good.
 ☐ Setup dockercontainers for node (with telldusd), forward tellstick to node container.
+☐ Clean up server and clients package.json deps

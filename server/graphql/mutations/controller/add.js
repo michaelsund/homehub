@@ -19,7 +19,7 @@ export default {
     const newController = await controllerModel.save()
 
     if (!newController) {
-      throw new Error('Error adding new blog post')
+      throw new Error('Error adding new controller')
     }
     return true
   }
