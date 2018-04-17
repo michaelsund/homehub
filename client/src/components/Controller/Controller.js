@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-// import Moment from 'moment'
+import Moment from 'moment'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-simple-flex-grid'
 import * as actions from '../../actions'
@@ -18,7 +18,6 @@ const mapDispatchToProps = dispatch => ({
 
 class Controller extends React.Component<Props> {
   handleToggleClicked = () => {
-    console.log('toggling a controller!')
     this.props.onToggleController(this.props.controller._id)
   }
 
@@ -31,8 +30,7 @@ class Controller extends React.Component<Props> {
               <p className="name">{this.props.controller.name}</p>
               <p className="desc">{this.props.controller.description}</p>
               {this.props.controller.lastReportedTime !== null &&
-                // <p>{Moment(this.props.controller.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
-                <span>moment depri bullshit</span>
+                <p>{Moment(new Date(this.props.controller.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
               }
             </Col>
             <Col className="right-container" span={2} offset={2}>

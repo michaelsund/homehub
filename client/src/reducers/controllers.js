@@ -11,7 +11,6 @@ const controllers = (state: any[] = initialState, action: any) => {
         if (controller._id !== action.controllerId) {
           return controller
         }
-        console.log('found the one')
         return {
           ...controller,
           status: !controller.status
