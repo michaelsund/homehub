@@ -5,6 +5,9 @@ const getControllers = gql`
     controllers {
       _id
       name
+      description
+      status
+      lastReportedTime
     }
   }
 `
