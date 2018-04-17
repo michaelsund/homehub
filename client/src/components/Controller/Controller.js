@@ -17,6 +17,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class Controller extends React.Component<Props> {
+  handleToggleClicked = () => {
+    console.log('toggling a controller!')
+    this.props.onToggleController(this.props.controller._id)
+  }
+
   render() {
     return (
       <div className="col-wrapper">
@@ -35,7 +40,11 @@ class Controller extends React.Component<Props> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-              <button onClick={() => this.props.onToggleController(this.props.controller._id)}>Toggle</button>
+              <button onClick={() =>
+                this.handleToggleClicked()
+              }>
+                Toggle
+              </button>
             </div>
             <div className="bottom-container_right">
               {this.props.controller.status ? <h2>ON</h2> : <h2>OFF</h2>}

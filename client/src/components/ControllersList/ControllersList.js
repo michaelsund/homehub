@@ -26,8 +26,8 @@ const mapDispatchToProps = dispatch => ({
 
 class ControllersList extends React.Component<Props> {
   componentWillReceiveProps = nextProps => {
-    console.log(nextProps)
-    if (nextProps.data.controllers) {
+    // We only want to set the stores controllers if its from gql, not if its from redux
+    if (nextProps.controllers.length === 0 && nextProps.data.controllers) {
       this.props.onSetControllers(nextProps.data.controllers)
     }
   }

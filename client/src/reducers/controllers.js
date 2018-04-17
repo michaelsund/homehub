@@ -7,7 +7,6 @@ const controllers = (state: any[] = initialState, action: any) => {
     case 'SET_CONTROLLERS':
       return action.controllers
     case 'TOGGLE_CONTROLLER':
-      console.log(`toggling: ${action.controllerId}`)
       return state.map(controller => {
         if (controller._id !== action.controllerId) {
           return controller
@@ -15,7 +14,7 @@ const controllers = (state: any[] = initialState, action: any) => {
         console.log('found the one')
         return {
           ...controller,
-          status: true
+          status: !controller.status
         }
       })
     default:
