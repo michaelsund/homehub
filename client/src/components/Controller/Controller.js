@@ -35,7 +35,11 @@ class Controller extends React.Component<Props> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-              <button onClick={() => this.props.onToggleController(this.props.controller._id)}>Toggle</button>
+              <button onClick={() =>
+                this.props.onToggleController(this.props.controller._id)}
+              >
+                Toggle
+              </button>
             </div>
             <div className="bottom-container_right">
               {this.props.controller.status ? <h2>ON</h2> : <h2>OFF</h2>}
