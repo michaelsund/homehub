@@ -95,7 +95,7 @@ class ReccuringEvent extends React.Component<Props, State> {
         {this.state.daysToEvent <= 1 ? (
           this.state.daysToEvent === 0 ? <p className="time-left-text_short">Today!</p> : <p className="time-left-text_short">Tomorrow!</p>
         ) : (
-          <p className="time-left-text_long">{this.state.daysToEvent} days left</p>
+          <p className="time-left-text_long">{this.state.daysToEvent} days</p>
         )}
       </div>
     )

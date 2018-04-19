@@ -2,10 +2,11 @@
   line-height: 70px;
   text-align: center;
   font-size: 30px;
+  animation: wiggle 3s infinite;
 }
 
 .time-left-text_long {
   line-height: 70px;
   text-align: center;
-  font-size: 26px;
+  font-size: 30px;
 }
