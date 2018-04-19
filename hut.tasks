@@ -2,6 +2,8 @@
 ✔ Fix the daysleft counting problem... and the and logic for RecrringEvent everyOtherWeek and onceAMonth props. @done (4/4/2018, 7:08:21 PM)x
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
 ✔ Implement graphql @done (4/15/2018, 10:21:00 AM)
+✔ ControllerList receives first props from gql and pushes them to redux in componentDidMount, need to separate gql updates from redux updates somehow. @done (2018-4-17 18:59:41)
+☐ Rework Sensor component, fetched data should live in redux, not in the component state (navigating away while fetch is running make the following setStates to be done on a unmounted component)
 ☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql
 ✔ fix problem with controllers graphql queries does not get anything back from the request.... @done (4/15/2018, 10:34:57 AM)
