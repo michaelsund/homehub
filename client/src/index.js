@@ -19,7 +19,6 @@ import './css/common.css'
 import configureStore from './store/configurestore'
 
 const client = new ApolloClient({
-  // link: new HttpLink({ uri: 'http://localhost:8080/graphql' }),
   link: new HttpLink(),
   cache: new InMemoryCache()
 })

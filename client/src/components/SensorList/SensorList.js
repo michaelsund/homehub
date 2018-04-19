@@ -45,7 +45,7 @@ class SensorList extends React.Component<Props> {
       this.props.sensors.length > 0 ? (
         this.props.sensors.map(sensor => (
           <Col className="col-without-row-style" key={sensor._id} lg={2} md={3} sm={3} xs={12}>
-            <Sensor sensorId={sensor._id} />
+            <Sensor sensor={sensor} />
           </Col>
         ))
       ) : (

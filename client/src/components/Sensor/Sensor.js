@@ -11,14 +11,13 @@ import VerticalProgress from '../VerticalProgress'
 
 type Props = {
   sensorId: string,
-  sensorValues: []
+  sensorValues?: [],
+  sensor: Array
 }
 
 type State = {
   errorFetchingData: bool,
-  sensor: Object,
   percentage: number,
-  sensorValues: []
 }
 
 const mapStateToProps = state => state
@@ -28,74 +27,35 @@ class Sensor extends React.Component<Props, State> {
     errorFetchingData: false,
     sensor: {},
     percentage: 0,
-    sensorValues: []
   }
 
   componentDidMount = () => {
     // Initial fetch of sensor
-    this.fetchSensorAndValues(this.props.sensorId)
+    // this.fetchSensorAndValues(this.props.sensorId)
+    this.setState({
+      percentage: this.calcPercentageValue(
+        this.props.sensor.lastReportedValue,
+        this.props.sensor.minValue,
+        this.props.sensor.maxValue
+      )
+    })
   }
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.sensorValues[0] && nextProps.sensorValues[0].sensorId === this.props.sensorId) {
-      const nextSensorValue = nextProps.sensorValues[0]
-      const sensor = { ...this.state.sensor }
-      sensor.lastReportedValue = nextProps.sensorValues[0].value
-      sensor.lastReportedTime = nextProps.sensorValues[0].time
+    if (nextProps.sensorValues[0] && nextProps.sensorValues[0].sensorId === this.props.sensor._id) {
+      // TODO: Update the sensor in redux instead when new data comes from websockets!
+      // const nextSensorValue = nextProps.sensorValues[0]
+      // const sensor = { ...this.state.sensor }
+      // sensor.lastReportedValue = nextProps.sensorValues[0].value
+      // sensor.lastReportedTime = nextProps.sensorValues[0].time
       this.setState({
-        sensor,
-        sensorValues: [nextSensorValue, ...this.state.sensorValues],
         percentage: this.calcPercentageValue(
           nextProps.sensorValues[0].value,
-          this.state.sensor.minValue,
-          this.state.sensor.maxValue
+          this.props.sensor.minValue,
+          this.props.sensor.maxValue
         )
       })
     }
-  }
-
-  fetchSensorAndValues = () => {
-    fetch('/api/sensor', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sensorId: this.props.sensorId
-      })
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          errorFetchingData: false,
-          sensor: response.sensor,
-          percentage: this.calcPercentageValue(
-            response.sensor.lastReportedValue,
-            response.sensor.minValue,
-            response.sensor.maxValue
-          )
-        })
-        this.fetchValues()
-      })
-      .catch(() => this.setState({ errorFetchingData: true }))
-  }
-
-  fetchValues = () => {
-    fetch('/api/sensorvalues', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        sensorId: this.props.sensorId
-      })
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.setState({ sensorValues: response.data })
-      })
   }
 
   calcPercentageValue = (current, min, max) => {
@@ -110,9 +70,9 @@ class Sensor extends React.Component<Props, State> {
 
   alarmStatus = () => {
     // min max value and max age
-    if (this.state.sensor.maxValueAlarmActive ||
-      this.state.sensor.minValueAlarmActive ||
-      this.state.sensor.maxAgeAlarmActive) {
+    if (this.props.sensor.maxValueAlarmActive ||
+      this.props.sensor.minValueAlarmActive ||
+      this.props.sensor.maxAgeAlarmActive) {
       return <GoAlert className="alarm-icon_inactive" />
     }
     return null
@@ -124,9 +84,9 @@ class Sensor extends React.Component<Props, State> {
         <div className="generic-wrapper">
           <Row>
             <Col className="left-container" span={8}>
-              <p className="name">{this.state.sensor.name}</p>
-              <p className="desc">{this.state.sensor.description}</p>
-              <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+              <p className="name">{this.props.sensor.name}</p>
+              <p className="desc">{this.props.sensor.description}</p>
+              <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
             </Col>
             <Col className="right-container" span={2} offset={2}>
               <VerticalProgress
@@ -150,13 +110,13 @@ class Sensor extends React.Component<Props, State> {
         <div className="generic-wrapper">
           <Row>
             <Col className="left-container" span={8}>
-              <p className="name">{this.state.sensor.name}</p>
-              <p className="desc">{this.state.sensor.description}</p>
-              <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+              <p className="name">{this.props.sensor.name}</p>
+              <p className="desc">{this.props.sensor.description}</p>
+              <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
             </Col>
             <Col className="right-container" span={2} offset={2}>
               {/* <VerticalProgress
-                value={this.state.percentage}
+                value={this.props.percentage}
                 bgColor="#1C1B1B"
               /> */}
             </Col>
@@ -166,7 +126,7 @@ class Sensor extends React.Component<Props, State> {
               {this.alarmStatus()}
             </div>
             <div className="bottom-container_right">
-              <p className="value-text_big">{this.state.sensor.lastReportedValue}{this.state.sensor.measurementUnit}</p>
+              <p className="value-text_big">{this.props.sensor.lastReportedValue}{this.props.sensor.measurementUnit}</p>
             </div>
           </div>
         </div>
@@ -176,10 +136,10 @@ class Sensor extends React.Component<Props, State> {
     return (
       <div className="generic-wrapper">
         <div className="text-container">
-          <p className="name">{this.state.sensor.name}</p>
-          <p className="desc">{this.state.sensor.description}</p>
-          <p>Last raw value: {this.state.sensor.lastReportedValue}</p>
-          <p>{Moment(this.state.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+          <p className="name">{this.props.sensor.name}</p>
+          <p className="desc">{this.props.sensor.description}</p>
+          <p>Last raw value: {this.props.sensor.lastReportedValue}</p>
+          <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
           <p>No sensortype defined</p>
         </div>
       </div>
@@ -192,10 +152,10 @@ class Sensor extends React.Component<Props, State> {
         {this.state.errorFetchingData ? (
           <div>
             <p>Error fetching sensor data!</p>
-            <p>sensorId: {this.props.sensorId}</p>
+            <p>sensorId: {this.props.sensor._id}</p>
           </div>
         ) : (
-          this.sensorRenderer(this.state.sensor.measurementType)
+          this.sensorRenderer(this.props.sensor.measurementType)
         )}
       </div>
     )

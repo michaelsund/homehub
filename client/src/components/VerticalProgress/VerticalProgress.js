@@ -4,48 +4,33 @@ import './VerticalProgress.css'
 type Props = {
   value: number,
   bgColor: string,
-  debug: boolean
 }
 
 type State = {
-  color: string,
-  debugValue: number,
-  value: number
+  color: string
 }
 
 class VerticalProgress extends React.Component<Props, State> {
   state = {
-    color: '#FFFFFF',
-    debugValue: 0,
-    value: 0
+    color: '#FFFFFF'
   }
 
   static defaultProps = {
-    debug: false,
     value: 0
   }
 
-  componentWillReceiveProps = nextProps => {
-    this.valueChanged(nextProps.value)
-    setTimeout(() => {
-      this.setState({ value: nextProps.value })
-    }, 1000)
-  }
+  componentWillMount = () => this.valueChanged(this.props.value)
 
-  randomValue = () => {
-    const randomVal = Math.floor((Math.random() * 100) + 1)
-    this.setState({ debugValue: randomVal })
-    this.valueChanged(randomVal)
-  }
+  componentWillReceiveProps = nextProps => this.valueChanged(nextProps.value)
 
-  valueChanged = () => {
-    if (this.props.value <= 10) {
+  valueChanged = val => {
+    if (val === 0) {
+      this.setState({ color: 'transparent' })
+    } else if (val <= 20) {
       this.setState({ color: 'red' })
-    } else if (this.props.value <= 20) {
-      this.setState({ color: 'yellow' })
-    } else if (this.props.value <= 30) {
-      this.setState({ color: 'green' })
-    } else {
+    } else if (val <= 40) {
+      this.setState({ color: 'orange' })
+    } else if (val > 40 && val <= 100) {
       this.setState({ color: 'green' })
     }
   }
@@ -56,14 +41,7 @@ class VerticalProgress extends React.Component<Props, State> {
         className="progress-container"
         style={{ backgroundColor: this.props.bgColor }}
       >
-        {this.props.debug ? (
-          <div>
-            <div className="progress" style={{ height: `${this.state.debugValue}%`, backgroundColor: this.state.color }}></div>
-            <button onClick={() => this.randomValue()}>random</button>
-          </div>
-        ) : (
-          <div className="progress" style={{ height: `${this.state.value}%`, backgroundColor: this.state.color }}></div>
-        )}
+        <div className="progress" style={{ height: `${this.props.value}%`, backgroundColor: this.state.color }}></div>
       </div>
     )
   }

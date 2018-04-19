@@ -3,7 +3,9 @@
 ✔ VerticalProgress handle negative values and values over 100. @done (4/2/2018, 8:38:48 AM)
 ✔ Implement graphql @done (4/15/2018, 10:21:00 AM)
 ✔ ControllerList receives first props from gql and pushes them to redux in componentDidMount, need to separate gql updates from redux updates somehow. @done (2018-4-17 18:59:41)
-☐ Rework Sensor component, fetched data should live in redux, not in the component state (navigating away while fetch is running make the following setStates to be done on a unmounted component)
+✔ Rework Sensor component, fetched data should live in the sensorList component, propagating down to sensors. @done (2018-4-19 20:47:58)
+☐ Sensorvalues is not used now or updated from SensorList, should be looked into for graphing in Sensor component later on.
+✔ VerticalProgress showing wrong colors. @done (2018-4-19 20:47:24)
 ☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql
 ✔ fix problem with controllers graphql queries does not get anything back from the request.... @done (4/15/2018, 10:34:57 AM)

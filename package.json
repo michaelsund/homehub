@@ -10,13 +10,14 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cors": "^2.8.4",
-    "graphql": "^0.13.2",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "express-validator": "^5.0.3",
+    "graphql": "^0.13.2",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",
     "pushbullet": "^2.1.0",
+    "remotedev-server": "^0.2.4",
     "ws": "^5.0.0"
   },
   "devDependencies": {
