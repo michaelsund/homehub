@@ -5,7 +5,7 @@ import cors from 'cors'
 import path from 'path'
 import morgan from 'morgan'
 import graphqlHTTP from 'express-graphql'
-import remotedev from 'remotedev-server'
+// import remotedev from 'remotedev-server'
 import routes from './routes/routes'
 import apiRoutes from './routes/apiRoutes'
 
@@ -14,7 +14,7 @@ import settings from './settings.json'
 import schema from './graphql'
 
 // Local remote dev server
-remotedev({ hostname: 'localhost', port: 8000 });
+// remotedev({ hostname: 'localhost', port: 8000 });
 
 if (settings.mongoUser === '') {
   mongoose.connect(`mongodb://${settings.mongoServer}/hut`)
