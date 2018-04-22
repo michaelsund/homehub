@@ -13,6 +13,10 @@ create server/settings.json with the following content for pushbullet messages.
   "telldusDuoConnected": false
 }
 
+Follow this guide to install tellstick support
+https://github.com/Hexagon/node-telldus#installation
+yarn add node-gyp telldus
+
 build the image
 docker build -t hut .
 
