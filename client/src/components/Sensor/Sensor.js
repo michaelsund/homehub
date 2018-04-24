@@ -4,9 +4,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
-import { GoAlert } from 'react-icons/lib/go'
 import './Sensor.css'
 import VerticalProgress from '../VerticalProgress'
+import Alarm from '../Alarm'
 // import Loading from '../Loading'
 
 type Props = {
@@ -25,7 +25,6 @@ const mapStateToProps = state => state
 class Sensor extends React.Component<Props, State> {
   state = {
     errorFetchingData: false,
-    sensor: {},
     percentage: 0,
   }
 
@@ -68,16 +67,6 @@ class Sensor extends React.Component<Props, State> {
     return percent
   }
 
-  alarmStatus = () => {
-    // min max value and max age
-    if (this.props.sensor.maxValueAlarmActive ||
-      this.props.sensor.minValueAlarmActive ||
-      this.props.sensor.maxAgeAlarmActive) {
-      return <GoAlert className="alarm-icon_inactive" />
-    }
-    return null
-  }
-
   sensorRenderer = type => {
     if (type === 'volume') {
       return (
@@ -97,7 +86,11 @@ class Sensor extends React.Component<Props, State> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-              {this.alarmStatus()}
+            {this.props.sensor.maxValueAlarm ||
+                this.props.sensor.minValueAlarm ||
+                this.props.sensor.maxAgeAlarm ?
+                <Alarm sensor={this.props.sensor} /> : null
+              }
             </div>
             <div className="bottom-container_right">
               <p className="value-text_big">{this.state.percentage}%</p>
@@ -123,7 +116,11 @@ class Sensor extends React.Component<Props, State> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-              {this.alarmStatus()}
+              {this.props.sensor.maxValueAlarm ||
+                this.props.sensor.minValueAlarm ||
+                this.props.sensor.maxAgeAlarm ?
+                <Alarm sensor={this.props.sensor} /> : null
+              }
             </div>
             <div className="bottom-container_right">
               <p className="value-text_big">{this.props.sensor.lastReportedValue}{this.props.sensor.measurementUnit}</p>
