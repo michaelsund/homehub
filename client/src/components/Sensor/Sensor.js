@@ -6,13 +6,13 @@ import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
 import './Sensor.css'
 import VerticalProgress from '../VerticalProgress'
-import Alarm from '../Alarm'
+import SensorAlarm from '../SensorAlarm'
 // import Loading from '../Loading'
 
 type Props = {
   sensorId: string,
-  sensorValues?: [],
-  sensor: Array
+  sensorValues?: Array,
+  sensor: Object
 }
 
 type State = {
@@ -20,7 +20,7 @@ type State = {
   percentage: number,
 }
 
-const mapStateToProps = state => state
+// const mapStateToProps = state => state
 
 class Sensor extends React.Component<Props, State> {
   state = {
@@ -40,16 +40,14 @@ class Sensor extends React.Component<Props, State> {
     })
   }
 
+  // Gets sensorValues updates from redux, which is updated by websockets.
   componentWillReceiveProps = nextProps => {
-    if (nextProps.sensorValues[0] && nextProps.sensorValues[0].sensorId === this.props.sensor._id) {
-      // TODO: Update the sensor in redux instead when new data comes from websockets!
-      // const nextSensorValue = nextProps.sensorValues[0]
-      // const sensor = { ...this.state.sensor }
-      // sensor.lastReportedValue = nextProps.sensorValues[0].value
-      // sensor.lastReportedTime = nextProps.sensorValues[0].time
+    console.log(nextProps)
+    if (nextProps.sensor._id === this.props.sensor._id) {
+      console.log(`recalcing % for ${nextProps.sensor.name}`)
       this.setState({
         percentage: this.calcPercentageValue(
-          nextProps.sensorValues[0].value,
+          nextProps.sensor.lastReportedValue,
           this.props.sensor.minValue,
           this.props.sensor.maxValue
         )
@@ -89,7 +87,11 @@ class Sensor extends React.Component<Props, State> {
             {this.props.sensor.maxValueAlarm ||
                 this.props.sensor.minValueAlarm ||
                 this.props.sensor.maxAgeAlarm ?
-                <Alarm sensor={this.props.sensor} /> : null
+                <SensorAlarm
+                  maxValueAlarmActive={this.props.sensor.maxValueAlarmActive}
+                  minValueAlarmActive={this.props.sensor.minValueAlarmActive}
+                  maxAgeAlarmActive={this.props.sensor.maxAgeAlarmActive}
+                /> : null
               }
             </div>
             <div className="bottom-container_right">
@@ -119,7 +121,11 @@ class Sensor extends React.Component<Props, State> {
               {this.props.sensor.maxValueAlarm ||
                 this.props.sensor.minValueAlarm ||
                 this.props.sensor.maxAgeAlarm ?
-                <Alarm sensor={this.props.sensor} /> : null
+                <SensorAlarm
+                  maxValueAlarmActive={this.props.sensor.maxValueAlarmActive}
+                  minValueAlarmActive={this.props.sensor.minValueAlarmActive}
+                  maxAgeAlarmActive={this.props.sensor.maxAgeAlarmActive}
+                /> : null
               }
             </div>
             <div className="bottom-container_right">
@@ -159,4 +165,4 @@ class Sensor extends React.Component<Props, State> {
   }
 }
 
-export default connect(mapStateToProps, null)(Sensor)
+export default connect(null, null)(Sensor)

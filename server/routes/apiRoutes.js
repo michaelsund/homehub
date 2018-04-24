@@ -131,14 +131,13 @@ apiRouter.post('/newsensorvalue', (req, res) => {
         newSensorValue.save(err => {
           if (!err) {
             // Update the sensors latest value and time
-            sensor.update({
-              lastReportedValue: req.body.value,
-              lastReportedTime: new Date()
-            }, () => {
+            const updated = { lastReportedValue: req.body.value, lastReportedTime: new Date() }
+            sensor.update(updated, () => {
               // Update websocket client with the new value
               wss.clients.forEach(client => {
                 if (client.readyState === WebSocket.OPEN) {
-                  client.send(JSON.stringify({ type: 'NEW_SENSOR_VALUE', newSensorValue }))
+                  // client.send(JSON.stringify({ type: 'NEW_SENSOR_VALUE', newSensorValue }))
+                  client.send(JSON.stringify({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated }))
                 }
               })
               res.json({ success: true, status: 'Sensor value saved' })

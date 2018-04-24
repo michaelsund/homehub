@@ -1,6 +1,14 @@
-export const newSensorValue = sensorValue => ({
-  type: 'NEW_SENSOR_VALUE',
-  sensorValue
+// export const newSensorValue = sensorValue => ({
+//   type: 'NEW_SENSOR_VALUE',
+//   sensorValue
+// })
+
+
+export const updatedSensor = (sensorId, lastReportedTime, lastReportedValue) => ({
+  type: 'UPDATE_SENSOR_VALUE',
+  sensorId,
+  lastReportedTime,
+  lastReportedValue
 })
 
 export const setSensors = sensors => ({
