@@ -88,9 +88,7 @@ class Sensor extends React.Component<Props, State> {
                 this.props.sensor.minValueAlarm ||
                 this.props.sensor.maxAgeAlarm ?
                 <SensorAlarm
-                  maxValueAlarmActive={this.props.sensor.maxValueAlarmActive}
-                  minValueAlarmActive={this.props.sensor.minValueAlarmActive}
-                  maxAgeAlarmActive={this.props.sensor.maxAgeAlarmActive}
+                  sensor={this.props.sensor}
                 /> : null
               }
             </div>

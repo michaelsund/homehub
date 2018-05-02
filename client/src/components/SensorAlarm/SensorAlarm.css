@@ -2,3 +2,12 @@
   color: #FF7A59;
   font-size: 30px;
 }
+
+.custom-overlay {
+  background: rgba(36, 123, 160, 0.7) !important;
+}
+.custom-modal {
+  background: #1C1B1B !important;
+  max-width: 500px !important;
+  width: 100%;
+}
