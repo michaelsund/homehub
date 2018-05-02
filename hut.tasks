@@ -4,8 +4,11 @@
 ✔ Implement graphql @done (4/15/2018, 10:21:00 AM)
 ✔ ControllerList receives first props from gql and pushes them to redux in componentDidMount, need to separate gql updates from redux updates somehow. @done (2018-4-17 18:59:41)
 ✔ Rework Sensor component, fetched data should live in the sensorList component, propagating down to sensors. @done (2018-4-19 20:47:58)
-☐ UI Alarm component, and ack alarm api route for sensor.
+✔ UI Alarm component, and ack alarm api route for sensor (will be graphql endpoint later). @done (2018-4-25 09:49:23)
+✔ Acking a sensorAlarm triggers websocket message that updates redux. @done (2018-4-25 10:03:30)
 ✔ VerticalProgress showing wrong colors. @done (2018-4-19 20:47:24)
+☐ Alarm click should display alarm information, and a ack or close button.
+☐ RecrringEvent does not handle the day of occurance correct when onceAMonth is used.
 ☐ Need to bind the telldus device to a controller id.
 ☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql

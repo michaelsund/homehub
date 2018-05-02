@@ -40,6 +40,14 @@ wss.on('connection', ws => {
   ws.on('error', () => {});
 })
 
+const senWebSocketMessage = message => {
+  wss.clients.forEach(client => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify(message))
+    }
+  })
+}
+
 apiRouter.get('/sensors', (req, res) => {
   db.Sensor.find({}, (err, sensors) => {
     if (err) {
@@ -103,6 +111,34 @@ apiRouter.post('/updatesensor', () => {
   // Should be safe to just update everything from body.
 })
 
+apiRouter.post(
+  '/acksensoralarm',
+  [
+    check('sensorId').exists().isLength({ min: 1 }).trim(),
+  ], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(422).json({ success: false, errors: errors.mapped() });
+    } else {
+      // Default acks all active alarms on sensor.
+      db.Sensor.findByIdAndUpdate(req.body.sensorId, {
+        $set: {
+          maxAgeAlarmActive: false,
+          maxValueAlarmActive: false,
+          minValueAlarmActive: false
+        }
+      }, { new: false }, err => {
+        if (err) {
+          res.json({ success: false, status: 'Can not ack sensor' })
+        } else {
+          res.json({ success: true, status: 'Sensor alarms acked' })
+          senWebSocketMessage({ type: 'SENSOR_ALARM_ACK', sensorId: req.body.sensorId })
+        }
+      })
+    }
+  }
+)
+
 apiRouter.post('/delsensor', (req, res) => {
   if (req.body.sensorId) {
     db.Sensor.findOne({ _id: req.body.sensorId }, (err, sensor) => {
@@ -134,12 +170,7 @@ apiRouter.post('/newsensorvalue', (req, res) => {
             const updated = { lastReportedValue: req.body.value, lastReportedTime: new Date() }
             sensor.update(updated, () => {
               // Update websocket client with the new value
-              wss.clients.forEach(client => {
-                if (client.readyState === WebSocket.OPEN) {
-                  // client.send(JSON.stringify({ type: 'NEW_SENSOR_VALUE', newSensorValue }))
-                  client.send(JSON.stringify({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated }))
-                }
-              })
+              senWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated })
               res.json({ success: true, status: 'Sensor value saved' })
             })
           } else {
