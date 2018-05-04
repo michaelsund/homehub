@@ -32,7 +32,7 @@ class Alarm extends React.Component<Props, State> {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      data: JSON.stringify({ sensorId: this.props.sensor._id })
+      body: JSON.stringify({ sensorId: this.props.sensor._id })
     })
       .then(() => {
         this.setState({ modalOpen: false })

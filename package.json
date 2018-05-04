@@ -17,7 +17,6 @@
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",
     "pushbullet": "^2.1.0",
-    "react-responsive-modal": "^3.0.0",
     "remotedev-server": "^0.2.4",
     "ws": "^5.0.0"
   },
@@ -31,7 +30,8 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.67.1"
+    "flow-bin": "^0.67.1",
+    "flow-typed": "^2.4.0"
   },
   "scripts": {
     "client": "cd client && yarn start",

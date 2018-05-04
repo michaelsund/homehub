@@ -7,8 +7,10 @@
 ✔ UI Alarm component, and ack alarm api route for sensor (will be graphql endpoint later). @done (2018-4-25 09:49:23)
 ✔ Acking a sensorAlarm triggers websocket message that updates redux. @done (2018-4-25 10:03:30)
 ✔ VerticalProgress showing wrong colors. @done (2018-4-19 20:47:24)
-☐ Alarm click should display alarm information, and a ack or close button.
-☐ RecrringEvent does not handle the day of occurance correct when onceAMonth is used.
+✔ Alarm click should display alarm information, and a ack or close button. @done (5/4/2018, 2:59:52 PM)
+✔ forEach sensor in node, check maxAge and if an alarm should be triggered. code is temp in checkSensorAlarmTrigger.js @done (5/4/2018, 9:50:54 PM)
+☐ Rename maxAge to maxAgeMinutes everywhere!
+☐ RecurringEvent does not handle the day of occurance correct when onceAMonth is used.
 ☐ Need to bind the telldus device to a controller id.
 ☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql

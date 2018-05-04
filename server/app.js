@@ -12,6 +12,7 @@ import apiRoutes from './routes/apiRoutes'
 // import PushBullet from 'pushbullet'
 import settings from './settings.json'
 import schema from './graphql'
+import helpers from './helpers'
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -50,5 +51,8 @@ app.use('/graphql', graphqlHTTP(() => ({
   pretty: true,
   graphiql: true
 })))
+
+// Start checking sensor maxAge alarms
+helpers.checkSensorMaxAge()
 
 app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))

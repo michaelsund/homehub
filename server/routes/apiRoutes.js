@@ -1,12 +1,11 @@
 import express from 'express'
-import WebSocket from 'ws'
 import { check, validationResult } from 'express-validator/check'
 import db from '../schema'
 import config from '../settings.json'
+import helpers from '../helpers'
 // const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
-const wss = new WebSocket.Server({ port: 40510 })
 
 if (config.telldusDuoConnected) {
   // eslint-disable-next-line
@@ -25,27 +24,6 @@ if (config.telldusDuoConnected) {
   })
 } else {
   console.log('no tellstick duo connected, ignoring routes')
-}
-
-wss.on('connection', ws => {
-  ws.on('message', message => {
-    // TODO: Verify its a valid message! to prevent spam
-    wss.clients.forEach(client => {
-      // Send to everyone
-      if (client.readyState === WebSocket.OPEN) {
-        client.send(JSON.stringify(message))
-      }
-    })
-  })
-  ws.on('error', () => {});
-})
-
-const senWebSocketMessage = message => {
-  wss.clients.forEach(client => {
-    if (client.readyState === WebSocket.OPEN) {
-      client.send(JSON.stringify(message))
-    }
-  })
 }
 
 apiRouter.get('/sensors', (req, res) => {
@@ -132,7 +110,7 @@ apiRouter.post(
           res.json({ success: false, status: 'Can not ack sensor' })
         } else {
           res.json({ success: true, status: 'Sensor alarms acked' })
-          senWebSocketMessage({ type: 'SENSOR_ALARM_ACK', sensorId: req.body.sensorId })
+          helpers.sendWebSocketMessage({ type: 'SENSOR_ALARM_ACK', sensorId: req.body.sensorId })
         }
       })
     }
@@ -170,7 +148,8 @@ apiRouter.post('/newsensorvalue', (req, res) => {
             const updated = { lastReportedValue: req.body.value, lastReportedTime: new Date() }
             sensor.update(updated, () => {
               // Update websocket client with the new value
-              senWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated })
+              helpers.sendWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated })
+              helpers.checkSensorAlarmTrigger(sensor, req.body.value)
               res.json({ success: true, status: 'Sensor value saved' })
             })
           } else {

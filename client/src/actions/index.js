@@ -21,6 +21,11 @@ export const sensorAlarmAck = sensorId => ({
   sensorId
 })
 
+export const sensorAlarmActive = sensorId => ({
+  type: 'SENSOR_ALARM_ACTIVE',
+  sensorId
+})
+
 export const setControllers = controllers => ({
   type: 'SET_CONTROLLERS',
   controllers

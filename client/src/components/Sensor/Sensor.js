@@ -42,9 +42,7 @@ class Sensor extends React.Component<Props, State> {
 
   // Gets sensorValues updates from redux, which is updated by websockets.
   componentWillReceiveProps = nextProps => {
-    console.log(nextProps)
     if (nextProps.sensor._id === this.props.sensor._id) {
-      console.log(`recalcing % for ${nextProps.sensor.name}`)
       this.setState({
         percentage: this.calcPercentageValue(
           nextProps.sensor.lastReportedValue,
