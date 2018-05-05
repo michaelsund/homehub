@@ -11,7 +11,7 @@ const sensors = (state: any[] = initialState, action: any) => {
         if (sensor._id === action.sensorId) {
           sensorList.push({
             ...sensor,
-            maxAgeAlarmActive: false,
+            maxAgeMinutesMinutesAlarmActive: false,
             maxValueAlarmActive: false,
             minValueAlarmActive: false
           })
@@ -36,10 +36,10 @@ const sensors = (state: any[] = initialState, action: any) => {
                 minValueAlarmActive: true
               })
               break;
-            case 'maxAge':
+            case 'maxAgeMinutesMinutes':
               sensorList.push({
                 ...sensor,
-                maxAgeAlarmActive: true
+                maxAgeMinutesMinutesAlarmActive: true
               })
               break;
             default:

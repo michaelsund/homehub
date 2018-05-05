@@ -9,8 +9,8 @@
 ✔ VerticalProgress showing wrong colors. @done (2018-4-19 20:47:24)
 ✔ Alarm click should display alarm information, and a ack or close button. @done (5/4/2018, 2:59:52 PM)
 ✔ forEach sensor in node, check maxAge and if an alarm should be triggered. code is temp in checkSensorAlarmTrigger.js @done (5/4/2018, 9:50:54 PM)
-☐ Rename maxAge to maxAgeMinutes everywhere!
-☐ RecurringEvent does not handle the day of occurance correct when onceAMonth is used.
+✔ Rename maxAge to maxAgeMinutes everywhere! @done (5/5/2018, 12:58:28 PM)
+☐ RecurringEvent does not handle the day of occurance correct when onceAMonth is used. ???
 ☐ Need to bind the telldus device to a controller id.
 ☐ implement mutations on server (run local tellstick command on request processing)
 ☐ rewrite the api and update clientside to use gql, might need http routes for external devices that doesnt speak gql

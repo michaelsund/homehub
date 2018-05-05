@@ -41,7 +41,7 @@ class Alarm extends React.Component<Props, State> {
 
   render() {
     return (
-      (this.props.sensor.maxAgeAlarmActive ||
+      (this.props.sensor.maxAgeMinutesMinutesMinutesMinutesAlarmActive ||
       this.props.sensor.maxValueAlarmActive ||
       this.props.sensor.minValueAlarmActive) && (
         <div>
@@ -54,7 +54,7 @@ class Alarm extends React.Component<Props, State> {
           >
             <h2>Alarms for {this.props.sensor.name}</h2>
             <ul>
-              {this.props.sensor.maxAgeAlarmActive && <li>data max age reached.</li>}
+              {this.props.sensor.maxAgeMinutesMinutesMinutesMinutesAlarmActive && <li>data max age reached.</li>}
               {this.props.sensor.maxValueAlarmActive && <li>sensor exceeded the maximum value.</li>}
               {this.props.sensor.minValueAlarmActive && <li>sensor exceeded the minimum value.</li>}
             </ul>

@@ -1,22 +1,22 @@
 import db from '../schema'
 import sendWebSocketMessage from './sendWebSocketMessage'
 
-const checkSensorMaxAge = () => {
-  console.log('starting maxAge check of sensors every 1 minute.')
+const checkSensormaxAge = () => {
+  console.log('starting maxAgeMinutes check of sensors every 1 minute.')
   // Starts a timer that runs the below stuff every minute
   setInterval(() => {
-    console.log('running sensor maxAge check')
-    db.Sensor.find({ maxAgeAlarm: true }, (err, sensors) => {
+    console.log('running sensor maxAgeMinutes check')
+    db.Sensor.find({ maxAgeMinutesAlarm: true }, (err, sensors) => {
       sensors.map(sensor => {
-        if (sensor.maxAge !== null) {
-          console.log(`checking maxAge for sensor ${sensor.name} maxAge: ${sensor.maxAge} maxAgeAlarm: ${sensor.maxAgeAlarm}`)
-          if (!sensor.maxAgeAlarmActive) {
+        if (sensor.maxAgeMinutes !== null) {
+          console.log(`checking maxAgeMinutes for sensor ${sensor.name} maxAgeMinutes: ${sensor.maxAgeMinutes} maxAgeMinutesAlarm: ${sensor.maxAgeMinutesAlarm}`)
+          if (!sensor.maxAgeMinutesAlarmActive) {
             const millisDiff = Math.abs(new Date() - new Date(sensor.lastReportedTime))
             const minutes = Math.floor((millisDiff / 1000) / 60)
-            if (minutes > sensor.maxAge) {
-              console.log(`setting maxAgeAlarm active for ${sensor.name}`)
-              sensor.update({ maxAgeAlarmActive: true }, () => {
-                sendWebSocketMessage({ type: 'SENSOR_ALARM_ACTIVE', sensorId: sensor._id, alarmType: 'maxAge' })
+            if (minutes > sensor.maxAgeMinutes) {
+              console.log(`setting maxAgeMinutesAlarm active for ${sensor.name}`)
+              sensor.update({ maxAgeMinutesAlarmActive: true }, () => {
+                sendWebSocketMessage({ type: 'SENSOR_ALARM_ACTIVE', sensorId: sensor._id, alarmType: 'maxAgeMinutes' })
               })
             }
           }
@@ -25,7 +25,7 @@ const checkSensorMaxAge = () => {
       })
     })
   }, 60000)
-  // Get all sensors from db where maxAgeAlarm is set
+  // Get all sensors from db where maxAgeMinutesAlarm is set
 }
 
-export default checkSensorMaxAge
+export default checkSensormaxAge

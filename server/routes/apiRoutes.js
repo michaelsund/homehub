@@ -64,7 +64,7 @@ apiRouter.post('/newsensor', [
       measurementType: req.body.measurementType || '',
       measurementUnit: req.body.measurementUnit || '',
       external: req.body.external || true,
-      maxAge: req.body.maxAge || null,
+      maxAgeMinutes: req.body.maxAge || null,
       maxAgeAlarm: req.body.maxAgeAlarm || false,
       maxAgeAlarmActive: req.body.maxAgeAlarmActive || false,
       maxAgeAlarmManualReset: req.body.maxAgeAlarmManualReset || false,
