@@ -10,7 +10,7 @@ import routes from './routes/routes'
 import apiRoutes from './routes/apiRoutes'
 
 // import PushBullet from 'pushbullet'
-import settings from './settings.json'
+import settings from '../client/src/settings.json'
 import schema from './graphql'
 import helpers from './helpers'
 
@@ -30,7 +30,7 @@ db.once('open', () => console.log('Connected to db!'))
 // const pusher = new PushBullet(settings.pushBulletKey)
 const app = express()
 app.use(cors())
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.static(path.resolve(__dirname, 'build')));
 // pusher.note({
 //  channel_tag: settings.pushBulletChannel
 // }, 'Pannan', 'Need moar pelletz!', (err, res) => {
@@ -54,5 +54,10 @@ app.use('/graphql', graphqlHTTP(() => ({
 
 // Start checking sensor maxAgeMinutes alarms
 helpers.checkSensorMaxAge()
+
+// Start checking for telldus sensors if in prod mode
+if (!settings.dev) {
+  helpers.sensorEvents()
+}
 
 app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))

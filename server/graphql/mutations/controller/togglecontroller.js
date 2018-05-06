@@ -5,10 +5,9 @@ import {
 } from 'graphql'
 import ControllerModel from '../../../schema/ControllerModel'
 import ToggleControllerResponse from '../../types/toggleControllerResponse'
-import config from '../../../settings.json'
+import settings from '../../../../client/src/settings.json'
 
-if (config.telldusDuoConnected) {
-  console.log(`duo: ${config.telldusDuoConnected}`)
+if (!settings.dev) {
   // eslint-disable-next-line
   const telldus = require('telldus')
 }
@@ -20,7 +19,7 @@ export default {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
   async resolve(root, args) {
-    if (config.telldusDuoConnected) {
+    if (settings.telldusDuoConnected) {
       return ControllerModel.findById(args.id)
         .select()
         .exec()

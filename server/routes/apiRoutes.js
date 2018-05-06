@@ -1,13 +1,13 @@
 import express from 'express'
 import { check, validationResult } from 'express-validator/check'
 import db from '../schema'
-import config from '../settings.json'
+import settings from '../../client/src/settings.json'
 import helpers from '../helpers'
 // const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
 
-if (config.telldusDuoConnected) {
+if (!settings.dev) {
   // eslint-disable-next-line
   const telldus = require('telldus')
   // TODO: Will not be own routes, but will be included from sensors and controllers db calls.
@@ -23,7 +23,7 @@ if (config.telldusDuoConnected) {
     res.json({ success: true })
   })
 } else {
-  console.log('no tellstick duo connected, ignoring routes')
+  console.log('in development mode, no telldus is used')
 }
 
 apiRouter.get('/sensors', (req, res) => {
@@ -64,7 +64,7 @@ apiRouter.post('/newsensor', [
       measurementType: req.body.measurementType || '',
       measurementUnit: req.body.measurementUnit || '',
       external: req.body.external || true,
-      maxAgeMinutes: req.body.maxAge || null,
+      maxAgeMinutes: req.body.maxAgeMinutes || null,
       maxAgeAlarm: req.body.maxAgeAlarm || false,
       maxAgeAlarmActive: req.body.maxAgeAlarmActive || false,
       maxAgeAlarmManualReset: req.body.maxAgeAlarmManualReset || false,
@@ -94,6 +94,7 @@ apiRouter.post(
   [
     check('sensorId').exists().isLength({ min: 1 }).trim(),
   ], (req, res) => {
+    console.log(req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(422).json({ success: false, errors: errors.mapped() });

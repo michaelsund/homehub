@@ -1,3 +1,5 @@
+import settings from '../../settings.json'
+
 const socketMiddleware = (() => {
   let socket = null
 
@@ -39,7 +41,11 @@ const socketMiddleware = (() => {
         store.dispatch({ type: 'CONNECTING' })
 
         // Attempt to connect (we could send a 'failed' action on error)
-        socket = new WebSocket('ws://localhost:40510')
+        if (settings.dev) {
+          socket = new WebSocket('ws://localhost:40510')
+        } else {
+          socket = new WebSocket(`ws://${settings.prodIp}:40510`)
+        }
         socket.onmessage = onMessage(socket, store)
         socket.onclose = onClose(socket, store)
         // TODO: Token?

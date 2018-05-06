@@ -3,14 +3,15 @@ docker run -d -p 27017:27017 --name mongo1 -v /path/to/hut/server/db:/data/db mo
 without a persistent db
 docker run -d -p 27017:27017 --name mongo1 mongo
 
-create server/settings.json with the following content for pushbullet messages.
+create client/src/settings.json with the following content for pushbullet messages.
 {
-  "mongoServer": "localhost",
+  "dev": true,
+  "prodIp": "192.168.1.X",
+  "mongoServer": "192.168.1.X",
   "mongoUser": "",
   "mongoPass": "",
   "pushBulletKey": "your_api_key",
-  "pusBulletChannel": "your_channel",
-  "telldusDuoConnected": false
+  "pusBulletChannel": "your_channel"
 }
 
 Follow this guide to install tellstick support
@@ -21,7 +22,7 @@ build the image
 docker build -t hut .
 
 start it with tellstick connected
-docker run -d -p 5000:5000 --device /dev/bus/usb:/dev/bus/usb --name my_hut hut
+docker run -d -p 5000:5000 -p 40510:40510 --device /dev/bus/usb:/dev/bus/usb --name my_hut hut
 
 or without tellstick
-docker run -d -p 5000:5000 --name my_hut hut
+docker run -d -p 5000:5000 -p 40510:40510 --name my_hut hut

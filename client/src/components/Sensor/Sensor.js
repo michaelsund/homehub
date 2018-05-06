@@ -7,7 +7,6 @@ import { Row, Col } from 'react-simple-flex-grid'
 import './Sensor.css'
 import VerticalProgress from '../VerticalProgress'
 import SensorAlarm from '../SensorAlarm'
-// import Loading from '../Loading'
 
 type Props = {
   sensorId: string,
@@ -16,7 +15,7 @@ type Props = {
 }
 
 type State = {
-  errorFetchingData: bool,
+  errorFetchingData: boolean,
   percentage: number,
 }
 
@@ -25,7 +24,7 @@ type State = {
 class Sensor extends React.Component<Props, State> {
   state = {
     errorFetchingData: false,
-    percentage: 0,
+    percentage: 0
   }
 
   componentDidMount = () => {
@@ -120,7 +119,7 @@ class Sensor extends React.Component<Props, State> {
                 <SensorAlarm
                   maxValueAlarmActive={this.props.sensor.maxValueAlarmActive}
                   minValueAlarmActive={this.props.sensor.minValueAlarmActive}
-                  maxAgeMinutesMinutesMinutesMinutesMinutesMinutesAlarmActive={this.props.sensor.maxAgeMinutesMinutesMinutesMinutesMinutesMinutesAlarmActive}
+                  maxAgeAlarmActive={this.props.sensor.maxAgeAlarmActive}
                 /> : null
               }
             </div>

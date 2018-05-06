@@ -11,7 +11,7 @@ const sensors = (state: any[] = initialState, action: any) => {
         if (sensor._id === action.sensorId) {
           sensorList.push({
             ...sensor,
-            maxAgeMinutesMinutesAlarmActive: false,
+            maxAgeAlarmActive: false,
             maxValueAlarmActive: false,
             minValueAlarmActive: false
           })

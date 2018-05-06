@@ -10,6 +10,8 @@
 ✔ Alarm click should display alarm information, and a ack or close button. @done (5/4/2018, 2:59:52 PM)
 ✔ forEach sensor in node, check maxAge and if an alarm should be triggered. code is temp in checkSensorAlarmTrigger.js @done (5/4/2018, 9:50:54 PM)
 ✔ Rename maxAge to maxAgeMinutes everywhere! @done (5/5/2018, 12:58:28 PM)
+☐ Loading indicator for sensors, which are fetched in SensorList, where to display the Loading component?
+☐ Sensor value length should be placed better horizontaly.
 ☐ RecurringEvent does not handle the day of occurance correct when onceAMonth is used. ???
 ☐ Need to bind the telldus device to a controller id.
 ☐ implement mutations on server (run local tellstick command on request processing)
