@@ -43,8 +43,10 @@ const socketMiddleware = (() => {
         // Attempt to connect (we could send a 'failed' action on error)
         if (settings.dev) {
           socket = new WebSocket('ws://localhost:40510')
+          console.log('using localhost websocket')
         } else {
           socket = new WebSocket(`ws://${settings.prodIp}:40510`)
+          console.log(`using ${settings.prodIp} websocket`)
         }
         socket.onmessage = onMessage(socket, store)
         socket.onclose = onClose(socket, store)

@@ -61,7 +61,7 @@ body {
 }
 
 .col-without-row-style {
-  margin: 5px !important;
+  /* margin: 5px !important; */
 }
 
 .name {

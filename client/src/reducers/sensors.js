@@ -36,13 +36,14 @@ const sensors = (state: any[] = initialState, action: any) => {
                 minValueAlarmActive: true
               })
               break;
-            case 'maxAgeMinutesMinutes':
+            case 'maxAge':
               sensorList.push({
                 ...sensor,
-                maxAgeMinutesMinutesAlarmActive: true
+                maxAgeAlarmActive: true
               })
               break;
             default:
+              sensorList.push(sensor)
               break;
           }
         } else {
