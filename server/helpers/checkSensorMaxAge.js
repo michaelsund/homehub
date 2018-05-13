@@ -7,13 +7,12 @@ const checkSensormaxAge = () => {
     db.Sensor.find({ maxAgeAlarm: true }, (err, sensors) => {
       if (sensors) {
         sensors.map(sensor => {
-          console.log(`running maxAge check on sensor ${sensor.name}`)
           if (sensor.maxAgeMinutes !== null) {
             if (!sensor.maxAgeAlarmActive) {
               const millisDiff = Math.abs(new Date() - new Date(sensor.lastReportedTime))
               const minutes = Math.floor((millisDiff / 1000) / 60)
               if (minutes > sensor.maxAgeMinutes) {
-                console.log(`sensor ${sensor.name} maxAge alarm!`)
+                console.log(`setting maxage alarm active for ${sensor.name} -> ${minutes} > ${sensor.maxAgeMinutes}`)
                 sensor.update({ maxAgeAlarmActive: true }, () => {
                   sendWebSocketMessage({ type: 'SENSOR_ALARM_ACTIVE', sensorId: sensor._id, alarmType: 'maxAge' })
                 })

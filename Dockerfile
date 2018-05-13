@@ -7,7 +7,7 @@ RUN apt update && apt install -y \
 COPY server/tellstick.conf /etc
 RUN npm install -g nodemon
 RUN npm install
-run npm install telldus
+RUN npm install telldus
 RUN cd client/ && npm install && npm run build && mv build ../server/build
 CMD sh startscript.sh
 EXPOSE 5000 40510

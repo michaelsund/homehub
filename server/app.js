@@ -30,7 +30,7 @@ db.once('open', () => console.log('Connected to db!'))
 // const pusher = new PushBullet(settings.pushBulletKey)
 const app = express()
 app.use(cors())
-app.use(express.static(path.resolve(__dirname, 'build')));
+app.use(express.static(path.resolve(__dirname, 'build')))
 // pusher.note({
 //  channel_tag: settings.pushBulletChannel
 // }, 'Pannan', 'Need moar pelletz!', (err, res) => {

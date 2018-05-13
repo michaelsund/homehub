@@ -1,9 +1,6 @@
-Spin up a local mongodb instance for development, replace /User/.. with your own path to the project server/db dir.
-docker run -d -p 27017:27017 --name mongo1 -v /path/to/hut/server/db:/data/db mongo
-without a persistent db
-docker run -d -p 27017:27017 --name mongo1 mongo
+Install node packages: yarn installdeps
 
-create client/src/settings.json with the following content for pushbullet messages.
+create client/src/settings.json with the following content.
 {
   "dev": true,
   "prodIp": "192.168.1.X",

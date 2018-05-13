@@ -15,14 +15,14 @@
 .bottom-container_right {
   line-height: 40px;
   margin-top: 4px;
-  width: 50%;
+  width: 90%;
   text-align: right;
 }
 
 .bottom-container_left {
   line-height: 50px;
   margin-left: 8px;
-  width: 50%;
+  width: 10%;
 }
 
 .value-text_big {

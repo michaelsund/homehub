@@ -4,7 +4,7 @@ import sendWebSocketMessage from './sendWebSocketMessage'
 import settings from '../../client/src/settings.json'
 
 if (!settings.dev) {
-  const telldus = ('telldus')
+  const telldus = require('telldus')
 }
 
 const minUpdateIntervalMinutes = 30;
