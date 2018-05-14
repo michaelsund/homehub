@@ -7,12 +7,14 @@ const telldusDeviceStatus = deviceName => new Promise((resolve, reject) => {
       if (result[0].status.name === 'ON') {
         console.log('Status is ON')
         resolve(true)
+      } else {
+        console.log('Status is OFF')
+        resolve(false)
       }
-      console.log('Status is OFF')
-      resolve(false)
+    } else {
+      console.log(`device not found ${deviceName}`)
+      reject(new Error('device not found'))
     }
-    console.log(`device not found ${deviceName}`)
-    reject(new Error('device not found'))
   })
 })
 
