@@ -6,6 +6,7 @@ import {
 import ControllerModel from '../../../schema/ControllerModel'
 import ToggleControllerResponse from '../../types/toggleControllerResponse'
 import settings from '../../../../client/src/settings.json'
+import helpers from '../../../helpers'
 
 if (!settings.dev) {
   // eslint-disable-next-line
@@ -13,22 +14,25 @@ if (!settings.dev) {
 }
 
 export default {
-  description: 'Adds a controller',
+  description: 'Toggles a controller',
   type: ToggleControllerResponse,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
-  async resolve(root, args) {
-    if (settings.telldusDuoConnected) {
-      return ControllerModel.findById(args.id)
-        .select()
-        .exec()
-        .then(() => {
-          // Try to toggle the telldus device here and return the result in status
-          return Object.assign({ result: false, status: false })
-        })
-        .catch(() => Object.assign({ result: false, status: false }))
+  resolve(root, args) {
+    if (settings.dev === false) {
+      ControllerModel.findById(args.id, (err, controller) => {
+        if (err) {
+          console.log(err)
+        } else {
+          helpers.telldusDeviceStatus(controller.name)
+            .then(res => console.log(`res: ${res}`))
+            .catch(err => console.log(err))
+        }
+      })
+      return Object.assign({ result: true, status: true })
     }
+    console.log('In dev mode, returning mock result')
     return Object.assign({ result: false, status: false })
   }
 }

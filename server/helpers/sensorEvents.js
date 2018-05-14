@@ -1,17 +1,22 @@
 import db from '../schema'
 import checkSensorAlarmTrigger from './checkSensorAlarmTrigger'
 import sendWebSocketMessage from './sendWebSocketMessage'
-import settings from '../../client/src/settings.json'
-
-if (!settings.dev) {
-  const telldus = require('telldus')
-}
+// import settings from '../../client/src/settings.json'
+import telldus from 'telldus'
+// if (!settings.dev) {
+//   const telldus = require('telldus')
+// }
 
 const minUpdateIntervalMinutes = 30;
 
 const sensorEvents = () => {
-  const listener = telldus.addSensorEventListener((deviceId,protocol,model,type,value,timestamp) => {
-    console.log(`New sensor event received: ${deviceId} ${protocol} ${model} ${type} ${value} ${timestamp}`)
+  telldus.addSensorEventListener((
+    deviceId,
+    protocol,
+    model,
+    type,
+    value
+  ) => {
     const now = new Date()
     db.Sensor.find({}, (err, sensors) => {
       if (!err) {
