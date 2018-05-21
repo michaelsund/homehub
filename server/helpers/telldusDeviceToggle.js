@@ -1,9 +1,14 @@
-import telldus from 'telldus'
 import Controller from '../schema/ControllerModel'
-import settings from '../../client/src/settings.json'
 import telldusDeviceStatus from './telldusDeviceStatus'
+import settings from '../../client/src/settings.json'
 
-const telldusDeviceToggle = controllerId => new Promise((resolve, reject) => {
+let telldus = null
+
+if (!settings.dev) {
+  telldus = require('telldus')
+}
+
+const telldusDeviceToggle = controllerId => new Promise(resolve => {
   if (settings.dev) {
     console.log('In dev mode, returning mock result')
     console.log(`returning: ${JSON.stringify({ result: false, status: false })}`)

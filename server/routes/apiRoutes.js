@@ -2,7 +2,7 @@ import express from 'express'
 import { check, validationResult } from 'express-validator/check'
 import db from '../schema'
 import settings from '../../client/src/settings.json'
-import helpers from '../helpers'
+import sendWebSocketMessage from '../helpers/sendWebSocketMessage'
 // const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
@@ -111,7 +111,7 @@ apiRouter.post(
           res.json({ success: false, status: 'Can not ack sensor' })
         } else {
           res.json({ success: true, status: 'Sensor alarms acked' })
-          helpers.sendWebSocketMessage({ type: 'SENSOR_ALARM_ACK', sensorId: req.body.sensorId })
+          sendWebSocketMessage({ type: 'SENSOR_ALARM_ACK', sensorId: req.body.sensorId })
         }
       })
     }

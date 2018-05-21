@@ -1,4 +1,10 @@
-import telldus from 'telldus'
+import settings from '../../client/src/settings.json'
+
+let telldus = null
+
+if (!settings.dev) {
+  telldus = require('telldus')
+}
 
 const telldusDeviceStatus = deviceName => new Promise((resolve, reject) => {
   telldus.getDevices((err, devices) => {

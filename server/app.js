@@ -12,7 +12,8 @@ import apiRoutes from './routes/apiRoutes'
 // import PushBullet from 'pushbullet'
 import settings from '../client/src/settings.json'
 import schema from './graphql'
-import helpers from './helpers'
+import sensorEvents from './helpers/sensorEvents'
+import checkSensorMaxAge from './helpers/checkSensorMaxAge'
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -53,11 +54,9 @@ app.use('/graphql', graphqlHTTP(() => ({
 })))
 
 // Start checking sensor maxAgeMinutes alarms
-helpers.checkSensorMaxAge()
+checkSensorMaxAge()
 
-// Start checking for telldus sensors if in prod mode
-if (!settings.dev) {
-  helpers.sensorEvents()
-}
+// Start checking for telldus sensor events if not in dev mode
+sensorEvents()
 
 app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))

@@ -11,7 +11,8 @@
 ✔ forEach sensor in node, check maxAge and if an alarm should be triggered. code is temp in checkSensorAlarmTrigger.js @done (5/4/2018, 9:50:54 PM)
 ✔ Rename maxAge to maxAgeMinutes everywhere! @done (5/5/2018, 12:58:28 PM)
 ✔ sensor alarm not triggering websocket message. @done (5/13/2018, 4:23:57 PM)
-☐ Finnish controller control backend.
+✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
+☐ toggling a controller updates db, and a compare between telldus and db is made when toggling a controller.
 ☐ controller can be set to run for X amount of hours and minutes starting at a specific time.
 ☐ On/Off indicator of controller component.
 ☐ col-without-rowstyle margin breaks reactstrap col's
