@@ -35,15 +35,13 @@ const sensorEvents = () => {
                   value,
                   time: now,
                 })
-                newSensorValue.save((err, data) => {
+                newSensorValue.save(err => {
                   if (err) {
                     console.log(err)
                   }
                   console.log(`added new sensorvalue for ${sensor.name} : ${value}`)
                 })
               })
-            } else {
-              console.log(`sensor ${sensor.name} has allready reported value for this 30 min period.`)
             }
           }
         })

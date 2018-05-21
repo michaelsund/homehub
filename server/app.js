@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
-import morgan from 'morgan'
+// import morgan from 'morgan'
 import graphqlHTTP from 'express-graphql'
 // import remotedev from 'remotedev-server'
 import routes from './routes/routes'
@@ -41,7 +41,7 @@ app.use(express.static(path.resolve(__dirname, 'build')))
 //   }
 // })
 
-app.use(morgan('combined'))
+// app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/', routes)
