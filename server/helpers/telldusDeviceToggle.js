@@ -23,8 +23,8 @@ const telldusDeviceToggle = controllerId => new Promise(resolve => {
     telldusDeviceStatus(controller.name)
       .then(status => {
         if (status) {
-          console.log(`controller status: ${status}, turning off`)
-          telldus.turnOff(1, err => {
+          console.log(`controller ${controller.name} status: ${status}, turning off`)
+          telldus.turnOff(controller.otherId, err => {
             if (err) {
               console.log(err)
             }
@@ -32,8 +32,8 @@ const telldusDeviceToggle = controllerId => new Promise(resolve => {
             resolve(Object.assign({ result: true, status: false }))
           })
         } else {
-          console.log(`controller status: ${status}, turning on`)
-          telldus.turnOn(1, err => {
+          console.log(`controller ${controller.name}  status: ${status}, turning on`)
+          telldus.turnOn(controller.otherId, err => {
             if (err) {
               console.log(err)
             }

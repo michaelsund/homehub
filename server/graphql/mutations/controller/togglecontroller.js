@@ -14,6 +14,7 @@ export default {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
   resolve(root, args) {
+    console.log(`received args: ${JSON.stringify(args, null, 2)}`)
     if (!settings.dev) {
       return telldusDeviceToggle(args.id)
         .then(result => {
