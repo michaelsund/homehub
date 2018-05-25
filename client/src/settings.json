@@ -1,5 +1,5 @@
 {
-  "dev": true,
+  "dev": false,
   "prodIp": "192.168.1.2",
   "mongoServer": "192.168.1.2",
   "mongoUser": "",

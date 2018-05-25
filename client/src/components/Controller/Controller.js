@@ -42,10 +42,10 @@ class Controller extends React.Component<Props> {
               </Row>
               <div className="bottom-container">
                 <div className="bottom-container_left">
-                  <button onClick={() =>
-                    // this.handleToggleClicked()
+                  <button onClick={() => {
+                    this.handleToggleClicked()
                     toggleController({ variables: { id: this.props.controller._id } })
-                  }>
+                  }}>
                     Toggle
                   </button>
                 </div>

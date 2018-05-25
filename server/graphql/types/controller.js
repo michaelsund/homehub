@@ -3,6 +3,7 @@ import {
   GraphQLNonNull,
   GraphQLString,
   GraphQLBoolean,
+  GraphQLInt,
   GraphQLID
 } from 'graphql'
 
@@ -25,6 +26,18 @@ export default new GraphQLObjectType({
       type: GraphQLBoolean
     },
     lastReportedTime: {
+      type: GraphQLString
+    },
+    otherId: {
+      type: GraphQLInt
+    },
+    timer: {
+      type: GraphQLBoolean
+    },
+    onTime: {
+      type: GraphQLString
+    },
+    offTime: {
       type: GraphQLString
     }
   }

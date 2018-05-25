@@ -12,9 +12,11 @@
 ✔ Rename maxAge to maxAgeMinutes everywhere! @done (5/5/2018, 12:58:28 PM)
 ✔ sensor alarm not triggering websocket message. @done (5/13/2018, 4:23:57 PM)
 ✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
-☐ telldusToggle needs to know the telldus device id, save it to db?
-☐ toggling a controller updates db, and a compare between telldus and db is made when toggling a controller.
 ☐ controller can be set to run for X amount of hours and minutes starting at a specific time.
+☐ toggleController clientside needs to be up to date with backend.
+☐ On startup the server should check the last db status for controllers and set them accordingly via telldus
+✔ telldusToggle needs to know the telldus device id, save it to db? @done (2018-5-25 13:43:11)
+✔ toggling a controller updates db @done (2018-5-25 13:43:19)
 ☐ On/Off indicator of controller component.
 ☐ learn controller, input name, then show a message to plug the controller in and a button that triggers learn, writing a new controller to db with otherId
 ☐ col-without-rowstyle margin breaks reactstrap col's

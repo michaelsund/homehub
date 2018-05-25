@@ -14,6 +14,7 @@ import settings from '../client/src/settings.json'
 import schema from './graphql'
 import sensorEvents from './helpers/sensorEvents'
 import checkSensorMaxAge from './helpers/checkSensorMaxAge'
+import checkControllerTimer from './helpers/checkControllerTimer'
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -53,10 +54,9 @@ app.use('/graphql', graphqlHTTP(() => ({
   graphiql: true
 })))
 
-// Start checking sensor maxAgeMinutes alarms
+// Start checks
 checkSensorMaxAge()
-
-// Start checking for telldus sensor events if not in dev mode
 sensorEvents()
+checkControllerTimer()
 
 app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))

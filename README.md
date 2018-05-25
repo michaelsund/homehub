@@ -19,7 +19,7 @@ build the image
 docker build -t hut .
 
 start it with tellstick connected
-docker run -d -p 5000:5000 -p 40510:40510 --device /dev/bus/usb:/dev/bus/usb --name my_hut hut
+docker run -d -e TZ="Europe/Stockholm" -p 5000:5000 -p 40510:40510 --device /dev/bus/usb:/dev/bus/usb --name my_hut hut
 
 or without tellstick
 docker run -d -p 5000:5000 -p 40510:40510 --name my_hut hut

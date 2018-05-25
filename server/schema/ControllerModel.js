@@ -11,7 +11,10 @@ const controller = mongoose.Schema({
   external: { type: Boolean, default: false },
   otherId: { type: Number, default: null },
   status: { type: Boolean, default: false },
-  lastReportedTime: { type: Date, default: null }
+  lastReportedTime: { type: Date, default: null },
+  timer: { type: Boolean, default: false },
+  onTime: { type: String, default: '' },
+  offTime: { type: String, default: '' }
 })
 
 export default mongoose.model('Controller', controller);

@@ -3,13 +3,13 @@ import {
   GraphQLID,
   // GraphQLBoolean,
 } from 'graphql'
-import ToggleControllerResponse from '../../types/toggleControllerResponse'
+import ControllerResponse from '../../types/controller'
 import telldusDeviceToggle from '../../../helpers/telldusDeviceToggle'
 import settings from '../../../../client/src/settings.json'
 
 export default {
   description: 'Toggles a controller',
-  type: ToggleControllerResponse,
+  type: ControllerResponse,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },
@@ -23,6 +23,16 @@ export default {
         })
     }
     console.log('Returning mock controller result in dev mode.')
-    return Object.assign({ result: false, status: false })
+    return Object.assign({
+      _id: new GraphQLID(123),
+      name: 'Development controller',
+      description: 'dev',
+      external: false,
+      status: false,
+      lastReportedTime: '',
+      timer: false,
+      onTime: '',
+      offTime: ''
+    })
   }
 }

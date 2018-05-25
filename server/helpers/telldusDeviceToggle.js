@@ -8,44 +8,75 @@ if (!settings.dev) {
   telldus = require('telldus')
 }
 
-const telldusDeviceToggle = controllerId => new Promise(resolve => {
+const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(resolve => {
   if (settings.dev) {
-    console.log('In dev mode, returning mock result')
-    console.log(`returning: ${JSON.stringify({ result: false, status: false })}`)
-    resolve(Object.assign({ result: false, status: false }))
+    console.log('In dev mode, returning just the controller from db')
+    Controller.findById(controllerId, (err, data) => {
+      resolve(data)
+    })
   }
   Controller.findById(controllerId, (err, controller) => {
     if (err) {
       console.log(err)
-      console.log(`returning: ${JSON.stringify({ result: false, status: false })}`)
-      resolve(Object.assign({ result: false, status: false }))
+      Controller.findById(controllerId, (err, data) => {
+        resolve(data)
+      })
     }
-    telldusDeviceStatus(controller.name)
+    telldusDeviceStatus(controller.otherId)
       .then(status => {
-        if (status) {
-          console.log(`controller ${controller.name} status: ${status}, turning off`)
-          telldus.turnOff(controller.otherId, err => {
-            if (err) {
-              console.log(err)
-            }
-            console.log(`returning: ${JSON.stringify({ result: true, status: false })}`)
-            resolve(Object.assign({ result: true, status: false }))
-          })
+        if (forcedState !== null) {
+          if (forcedState) {
+            telldus.turnOn(controller.otherId, err => {
+              if (err) {
+                console.log(err)
+              }
+              controller.set({ status: true })
+              controller.save((err, updatedController) => {
+                resolve(updatedController)
+              })
+            })
+          } else {
+            telldus.turnOff(controller.otherId, err => {
+              if (err) {
+                console.log(err)
+              }
+              controller.set({ status: false })
+              controller.save((err, updatedController) => {
+                resolve(updatedController)
+              })
+            })
+          }
         } else {
-          console.log(`controller ${controller.name}  status: ${status}, turning on`)
-          telldus.turnOn(controller.otherId, err => {
-            if (err) {
-              console.log(err)
-            }
-            console.log(`returning: ${JSON.stringify({ result: true, status: true })}`)
-            resolve(Object.assign({ result: true, status: true }))
-          })
+          if (status) {
+            console.log(`controller ${controller.name} status: ${status}, turning off`)
+            telldus.turnOff(controller.otherId, err => {
+              if (err) {
+                console.log(err)
+              }
+              controller.set({ status: false })
+              controller.save((err, updatedController) => {
+                resolve(updatedController)
+              })
+            })
+          } else {
+            console.log(`controller ${controller.name}  status: ${status}, turning on`)
+            telldus.turnOn(controller.otherId, err => {
+              if (err) {
+                console.log(err)
+              }
+              controller.set({ status: true })
+              controller.save((err, updatedController) => {
+                resolve(updatedController)
+              })
+            })
+          }
         }
       })
       .catch(err => {
         console.log(err)
-        console.log(`returning: ${JSON.stringify({ result: false, status: false })}`)
-        resolve(Object.assign({ result: false, status: false }))
+        Controller.findById(controllerId, (err, data) => {
+          resolve(data)
+        })
       })
   })
 })

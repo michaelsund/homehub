@@ -3,8 +3,16 @@ import gql from 'graphql-tag'
 const toggleController = gql`
   mutation toggle($id: ID!) {
     toggleController(id: $id) {
-      result
+      _id
+      name
+      description
       status
+      timer
+      onTime
+      offTime
+      lastReportedTime
+      otherId
+      external
     }
   }
 `
