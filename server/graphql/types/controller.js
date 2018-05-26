@@ -28,7 +28,7 @@ export default new GraphQLObjectType({
     lastReportedTime: {
       type: GraphQLString
     },
-    otherId: {
+    identificationId: {
       type: GraphQLInt
     },
     timer: {

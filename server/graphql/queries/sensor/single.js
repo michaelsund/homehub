@@ -3,13 +3,13 @@ import {
   GraphQLNonNull
 } from 'graphql'
 
-import controllerType from '../../types/controller'
+import sensorType from '../../types/sensor'
 import getProjection from '../../get-projection'
-import ControllerModel from '../../../schema/ControllerModel'
+import SensorModel from '../../../schema/SensorModel'
 
 export default {
-  description: 'Get a single controller by id',
-  type: controllerType,
+  description: 'Get a single sensor by id',
+  type: sensorType,
   args: {
     id: {
       name: 'id',
@@ -18,7 +18,7 @@ export default {
   },
   resolve(root, params, info, fieldASTs) {
     const projection = getProjection(fieldASTs)
-    return ControllerModel
+    return SensorModel
       .findById(params.id)
       .select(projection)
       .exec()

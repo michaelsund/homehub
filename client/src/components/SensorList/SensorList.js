@@ -2,12 +2,18 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
+import {
+  graphql,
+  compose
+} from 'react-apollo'
 import { Col } from 'react-simple-flex-grid'
 import * as actions from '../../actions'
+import queries from '../../graphql/queries'
 import Sensor from '../Sensor'
 import './SensorList.css'
 
 type Props = {
+  data: Object,
   sensors: [],
   onSetSensors: Function
 }
@@ -19,25 +25,10 @@ const mapDispatchToProps = dispatch => ({
 })
 
 class SensorList extends React.Component<Props> {
-  componentDidMount = () => {
-    // Initial fetch of List
-    if (this.props.sensors.length === 0) {
-      this.fetchAllSensors()
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.sensors.length === 0 && nextProps.data.sensors) {
+      this.props.onSetSensors(nextProps.data.sensors)
     }
-  }
-
-  fetchAllSensors = () => {
-    fetch('/api/sensors', {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      }
-    })
-      .then(response => response.json())
-      .then(response => {
-        this.props.onSetSensors(response.sensors)
-      })
   }
 
   render() {
@@ -49,10 +40,22 @@ class SensorList extends React.Component<Props> {
           </Col>
         ))
       ) : (
-        null
+        this.props.data.loading ? (
+          <p>Loading...</p>
+        ) : (
+          this.props.data.error !== undefined ? (
+            <p>Error contacting server...</p>
+          ) : (
+            null
+          )
+        )
       )
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SensorList)
+// export default connect(mapStateToProps, mapDispatchToProps)(SensorList)
+export default compose(
+  graphql(queries.getSensors),
+  connect(mapStateToProps, mapDispatchToProps)
+)(SensorList)

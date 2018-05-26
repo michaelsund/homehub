@@ -22,11 +22,11 @@ const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(re
         resolve(data)
       })
     }
-    telldusDeviceStatus(controller.otherId)
+    telldusDeviceStatus(controller.identificationId)
       .then(status => {
         if (forcedState !== null) {
           if (forcedState) {
-            telldus.turnOn(controller.otherId, err => {
+            telldus.turnOn(controller.identificationId, err => {
               if (err) {
                 console.log(err)
               }
@@ -36,7 +36,7 @@ const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(re
               })
             })
           } else {
-            telldus.turnOff(controller.otherId, err => {
+            telldus.turnOff(controller.identificationId, err => {
               if (err) {
                 console.log(err)
               }
@@ -49,7 +49,7 @@ const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(re
         } else {
           if (status) {
             console.log(`controller ${controller.name} status: ${status}, turning off`)
-            telldus.turnOff(controller.otherId, err => {
+            telldus.turnOff(controller.identificationId, err => {
               if (err) {
                 console.log(err)
               }
@@ -60,7 +60,7 @@ const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(re
             })
           } else {
             console.log(`controller ${controller.name}  status: ${status}, turning on`)
-            telldus.turnOn(controller.otherId, err => {
+            telldus.turnOn(controller.identificationId, err => {
               if (err) {
                 console.log(err)
               }

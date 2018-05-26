@@ -8,7 +8,7 @@ import telldusDeviceToggle from '../../../helpers/telldusDeviceToggle'
 import settings from '../../../../client/src/settings.json'
 
 export default {
-  description: 'Toggles a controller',
+  description: 'Toggles a controller status',
   type: ControllerResponse,
   args: {
     id: { type: new GraphQLNonNull(GraphQLID) }

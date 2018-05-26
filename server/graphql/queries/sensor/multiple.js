@@ -1,15 +1,15 @@
 import { GraphQLList } from 'graphql'
-import controllerType from '../../types/controller'
+import sensorType from '../../types/sensor'
 import getProjection from '../../get-projection'
-import ControllerModel from '../../../schema/ControllerModel'
+import SensorModel from '../../../schema/SensorModel'
 
 export default {
-  description: 'Get controllers in a list',
-  type: new GraphQLList(controllerType),
+  description: 'Get sensors in a list',
+  type: new GraphQLList(sensorType),
   args: {},
   resolve(root, params, info, fieldASTs) {
     const projections = getProjection(fieldASTs)
-    return ControllerModel
+    return SensorModel
       .find()
       .select(projections)
       .exec()
