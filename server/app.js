@@ -3,10 +3,9 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
-// import morgan from 'morgan'
 import graphqlHTTP from 'express-graphql'
+// import morgan from 'morgan'
 // import remotedev from 'remotedev-server'
-import routes from './routes/routes'
 import apiRoutes from './routes/apiRoutes'
 
 // import PushBullet from 'pushbullet'
@@ -30,9 +29,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 db.once('open', () => console.log('Connected to db!'))
 
 // const pusher = new PushBullet(settings.pushBulletKey)
-const app = express()
-app.use(cors())
-app.use(express.static(path.resolve(__dirname, 'build')))
 // pusher.note({
 //  channel_tag: settings.pushBulletChannel
 // }, 'Pannan', 'Need moar pelletz!', (err, res) => {
@@ -43,16 +39,22 @@ app.use(express.static(path.resolve(__dirname, 'build')))
 //   }
 // })
 
+const app = express()
+app.use(cors())
+app.use(express.static(path.resolve(__dirname, 'build')))
 // app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use('/', routes)
 app.use('/api', apiRoutes)
 app.use('/graphql', graphqlHTTP(() => ({
   schema,
   pretty: true,
   graphiql: true
 })))
+// Redirect everything under root to react router
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 // Start checks
 checkSensorMaxAge()

@@ -3,6 +3,7 @@ import settings from '../../client/src/settings.json'
 let telldus = null
 
 if (!settings.dev) {
+  // eslint-disable-next-line
   telldus = require('telldus')
 }
 

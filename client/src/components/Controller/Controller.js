@@ -33,8 +33,11 @@ class Controller extends React.Component<Props> {
                 <Col className="left-container" span={8}>
                   <p className="name">{this.props.controller.name}</p>
                   <p className="desc">{this.props.controller.description}</p>
-                  {this.props.controller.lastReportedTime !== null &&
-                    <p>{Moment(new Date(this.props.controller.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
+                  {this.props.controller.timer &&
+                    <div>
+                      <p>On: {this.props.controller.onTime}</p>
+                      <p>Off: {this.props.controller.offTime}</p>
+                    </div>
                   }
                 </Col>
                 <Col className="right-container" span={2} offset={2}>

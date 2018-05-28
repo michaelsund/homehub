@@ -6,8 +6,12 @@ const getControllers = gql`
       _id
       name
       description
+      identificationId
       status
       lastReportedTime
+      timer
+      onTime
+      offTime
     }
   }
 `

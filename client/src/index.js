@@ -14,7 +14,7 @@ import Menu from './components/Menu'
 import App from './containers/App'
 import Controls from './containers/Controls'
 import Settings from './containers/Settings'
-import registerServiceWorker from './registerServiceWorker'
+// import registerServiceWorker from './registerServiceWorker'
 import './css/common.css'
 import configureStore from './store/configurestore'
 
@@ -44,4 +44,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
-registerServiceWorker()
+// registerServiceWorker()

@@ -70,7 +70,7 @@ class Sensor extends React.Component<Props, State> {
             <Col className="left-container" span={8}>
               <p className="name">{this.props.sensor.name}</p>
               <p className="desc">{this.props.sensor.description}</p>
-              <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+              <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
             </Col>
             <Col className="right-container" span={2} offset={2}>
               <VerticalProgress
@@ -102,7 +102,7 @@ class Sensor extends React.Component<Props, State> {
             <Col className="left-container" span={8}>
               <p className="name">{this.props.sensor.name}</p>
               <p className="desc">{this.props.sensor.description}</p>
-              <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+              <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
             </Col>
             <Col className="right-container" span={2} offset={2}>
               {/* <VerticalProgress
@@ -135,7 +135,7 @@ class Sensor extends React.Component<Props, State> {
           <p className="name">{this.props.sensor.name}</p>
           <p className="desc">{this.props.sensor.description}</p>
           <p>Last raw value: {this.props.sensor.lastReportedValue}</p>
-          <p>{Moment(this.props.sensor.lastReportedTime).format('MM-DD HH:mm:ss')}</p>
+          <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
           <p>No sensortype defined</p>
         </div>
       </div>
