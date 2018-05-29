@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import Moment from 'moment'
 import { connect } from 'react-redux'
 import { Row, Col } from 'react-simple-flex-grid'
 import { Mutation } from 'react-apollo'

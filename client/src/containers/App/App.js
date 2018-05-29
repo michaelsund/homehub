@@ -30,6 +30,22 @@ class App extends React.Component<{}> {
             eventDay="sat"
           />
         </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <RecurringEvent
+            title="Luftvärmepump"
+            note="Dammsug filter"
+            everyWeek
+            eventDay="sat"
+          />
+        </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <RecurringEvent
+            title="Luftvärmepump"
+            note="Dammsug filter"
+            everyWeek
+            eventDay="sat"
+          />
+        </Col>
       </Row>
     )
   }
