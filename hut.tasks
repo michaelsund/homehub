@@ -13,8 +13,13 @@
 ✔ sensor alarm not triggering websocket message. @done (5/13/2018, 4:23:57 PM)
 ✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
 ✔ controller can have a on and off time set. @done (5/26/2018, 11:56:52 AM)
-☐ toggleController clientside needs to be up to date with backend, using websockets or graphql subscriptions.
+☐ Make sensorValues graphql endpoints.
+☐ instead of websockets, maybe use graphql subscriptions instead?
+☐ Graph sensorvalues in separate graph component that can be included in sensor component via props.
+☐ Sensorvalues retention time. grows quickly if left unpurged.
+☐ Pushbullet notifications on controller timer.
 ☐ On startup the server should check the last db status for controllers and set them accordingly via telldus.
+☐ RecurringEvent onceAMonth is not getting the right amount of days calculated, seems like weekNumbers are wrong.
 ✔ telldusToggle needs to know the telldus device id, save it to db? @done (2018-5-25 13:43:11)
 ✔ toggling a controller updates db @done (2018-5-25 13:43:19)
 ☐ On/Off indicator of controller component.
@@ -34,4 +39,4 @@
 ☐ Sensorvalues is not used now or updated from SensorList, should be looked into for graphing in Sensor component later on.
 ☐ Checkout express-validator for validating post input, implement if its any good.
 ☐ Setup dockercontainers for node (with telldusd), forward tellstick to node container.
-☐ Clean up server and clients package.json deps
+☐ Clean up server and clients package.json

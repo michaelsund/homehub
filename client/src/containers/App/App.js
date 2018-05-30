@@ -32,18 +32,10 @@ class App extends React.Component<{}> {
         </Col>
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <RecurringEvent
-            title="Luftvärmepump"
-            note="Dammsug filter"
+            title="Pannan"
+            note="Aska ur"
             everyWeek
-            eventDay="sat"
-          />
-        </Col>
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
-          <RecurringEvent
-            title="Luftvärmepump"
-            note="Dammsug filter"
-            everyWeek
-            eventDay="sat"
+            eventDay="thu"
           />
         </Col>
       </Row>
