@@ -13,7 +13,7 @@
 ✔ sensor alarm not triggering websocket message. @done (5/13/2018, 4:23:57 PM)
 ✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
 ✔ controller can have a on and off time set. @done (5/26/2018, 11:56:52 AM)
-☐ Make sensorValues graphql endpoints.
+✔ Make sensorValues graphql endpoints. @done (5/31/2018, 12:25:25 PM)
 ☐ instead of websockets, maybe use graphql subscriptions instead?
 ☐ Graph sensorvalues in separate graph component that can be included in sensor component via props.
 ☐ Sensorvalues retention time. grows quickly if left unpurged.
