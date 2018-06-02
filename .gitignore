@@ -6,7 +6,7 @@ client/node_modules
 # development db
 /server/db
 
-/server/settings.json
+/client/src/settings.json
 
 # testing
 /coverage
