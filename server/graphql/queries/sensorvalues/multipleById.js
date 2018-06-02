@@ -1,6 +1,7 @@
 import {
   GraphQLString,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLList
 } from 'graphql'
 
 import sensorvalueType from '../../types/sensorvalue'
@@ -9,7 +10,7 @@ import SensorValueModel from '../../../schema/SensorValueModel'
 
 export default {
   description: 'Get a list of sensorvalues from a sensor id',
-  type: sensorvalueType,
+  type: new GraphQLList(sensorvalueType),
   args: {
     sensorId: {
       name: 'sensorId',
@@ -21,6 +22,8 @@ export default {
     return SensorValueModel
       .find({ sensorId: params.sensorId })
       .select(projection)
+      .sort({ time: 'desc' })
+      .limit(10)
       .exec()
   }
 }

@@ -1,9 +1,0 @@
-{
-  "dev": true,
-  "prodIp": "192.168.1.2",
-  "mongoServer": "192.168.1.2",
-  "mongoUser": "",
-  "mongoPass": "",
-  "pushBulletKey": "o.TrbeTIdcwZJ30lXHTQCGWzqumLCuywda",
-  "pusBulletChannel": "oppestuff"
-}

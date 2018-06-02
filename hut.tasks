@@ -13,11 +13,14 @@
 ✔ sensor alarm not triggering websocket message. @done (5/13/2018, 4:23:57 PM)
 ✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
 ✔ controller can have a on and off time set. @done (5/26/2018, 11:56:52 AM)
-☐ Make sensorValues graphql endpoints.
+✔ Make sensorValues graphql endpoints. @done (5/31/2018, 12:25:25 PM)
+☐ Graph sensorvalues (for temperature mainly) in separate graph component that can be included in sensor component via props.
+☐ current bitcoin price graph. (just for fun) https://www.coindesk.com/api/ (is there a graphql endpoint?)
+  Look at this component to use vx for the graphs https://github.com/hshoff/viewsource
+☐ Sensorvalues retention time. grows quickly if left unpurged (decide on a configurable retention time) and write a node checker.
+☐ Move recurringevents to db.
+☐ Pushbullet notifications on recurringevents.
 ☐ instead of websockets, maybe use graphql subscriptions instead?
-☐ Graph sensorvalues in separate graph component that can be included in sensor component via props.
-☐ Sensorvalues retention time. grows quickly if left unpurged.
-☐ Pushbullet notifications on controller timer.
 ☐ On startup the server should check the last db status for controllers and set them accordingly via telldus.
 ☐ RecurringEvent onceAMonth is not getting the right amount of days calculated, seems like weekNumbers are wrong.
 ✔ telldusToggle needs to know the telldus device id, save it to db? @done (2018-5-25 13:43:11)
