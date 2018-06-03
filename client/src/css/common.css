@@ -180,3 +180,7 @@ body {
 .btn.red:hover, .btn.red:focus {
   background-color: #c0392b;
 }
+
+.graph-container {
+  height: 82%;
+}

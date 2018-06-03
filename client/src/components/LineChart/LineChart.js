@@ -2,7 +2,6 @@
 
 import React from 'react'
 import { AreaClosed, Line, Bar } from '@vx/shape'
-import { appleStock } from '@vx/mock-data'
 import { curveMonotoneX } from '@vx/curve'
 import { LinearGradient } from '@vx/gradient'
 import { GridRows, GridColumns } from '@vx/grid'
@@ -13,12 +12,16 @@ import { extent, max, bisector } from 'd3-array'
 import { timeFormat } from 'd3-time-format'
 
 type Props = {
+  data: Array,
   width: number,
   height: number,
   margin: Object
 }
 
-const stock = appleStock.slice(800)
+type State = {
+  data: Array
+}
+
 const formatDate = timeFormat("%b %d, '%y")
 
 // accessors
@@ -27,10 +30,15 @@ const yStock = d => d.close
 const bisectDate = bisector(d => new Date(d.date)).left
 
 
-class LineChart extends React.Component<Props> {
-  constructor(props) {
-    super(props)
-    this.handleTooltip = this.handleTooltip.bind(this)
+class LineChart extends React.Component<Props, State> {
+  state = {
+    data: []
+  }
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.data) {
+      this.setState({ data: nextProps.data })
+    }
   }
 
   handleTooltip = ({
@@ -74,11 +82,11 @@ class LineChart extends React.Component<Props> {
     // scales
     const xScale = scaleTime({
       range: [0, xMax],
-      domain: extent(stock, xStock),
+      domain: extent(this.state.data, xStock),
     });
     const yScale = scaleLinear({
       range: [yMax, 0],
-      domain: [0, max(stock, yStock) + yMax / 3],
+      domain: [0, max(this.state.data, yStock) + yMax / 3],
       nice: true,
     });
 
@@ -128,7 +136,7 @@ class LineChart extends React.Component<Props> {
             stroke="rgba(255,255,255,0.3)"
           />
           <AreaClosed
-            data={stock}
+            data={this.state.data}
             xScale={xScale}
             yScale={yScale}
             x={xStock}
@@ -145,7 +153,7 @@ class LineChart extends React.Component<Props> {
             height={height}
             fill="transparent"
             rx={14}
-            data={stock}
+            data={this.state.data}
             onTouchStart={data => event =>
               this.handleTooltip({
                 event,
