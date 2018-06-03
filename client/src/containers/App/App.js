@@ -3,6 +3,7 @@
 import React from 'react'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
+import BitCoinValue from '../../components/BitCoinValue'
 import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 
@@ -10,6 +11,9 @@ class App extends React.Component<{}> {
   render() {
     return (
       <Row className="row-style">
+        <Col className="col-without-row-style" lg={4} md={3} sm={3} xs={12}>
+          <BitCoinValue />
+        </Col>
         {/* Sensors fetched from db */}
         <SensorList />
         {/* Recurring events are hardcoded */}
