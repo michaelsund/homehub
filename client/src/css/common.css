@@ -11,6 +11,12 @@ body {
   color: #EBF5EE;
 }
 
+.loading-text {
+  text-align: center;
+  vertical-align: middle;
+  line-height: 120px;
+}
+
 .sidebar-container {
   width: 70px;
   position: absolute;
@@ -183,4 +189,8 @@ body {
 
 .graph-container {
   height: 82%;
+}
+
+.chart-svg {
+  border-radius: 4px;
 }

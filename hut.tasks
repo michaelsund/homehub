@@ -14,9 +14,12 @@
 ✔ Finnish controller control backend. @done (5/21/2018, 11:17:20 PM)
 ✔ controller can have a on and off time set. @done (5/26/2018, 11:56:52 AM)
 ✔ Make sensorValues graphql endpoints. @done (5/31/2018, 12:25:25 PM)
+☐ Loading component that wrap children to hide or show them when loading is done, accepts a name props that displays whats loading.
+☐ Navigating from dash to controllers throws a setstate while unmounted error. fix!
+☐ Server status heatmap in vx (dummy until api written).
+☐ Write backend logic to check servers status by checking if the port is responding, expose a graphql endpoint. (should use subscriptions to push data)
 ☐ Graph sensorvalues (for temperature mainly) in separate graph component that can be included in sensor component via props.
-☐ current bitcoin price graph. (just for fun) https://www.coindesk.com/api/ (is there a graphql endpoint?)
-  Look at this component to use vx for the graphs https://github.com/hshoff/viewsource
+✔ current bitcoin price graph. (just for fun) https://www.coindesk.com/api/ (is there a graphql endpoint?) @done (6/4/2018, 11:56:08 AM) Look at this component to use vx for the graphs https://github.com/hshoff/viewsource
 ☐ Sensorvalues retention time. grows quickly if left unpurged (decide on a configurable retention time) and write a node checker.
 ☐ Move recurringevents to db.
 ☐ Pushbullet notifications on recurringevents.

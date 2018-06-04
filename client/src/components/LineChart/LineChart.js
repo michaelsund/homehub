@@ -3,8 +3,8 @@
 import React from 'react'
 import { AreaClosed, Line, Bar } from '@vx/shape'
 import { curveMonotoneX } from '@vx/curve'
-import { LinearGradient } from '@vx/gradient'
-import { GridRows, GridColumns } from '@vx/grid'
+// import { GridRows, GridColumns } from '@vx/grid'
+import { GradientPinkBlue } from '@vx/gradient'
 import { scaleTime, scaleLinear } from '@vx/scale'
 import { withTooltip, Tooltip } from '@vx/tooltip'
 import { localPoint } from '@vx/event'
@@ -15,7 +15,8 @@ type Props = {
   data: Array,
   width: number,
   height: number,
-  margin: Object
+  margin: Object,
+  showTooltip: Function
 }
 
 type State = {
@@ -36,7 +37,7 @@ class LineChart extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.data) {
+    if (nextProps.data.length) {
       this.setState({ data: nextProps.data })
     }
   }
@@ -66,75 +67,33 @@ class LineChart extends React.Component<Props, State> {
       width,
       height,
       margin,
-      showTooltip,
       hideTooltip,
       tooltipData,
       tooltipTop,
       tooltipLeft,
       events,
-    } = this.props;
-    if (width < 10) return null;
+    } = this.props
+    if (width < 10) return null
 
     // bounds
-    const xMax = this.props.width - this.props.margin.left - this.props.margin.right;
-    const yMax = this.props.height - this.props.margin.top - this.props.margin.bottom;
+    const xMax = this.props.width - this.props.margin.left - this.props.margin.right
+    const yMax = this.props.height - this.props.margin.top - this.props.margin.bottom
 
     // scales
     const xScale = scaleTime({
       range: [0, xMax],
       domain: extent(this.state.data, xStock),
-    });
+    })
     const yScale = scaleLinear({
       range: [yMax, 0],
-      domain: [0, max(this.state.data, yStock) + yMax / 3],
-      nice: true,
-    });
+      domain: [0, max(this.state.data, yStock) + (yMax / 3)],
+      nice: true
+    })
 
     return (
       <div>
-        <svg ref={s => (this.svg = s)} width={this.props.width} height={this.props.height}>
-          <rect
-            x={0}
-            y={0}
-            width={this.props.width}
-            height={this.props.height}
-            fill="#32deaa"
-            rx={14}
-          />
-          <defs>
-            <linearGradient
-              id="gradient"
-              x1="0%"
-              y1="0%"
-              x2="0%"
-              y2="100%"
-            >
-              <stop
-                offset="0%"
-                stopColor="#FFFFFF"
-                stopOpacity={1}
-              />
-              <stop
-                offset="100%"
-                stopColor="#FFFFFF"
-                stopOpacity={0.2}
-              />
-            </linearGradient>
-          </defs>
-          <GridRows
-            lineStyle={{ pointerEvents: 'none' }}
-            scale={yScale}
-            width={xMax}
-            strokeDasharray="2,2"
-            stroke="rgba(255,255,255,0.3)"
-          />
-          <GridColumns
-            lineStyle={{ pointerEvents: 'none' }}
-            scale={xScale}
-            height={yMax}
-            strokeDasharray="2,2"
-            stroke="rgba(255,255,255,0.3)"
-          />
+        <svg className="chart-svg" ref={s => (this.svg = s)} width={this.props.width} height={this.props.height}>
+          <GradientPinkBlue id="gradient" />
           <AreaClosed
             data={this.state.data}
             xScale={xScale}
@@ -217,7 +176,7 @@ class LineChart extends React.Component<Props, State> {
           <div>
             <Tooltip
               top={tooltipTop - 12}
-              left={tooltipLeft + 12}
+              left={tooltipLeft - 28}
               style={{
                 backgroundColor: 'rgba(92, 119, 235, 1.000)',
                 color: 'white',
@@ -237,7 +196,7 @@ class LineChart extends React.Component<Props, State> {
           </div>
         )}
       </div>
-    );
+    )
   }
 }
 
