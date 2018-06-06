@@ -11,6 +11,7 @@ import * as actions from '../../actions'
 import queries from '../../graphql'
 import Controller from '../Controller'
 import './ControllersList.css'
+import Loading from '../Loading'
 
 type Props = {
   data: Object,
@@ -45,7 +46,7 @@ class ControllersList extends React.Component<Props> {
         ))
       ) : (
         this.props.data.loading ? (
-          <p>Loading...</p>
+          <Loading />
         ) : (
           this.props.data.error !== undefined ? (
             <p>Error contacting server...</p>

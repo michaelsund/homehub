@@ -3,7 +3,6 @@
 import React from 'react'
 import { AreaClosed, Line, Bar } from '@vx/shape'
 import { curveMonotoneX } from '@vx/curve'
-// import { GridRows, GridColumns } from '@vx/grid'
 import { GradientPinkBlue } from '@vx/gradient'
 import { scaleTime, scaleLinear } from '@vx/scale'
 import { withTooltip, Tooltip } from '@vx/tooltip'
@@ -16,7 +15,12 @@ type Props = {
   width: number,
   height: number,
   margin: Object,
-  showTooltip: Function
+  showTooltip: Function,
+  hideTooltip: any,
+  tooltipData: any,
+  tooltipTop: any,
+  tooltipLeft: any,
+  events: any,
 }
 
 type State = {
@@ -24,8 +28,6 @@ type State = {
 }
 
 const formatDate = timeFormat("%b %d, '%y")
-
-// accessors
 const xStock = d => new Date(d.date)
 const yStock = d => d.close
 const bisectDate = bisector(d => new Date(d.date)).left
@@ -66,12 +68,10 @@ class LineChart extends React.Component<Props, State> {
     const {
       width,
       height,
-      margin,
       hideTooltip,
       tooltipData,
       tooltipTop,
-      tooltipLeft,
-      events,
+      tooltipLeft
     } = this.props
     if (width < 10) return null
 
@@ -92,7 +92,7 @@ class LineChart extends React.Component<Props, State> {
 
     return (
       <div>
-        <svg className="chart-svg" ref={s => (this.svg = s)} width={this.props.width} height={this.props.height}>
+        <svg className="chart-svg" ref={s => this.svg = s} width={this.props.width} height={this.props.height}>
           <GradientPinkBlue id="gradient" />
           <AreaClosed
             data={this.state.data}
@@ -137,7 +137,7 @@ class LineChart extends React.Component<Props, State> {
                 xScale,
                 yScale,
               })}
-            onMouseLeave={data => event => hideTooltip()}
+              onMouseLeave={data => event => hideTooltip()}
           />
           {tooltipData && (
             <g>

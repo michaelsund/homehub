@@ -5,6 +5,7 @@ import { ParentSize } from '@vx/responsive'
 import Moment from 'moment'
 import './BitCoinValue.css'
 import LineChart from '../LineChart'
+import Loading from '../Loading'
 
 type State = {
   loading: boolean,
@@ -58,9 +59,9 @@ class BitCoinValue extends React.Component<{}, State> {
     return (
       <div className="col-wrapper generic-wrapper">
         <p>Bitcoin ${this.state.latestValue} @ {this.state.lastUpdated}</p>
-        <div className="graph-container">
+        <div className="bitcoin-graph-container">
           {this.state.loading ? (
-            <p className="loading-text">Loading...</p>
+            <Loading />
           ) : (
             <ParentSize>
               {parent => (

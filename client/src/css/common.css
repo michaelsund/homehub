@@ -187,10 +187,6 @@ body {
   background-color: #c0392b;
 }
 
-.graph-container {
-  height: 82%;
-}
-
 .chart-svg {
   border-radius: 4px;
 }

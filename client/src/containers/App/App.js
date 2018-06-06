@@ -6,6 +6,7 @@ import 'react-simple-flex-grid/lib/main.css'
 import BitCoinValue from '../../components/BitCoinValue'
 import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
+import ServerStatus from '../../components/ServerStatus'
 
 class App extends React.Component<{}> {
   render() {
@@ -42,6 +43,9 @@ class App extends React.Component<{}> {
             eventDay="thu"
           />
         </Col>
+        {/* <Col className="col-without-row-style" lg={3} md={3} sm={3} xs={12}>
+          <ServerStatus />
+        </Col> */}
       </Row>
     )
   }

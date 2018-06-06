@@ -166,6 +166,13 @@
   dependencies:
     classnames "^2.2.5"
 
+"@vx/heatmap@^0.0.161":
+  version "0.0.161"
+  resolved "https://registry.yarnpkg.com/@vx/heatmap/-/heatmap-0.0.161.tgz#0de616c77809fedaf9d9b088c95c0f7c09ec2888"
+  dependencies:
+    "@vx/group" "0.0.161"
+    classnames "^2.2.5"
+
 "@vx/mock-data@^0.0.161":
   version "0.0.161"
   resolved "https://registry.yarnpkg.com/@vx/mock-data/-/mock-data-0.0.161.tgz#83abeee287cdcffbfee77b00525f327e788380d1"

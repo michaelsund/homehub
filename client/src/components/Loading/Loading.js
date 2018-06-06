@@ -1,9 +1,8 @@
 import * as React from 'react'
+import './Loading.css'
 
 const Loading = () => (
-  <div>
-    <h4>Loading...</h4>
-  </div>
+  <div className="lds-dual-ring"></div>
 )
 
 export default Loading
