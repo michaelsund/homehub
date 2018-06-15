@@ -1,4 +1,10 @@
-.serverstatus-graph-container {
-  height: 100%;
-  widthL: 100%;
+.serverStatus-container {
+  position: relative;
+  top: 50%;
+}
+
+.serverStatus-item {
+  cursor: pointer;
+  display: inline-flex;
+  margin: 10px;
 }

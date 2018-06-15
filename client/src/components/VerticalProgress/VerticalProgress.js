@@ -27,11 +27,11 @@ class VerticalProgress extends React.Component<Props, State> {
     if (val === 0) {
       this.setState({ color: 'transparent' })
     } else if (val <= 20) {
-      this.setState({ color: 'red' })
+      this.setState({ color: '#FF1493' })
     } else if (val <= 40) {
-      this.setState({ color: 'orange' })
+      this.setState({ color: '#FF1493' })
     } else if (val > 40 && val <= 100) {
-      this.setState({ color: 'green' })
+      this.setState({ color: '#18D8F0' })
     }
   }
 

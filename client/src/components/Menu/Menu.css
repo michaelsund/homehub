@@ -13,11 +13,7 @@
 }
 
 .icon-bar a:hover {
-  color: #1C1B1B;
-}
-
-.active {
-  background-color: #4CAF50; /* Add an active/current color */
+  color: #18D8F0;
 }
 
 .nav-link {
@@ -25,5 +21,5 @@
 }
 
 .nav-link-active {
-  border-right: 4px solid orangered;
+  border-right: 4px solid #FF1493;
 }

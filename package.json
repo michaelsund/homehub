@@ -13,11 +13,13 @@
     "express-graphql": "^0.6.12",
     "express-validator": "^5.0.3",
     "graphql": "^0.13.2",
+    "graphql-subscriptions": "^0.5.8",
     "moment": "^2.22.1",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",
     "pushbullet": "^2.1.0",
     "remotedev-server": "^0.2.4",
+    "subscriptions-transport-ws": "^0.9.11",
     "ws": "^5.0.0"
   },
   "devDependencies": {

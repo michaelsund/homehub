@@ -32,4 +32,4 @@ const sensor = mongoose.Schema({
   minValue: { type: Number, default: null }
 })
 
-export default mongoose.model('Sensor', sensor);
+export default mongoose.model('Sensor', sensor)

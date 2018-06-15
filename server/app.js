@@ -14,6 +14,7 @@ import schema from './graphql'
 import sensorEvents from './helpers/sensorEvents'
 import checkSensorMaxAge from './helpers/checkSensorMaxAge'
 import checkControllerTimer from './helpers/checkControllerTimer'
+import checkServerStatuses from './helpers/checkServerStatuses'
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -60,5 +61,6 @@ app.get('/*', (req, res) => {
 checkSensorMaxAge()
 sensorEvents()
 checkControllerTimer()
+checkServerStatuses()
 
 app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))

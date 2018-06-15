@@ -1,6 +1,7 @@
 .sensor-alarm-icon {
   color: #FF7A59;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .custom-overlay {

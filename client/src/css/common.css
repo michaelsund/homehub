@@ -106,7 +106,7 @@ body {
 /* buttons */
 .btn {
   position: relative;
-
+  cursor: pointer;
   display: block;
   margin: 30px auto;
   padding: 0;
@@ -118,14 +118,14 @@ body {
   border-radius: 2px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 
-  background-color: #2ecc71;
-  color: #ecf0f1;
+  background-color: #EBF5EE;
+  color: #1C1B1B;
 
   transition: background-color .3s;
 }
 
 .btn:hover, .btn:focus {
-  background-color: #27ae60;
+  background-color: #FF1493;
 }
 
 .btn > * {

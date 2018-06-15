@@ -43,9 +43,9 @@ class App extends React.Component<{}> {
             eventDay="thu"
           />
         </Col>
-        {/* <Col className="col-without-row-style" lg={3} md={3} sm={3} xs={12}>
+        <Col className="col-without-row-style" lg={3} md={3} sm={3} xs={12}>
           <ServerStatus />
-        </Col> */}
+        </Col>
       </Row>
     )
   }

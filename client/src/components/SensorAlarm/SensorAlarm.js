@@ -12,7 +12,7 @@ type State = {
   modalOpen: boolean
 }
 
-class Alarm extends React.Component<Props, State> {
+class SensorAlarm extends React.Component<Props, State> {
   state = {
     modalOpen: false
   }
@@ -22,8 +22,8 @@ class Alarm extends React.Component<Props, State> {
   }
 
   onCloseModal = () => {
-    this.setState({ modalOpen: false });
-  };
+    this.setState({ modalOpen: false })
+  }
 
   onAlarmAck = () => {
     fetch('/api/acksensoralarm', {
@@ -50,6 +50,7 @@ class Alarm extends React.Component<Props, State> {
             classNames={{ overlay: 'custom-overlay', modal: 'custom-modal' }}
             open={this.state.modalOpen}
             onClose={this.onCloseModal}
+            showCloseIcon={false}
             center
           >
             <h2>Alarms for {this.props.sensor.name}</h2>
@@ -58,7 +59,7 @@ class Alarm extends React.Component<Props, State> {
               {this.props.sensor.maxValueAlarmActive && <li>sensor exceeded the maximum value.</li>}
               {this.props.sensor.minValueAlarmActive && <li>sensor exceeded the minimum value.</li>}
             </ul>
-            <button className="btn" onClick={this.onAlarmAck}>
+            <button className="btn" onClick={() => this.onAlarmAck()}>
               <span>Acknowledge</span>
             </button>
           </Modal>
@@ -68,4 +69,4 @@ class Alarm extends React.Component<Props, State> {
   }
 }
 
-export default Alarm
+export default SensorAlarm

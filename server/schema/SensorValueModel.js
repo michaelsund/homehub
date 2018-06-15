@@ -6,4 +6,4 @@ const sensorValue = mongoose.Schema({
   time: { type: Date, default: null },
 })
 
-export default mongoose.model('SensorValue', sensorValue);
+export default mongoose.model('SensorValue', sensorValue)
