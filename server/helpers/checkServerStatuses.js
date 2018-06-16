@@ -41,10 +41,10 @@ const getServers = () => {
 }
 
 const checkServerStatuses = () => {
-  getServers()
-  setInterval(() => {
-    getServers()
-  }, checkInterval)
+  // getServers()
+  // setInterval(() => {
+  //   getServers()
+  // }, checkInterval)
 }
 
 export default checkServerStatuses

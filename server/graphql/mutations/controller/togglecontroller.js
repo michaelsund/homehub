@@ -1,7 +1,6 @@
 import {
   GraphQLNonNull,
-  GraphQLID,
-  // GraphQLBoolean,
+  GraphQLID
 } from 'graphql'
 import ControllerResponse from '../../types/controller'
 import telldusDeviceToggle from '../../../helpers/telldusDeviceToggle'
@@ -22,9 +21,11 @@ export default {
           return result
         })
     }
+
     console.log('Returning mock controller result in dev mode.')
+
     return Object.assign({
-      _id: new GraphQLID(123),
+      _id: '123',
       name: 'Development controller',
       description: 'dev',
       external: false,

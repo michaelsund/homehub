@@ -3,12 +3,14 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import path from 'path'
-import graphqlHTTP from 'express-graphql'
+import { createServer } from 'http'
+import { execute, subscribe } from 'graphql'
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
 // import morgan from 'morgan'
 // import remotedev from 'remotedev-server'
-import apiRoutes from './routes/apiRoutes'
-
 // import PushBullet from 'pushbullet'
+import apiRoutes from './routes/apiRoutes'
 import settings from '../client/src/settings.json'
 import schema from './graphql'
 import sensorEvents from './helpers/sensorEvents'
@@ -47,11 +49,12 @@ app.use(express.static(path.resolve(__dirname, 'build')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/api', apiRoutes)
-app.use('/graphql', graphqlHTTP(() => ({
-  schema,
-  pretty: true,
-  graphiql: true
-})))
+app.use('/graphql', graphqlExpress({ schema }))
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+  subscriptionsEndpoint: 'ws://localhost:5000/subscriptions'
+}))
+
 // Redirect everything under root to react router
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
@@ -63,4 +66,16 @@ sensorEvents()
 checkControllerTimer()
 checkServerStatuses()
 
-app.listen(5000, '0.0.0.0', () => console.log('Listening on port 5000'))
+const server = createServer(app)
+server.listen(5000, '0.0.0.0', () => {
+  // eslint-disable-next-line
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema,
+    onConnect: () => { console.log('NEW SUBSCRIPTION CONNECTION!!!') }
+  }, {
+    server,
+    path: '/subscriptions'
+  })
+})

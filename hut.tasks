@@ -17,9 +17,11 @@
 ✔ Loading component that wrap children to hide or show them when loading is done, accepts a name props that displays whats loading. @done (2018-6-6 11:39:34)
 ✔ Continue with checkServerStatuses using Promise.all with each promise handling it's own catch(error), returning to Promise.all @done (2018-6-14 14:28:54)
 ✔ Add serverIp to server model in mongo schema and graphQL @done (2018-6-14 14:28:55)
+☐ Test server subscriptions
 ☐ Write backend logic to check servers status by checking if the port is responding, expose a graphql endpoint. (should use subscriptions to push data)
 ☐ Serverstatus on item hover, show popover with servername instead of a modal.
 ☐ Sensor and Controllers uses Loading component, should try to have a general position that works for all sizes of components.
+☐ Rework recurring events, they are not working properly.
 ☐ Navigating from dash to controllers throws a setstate while unmounted error. fix!
 ☐ Graph sensorvalues (for temperature mainly) in separate graph component that can be included in sensor component via props.
 ✔ current bitcoin price graph. (just for fun) https://www.coindesk.com/api/ (is there a graphql endpoint?) @done (6/4/2018, 11:56:08 AM) Look at this component to use vx for the graphs https://github.com/hshoff/viewsource
