@@ -1,3 +1,7 @@
+import {
+  pubsub,
+  CONTROLLERS_UPDATED_TOPIC
+} from '../graphql/pubsub'
 import Controller from '../schema/ControllerModel'
 import telldusDeviceStatus from './telldusDeviceStatus'
 import settings from '../../client/src/settings.json'
@@ -5,7 +9,13 @@ import settings from '../../client/src/settings.json'
 let telldus = null
 
 if (!settings.dev) {
+  // eslint-disable-next-line
   telldus = require('telldus')
+}
+
+const updateControllersPubSub = () => {
+  const updatedControllerList = Controller.find({})
+  pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllerUpdated: updatedControllerList })
 }
 
 const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(resolve => {
@@ -46,30 +56,30 @@ const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(re
               })
             })
           }
+        } else if (status) {
+          console.log(`controller ${controller.name} status: ${status}, turning off`)
+          telldus.turnOff(controller.identificationId, err => {
+            if (err) {
+              console.log(err)
+            }
+            controller.set({ status: false })
+            controller.save((err, updatedController) => {
+              updateControllersPubSub()
+              resolve(updatedController)
+            })
+          })
         } else {
-          if (status) {
-            console.log(`controller ${controller.name} status: ${status}, turning off`)
-            telldus.turnOff(controller.identificationId, err => {
-              if (err) {
-                console.log(err)
-              }
-              controller.set({ status: false })
-              controller.save((err, updatedController) => {
-                resolve(updatedController)
-              })
+          console.log(`controller ${controller.name}  status: ${status}, turning on`)
+          telldus.turnOn(controller.identificationId, err => {
+            if (err) {
+              console.log(err)
+            }
+            controller.set({ status: true })
+            controller.save((err, updatedController) => {
+              updateControllersPubSub()
+              resolve(updatedController)
             })
-          } else {
-            console.log(`controller ${controller.name}  status: ${status}, turning on`)
-            telldus.turnOn(controller.identificationId, err => {
-              if (err) {
-                console.log(err)
-              }
-              controller.set({ status: true })
-              controller.save((err, updatedController) => {
-                resolve(updatedController)
-              })
-            })
-          }
+          })
         }
       })
       .catch(err => {

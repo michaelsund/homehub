@@ -20,10 +20,11 @@ import Controls from './containers/Controls'
 import Settings from './containers/Settings'
 // import registerServiceWorker from './registerServiceWorker'
 import './css/common.css'
+import settings from './settings.json'
 import configureStore from './store/configurestore'
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:5000/subscriptions',
+  uri: settings.dev ? 'ws://localhost:5000/subscriptions' : `ws://${settings.prodIp}:5000/subscriptions`,
   options: {
     reconnect: true,
     // connectionParams: {

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 const toggleController = gql`
-  mutation toggle($id: ID!) {
+  mutation toggleController($id: ID!) {
     toggleController(id: $id) {
       _id
       name

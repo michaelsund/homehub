@@ -1,27 +1,16 @@
 // @flow
 
 import React from 'react'
-import { connect } from 'react-redux'
 import { Row, Col } from 'react-simple-flex-grid'
 import { Mutation } from 'react-apollo'
 import mutations from '../../graphql/mutations'
-import * as actions from '../../actions'
 import './Controller.css'
 
 type Props = {
-  controller: Object,
-  onToggleController: Function
+  controller: Object
 }
 
-const mapDispatchToProps = dispatch => ({
-  onToggleController: controllerId => dispatch(actions.toggleController(controllerId))
-})
-
 class Controller extends React.Component<Props> {
-  handleToggleClicked = () => {
-    this.props.onToggleController(this.props.controller._id)
-  }
-
   render() {
     return (
       <Mutation mutation={mutations.toggleController}>
@@ -45,7 +34,6 @@ class Controller extends React.Component<Props> {
               <div className="bottom-container">
                 <div className="bottom-container_left">
                   <button onClick={() => {
-                    this.handleToggleClicked()
                     toggleController({ variables: { id: this.props.controller._id } })
                   }}>
                     Toggle
@@ -63,4 +51,4 @@ class Controller extends React.Component<Props> {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Controller)
+export default Controller

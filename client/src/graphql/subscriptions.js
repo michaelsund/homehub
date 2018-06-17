@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-const controllerUpdated = gql`
-  subscription controllerUpdated {
-    controllerUpdated {
+const controllersUpdated = gql`
+  subscription controllersUpdated {
+    controllersUpdated {
       _id
       name
       description
@@ -17,5 +17,5 @@ const controllerUpdated = gql`
 `
 
 export default {
-  controllerUpdated
+  controllersUpdated
 }

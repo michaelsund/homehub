@@ -1,6 +1,6 @@
 import {
   pubsub,
-  CONTROLLER_UPDATED_TOPIC,
+  CONTROLLERS_UPDATED_TOPIC,
   SERVERS_CHANGED_TOPIC
 } from './pubsub'
 import settings from '../../client/src/settings.json'
@@ -29,39 +29,28 @@ export const resolvers = {
     //   pubsub.publish(CHANNEL_ADDED_TOPIC, { channelAdded: newChannel })
     //   return newChannel
     // }
-    toggleController: (root, args) => {
+    toggleController: async (root, args) => {
       if (!settings.dev) {
         return telldusDeviceToggle(args.id)
           .then(result => {
-            console.log(result)
-            pubsub.publish(CONTROLLER_UPDATED_TOPIC, { controllerUpdated: result })
+            const updatedControllerList = ControllerModel.find({})
+            pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllerUpdated: updatedControllerList })
             return result
           })
       }
-      console.log('Returning mock controller result in dev mode.')
-      const mockController = Object.assign({
-        _id: '123',
-        name: 'Development controller',
-        description: 'dev',
-        external: false,
-        status: false,
-        lastReportedTime: '',
-        timer: false,
-        onTime: '',
-        offTime: ''
-      })
-
-      pubsub.publish(CONTROLLER_UPDATED_TOPIC, { controllerUpdated: mockController })
-
-      return mockController
+      console.log(`DEV Toggling controller ${args.id}`)
+      const unmodifiedControllerList = await ControllerModel.find({})
+      const unmodifiedController = await ControllerModel.findById(args.id)
+      pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllersUpdated: unmodifiedControllerList })
+      return unmodifiedController
     }
   },
   Subscription: {
     serversChanged: {
       subscribe: () => pubsub.asyncIterator(SERVERS_CHANGED_TOPIC)
     },
-    controllerUpdated: {
-      subscribe: () => pubsub.asyncIterator(CONTROLLER_UPDATED_TOPIC)
+    controllersUpdated: {
+      subscribe: () => pubsub.asyncIterator(CONTROLLERS_UPDATED_TOPIC)
     }
   }
 }
