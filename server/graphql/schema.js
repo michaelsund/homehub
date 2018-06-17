@@ -4,12 +4,12 @@ import { resolvers } from './resolvers'
 
 const typeDefs = `
   type Channel {
-    id: ID!                # "!" denotes a required field
+    id: ID!
     name: String
   }
 
   type Server {
-    _id: ID!                # "!" denotes a required field
+    _id: ID!
     serverName: String
     serverType: String
     serverIp: String
@@ -19,7 +19,7 @@ const typeDefs = `
   }
 
   type Sensor {
-    _id: ID!                # "!" denotes a required field
+    _id: ID!
     name: String
     description: String
     measurementType: String
@@ -41,22 +41,34 @@ const typeDefs = `
     minValue: Float
   }
 
-  # This type specifies the entry points into our API
+  type Controller {
+    _id: ID!
+    name: String
+    description: String
+    external: Boolean
+    status: Boolean
+    lastReportedTime: String
+    identificationId: Float
+    timer: Boolean
+    onTime: String
+    offTime: String
+  }
+
   type Query {
     servers: [Server]
     server(id: ID!): Server
     sensors: [Sensor]
     sensor(id: ID!): Sensor
+    controllers: [Controller]
+    controller(id: ID!): Controller
   }
 
-  # The mutation root type, used to define all mutations
   #type Mutation {
   #  addChannel(name: String!): Channel
   #}
 
-  # The subscription root type, specifying what we can subscribe to
   type Subscription {
-      serverChanged: Server
+      serversChanged: [Server]
   }
 `
 

@@ -72,8 +72,7 @@ server.listen(5000, '0.0.0.0', () => {
   new SubscriptionServer({
     execute,
     subscribe,
-    schema,
-    onConnect: () => { console.log('NEW SUBSCRIPTION CONNECTION!!!') }
+    schema
   }, {
     server,
     path: '/subscriptions'

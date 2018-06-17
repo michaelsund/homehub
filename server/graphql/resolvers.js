@@ -1,16 +1,23 @@
 import { PubSub } from 'graphql-subscriptions'
 import ServerModel from '../schema/ServerModel'
 import SensorModel from '../schema/SensorModel'
+import ControllerModel from '../schema/ControllerModel'
 
-const SERVER_CHANGED_TOPIC = 'SERVER_CHANGED'
+const SERVERS_CHANGED_TOPIC = 'SERVERS_CHANGED'
 const pubsub = new PubSub()
 
 export const resolvers = {
   Query: {
-    servers: () => ServerModel.find({}),
+    servers: () => {
+      const allServers = ServerModel.find({})
+      pubsub.publish(SERVERS_CHANGED_TOPIC, { serversChanged: allServers })
+      return allServers
+    },
     server: (root, { id }) => ServerModel.findById(id),
     sensors: () => SensorModel.find({}),
     sensor: (root, { id }) => SensorModel.findById(id),
+    controllers: () => ControllerModel.find({}),
+    controller: (root, { id }) => ControllerModel.findById(id),
   },
   // Mutation: {
   //   addChannel: (root, args) => {
@@ -21,8 +28,8 @@ export const resolvers = {
   //   }
   // },
   Subscription: {
-    serverChanged: {
-      subscribe: () => pubsub.asyncIterator(SERVER_CHANGED_TOPIC)
+    serversChanged: {
+      subscribe: () => pubsub.asyncIterator(SERVERS_CHANGED_TOPIC)
     }
   }
 }
