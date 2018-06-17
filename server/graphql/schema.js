@@ -63,12 +63,13 @@ const typeDefs = `
     controller(id: ID!): Controller
   }
 
-  #type Mutation {
-  #  addChannel(name: String!): Channel
-  #}
+  type Mutation {
+    toggleController(id: ID!): Controller
+  }
 
   type Subscription {
-      serversChanged: [Server]
+      serversChanged: [Server],
+      controllerUpdated: Controller
   }
 `
 
