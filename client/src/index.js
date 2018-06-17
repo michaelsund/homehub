@@ -9,6 +9,10 @@ import { ApolloClient } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+// import { ApolloLink, split } from 'apollo-client-preset'
+import { split } from 'apollo-client-preset'
+import { WebSocketLink } from 'apollo-link-ws'
+import { getMainDefinition } from 'apollo-utilities'
 import { Provider } from 'react-redux'
 import Menu from './components/Menu'
 import App from './containers/App'
@@ -18,8 +22,27 @@ import Settings from './containers/Settings'
 import './css/common.css'
 import configureStore from './store/configurestore'
 
+const wsLink = new WebSocketLink({
+  uri: 'ws://localhost:5000/subscriptions',
+  options: {
+    reconnect: true,
+    // connectionParams: {
+    //   authToken: localStorage.getItem(AUTH_TOKEN),
+    // }
+  }
+})
+
+const link = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query)
+    return kind === 'OperationDefinition' && operation === 'subscription'
+  },
+  wsLink,
+  new HttpLink()
+)
+
 const client = new ApolloClient({
-  link: new HttpLink(),
+  link,
   cache: new InMemoryCache()
 })
 

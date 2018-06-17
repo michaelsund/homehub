@@ -25,6 +25,8 @@
     "apollo-client": "^2.2.8",
     "apollo-client-preset": "^1.0.8",
     "apollo-link-http": "^1.5.4",
+    "apollo-link-ws": "^1.0.8",
+    "apollo-utilities": "^1.0.15",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
     "babel-preset-es2015": "^6.24.1",
@@ -49,6 +51,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "remote-redux-devtools": "^0.5.12",
+    "subscriptions-transport-ws": "^0.9.11",
     "ws": "^5.0.0"
   },
   "devDependencies": {
