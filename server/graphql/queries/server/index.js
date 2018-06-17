@@ -1,5 +1,5 @@
-import servers from './multiple'
+import multiple from './multiple'
 
 export default {
-  servers
+  multiple
 }
