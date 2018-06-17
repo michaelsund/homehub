@@ -2,9 +2,8 @@ import {
   GraphQLObjectType,
   GraphQLSchema
 } from 'graphql'
-
 import queries from './queries'
-import mutations from './mutations'
+// import mutations from './mutations'
 import subscriptions from './subscriptions'
 
 export default new GraphQLSchema({
@@ -12,10 +11,10 @@ export default new GraphQLSchema({
     name: 'Query',
     fields: queries
   }),
-  mutation: new GraphQLObjectType({
-    name: 'Mutation',
-    fields: mutations
-  }),
+  // mutation: new GraphQLObjectType({
+  //   name: 'Mutation',
+  //   fields: mutations
+  // }),
   subscription: new GraphQLObjectType({
     name: 'Subscription',
     fields: subscriptions

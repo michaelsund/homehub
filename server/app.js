@@ -5,14 +5,14 @@ import cors from 'cors'
 import path from 'path'
 import { createServer } from 'http'
 import { execute, subscribe } from 'graphql'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 // import morgan from 'morgan'
 // import remotedev from 'remotedev-server'
 // import PushBullet from 'pushbullet'
 import apiRoutes from './routes/apiRoutes'
 import settings from '../client/src/settings.json'
-import schema from './graphql'
+import schema from './graphql/schema'
 import sensorEvents from './helpers/sensorEvents'
 import checkSensorMaxAge from './helpers/checkSensorMaxAge'
 import checkControllerTimer from './helpers/checkControllerTimer'
@@ -49,7 +49,7 @@ app.use(express.static(path.resolve(__dirname, 'build')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use('/api', apiRoutes)
-app.use('/graphql', graphqlExpress({ schema }))
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: 'ws://localhost:5000/subscriptions'

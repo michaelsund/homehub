@@ -1,11 +1,11 @@
-import controller from './controller'
-import sensor from './sensor'
-import sensorvalues from './sensorvalues'
+// import controller from './controller'
+// import sensor from './sensor'
+// import sensorvalues from './sensorvalues'
 import server from './server'
 
 export default {
-  ...controller,
-  ...sensor,
-  ...sensorvalues,
+  // ...controller,
+  // ...sensor,
+  // ...sensorvalues,
   ...server
 }

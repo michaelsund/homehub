@@ -22,7 +22,7 @@ export default new GraphQLObjectType({
     serverIp: {
       type: GraphQLString
     },
-    ports: {
+    port: {
       type: GraphQLFloat
     },
     status: {
