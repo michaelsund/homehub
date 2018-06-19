@@ -14,7 +14,8 @@ class Controller extends React.Component<Props> {
   render() {
     return (
       <Mutation mutation={mutations.toggleController}>
-        {(toggleController, { data }) => (
+        {/* Used to be toggleController, { data } */}
+        {toggleController => (
           <div className="col-wrapper">
             <div className="generic-wrapper">
               <Row>
