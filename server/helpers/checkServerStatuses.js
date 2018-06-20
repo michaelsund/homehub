@@ -10,7 +10,7 @@ const portCheck = server => new Promise(resolve => {
   updatedServer.lastChecked = lastChecked
   if (server.port !== null) {
     const timer = setTimeout(() => {
-      // console.log(`${server.serverIp}/${server.serverName} timed out on port ${server.port}`)
+      // Timed out
       updatedServer.status = false
       resolve(updatedServer)
       // eslint-disable-next-line
@@ -18,15 +18,14 @@ const portCheck = server => new Promise(resolve => {
     }, timeout)
     const socket = net.createConnection(server.port, server.serverIp, () => {
       clearTimeout(timer)
-      // console.log(`${server.serverIp}/${server.serverName} responded on port ${server.port}`)
+      // Responded
       socket.end()
       updatedServer.status = true
       resolve(updatedServer)
     })
     socket.on('error', () => {
       clearTimeout(timer)
-      // console.log(`${server.serverIp}/${server.serverName}
-      // is NOT responding on port ${server.port}`)
+      // Not responding
       updatedServer.status = false
       resolve(updatedServer)
     })
@@ -37,14 +36,16 @@ const portCheck = server => new Promise(resolve => {
 const getServers = () => {
   db.Server.find({}, (err, servers) =>
     Promise.all(servers.map(server => portCheck(server)))
-      .then(results => console.log(results)))
+      .then(results => {
+        results.map(server => server.save())
+      }))
 }
 
 const checkServerStatuses = () => {
-  // getServers()
-  // setInterval(() => {
-  //   getServers()
-  // }, checkInterval)
+  getServers()
+  setInterval(() => {
+    getServers()
+  }, checkInterval)
 }
 
 export default checkServerStatuses

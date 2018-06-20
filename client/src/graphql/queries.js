@@ -1,5 +1,18 @@
 import gql from 'graphql-tag'
 
+const getServers = gql`
+  query getServers {
+    servers {
+      serverName
+      serverType
+      serverIp
+      status
+      lastChecked
+      port
+    }
+  }
+`
+
 const getControllers = gql`
   query getControllers {
     controllers {
@@ -44,5 +57,6 @@ const getSensors = gql`
 
 export default {
   getControllers,
-  getSensors
+  getSensors,
+  getServers
 }

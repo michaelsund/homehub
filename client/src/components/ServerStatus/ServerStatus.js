@@ -1,8 +1,15 @@
 import * as React from 'react'
+import { graphql } from 'react-apollo'
 import Modal from 'react-responsive-modal'
+import queries from '../../graphql/queries'
+import subscriptions from '../../graphql/subscriptions'
 import './ServerStatus.css'
 import Loading from '../Loading'
 import SvgRect from '../SvgRect'
+
+type Props = {
+  data: Object
+}
 
 type State = {
   loading: boolean,
@@ -11,38 +18,20 @@ type State = {
   currentDisplayedServer: Object
 }
 
-// const mockData = [
-//   { serverName: 'frink', status: false }
-// ]
-
-class ServerStatus extends React.Component<{}, State> {
+class ServerStatus extends React.Component<Props, State> {
   state = {
-    loading: false,
-    data: [
-      {
-        serverName: 'Server 1', serverType: 'fileserver', status: true, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 2', serverType: 'fileserver', status: true, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 3', serverType: 'fileserver', status: false, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 4', serverType: 'fileserver', status: true, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 5', serverType: 'fileserver', status: false, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 6', serverType: 'fileserver', status: true, ports: [80, 443]
-      },
-      {
-        serverName: 'Server 7', serverType: 'fileserver', status: true, ports: [80, 443]
-      }
-    ],
     modalOpen: false,
     currentDisplayedServer: {}
+  }
+
+  componentDidMount = () => {
+    // this.serversChangeSubscription()
+  }
+
+  serversChangeSubscription = () => {
+    this.props.data.subscribeToMore({
+      document: subscriptions.serversUpdated
+    })
   }
 
   onCloseModal = () => {
@@ -61,11 +50,11 @@ class ServerStatus extends React.Component<{}, State> {
     return (
       <div className="col-wrapper generic-wrapper">
         <div className="serverstatus-graph-container">
-          {this.state.loading ? (
+          {this.props.data.loading ? (
             <Loading />
           ) : (
             <div className="serverStatus-container">
-              {this.state.data.map(server => (
+              {this.props.data.servers.map(server => (
                 <div
                   className="serverStatus-item"
                   key={server.serverName}
@@ -87,6 +76,8 @@ class ServerStatus extends React.Component<{}, State> {
           <ul>
             <li>{this.state.currentDisplayedServer.serverName}</li>
             <li>{this.state.currentDisplayedServer.serverType}</li>
+            <li>{this.state.currentDisplayedServer.serverIp}</li>
+            <li>{JSON.stringify(this.state.currentDisplayedServer.status)}</li>
           </ul>
           <button className="btn" onClick={() => this.onCloseModal()}>
             <span>Close</span>
@@ -97,4 +88,4 @@ class ServerStatus extends React.Component<{}, State> {
   }
 }
 
-export default ServerStatus
+export default graphql(queries.getServers)(ServerStatus)
