@@ -16,6 +16,22 @@ const controllersUpdated = gql`
   }
 `
 
+const serversChanged = gql`
+  subscription serversChanged {
+    serversChanged {
+      _id
+      serverName
+      serverType
+      serverIp
+      status
+      statusMessage
+      lastChecked
+      port
+    }
+  }
+`
+
 export default {
-  controllersUpdated
+  controllersUpdated,
+  serversChanged
 }

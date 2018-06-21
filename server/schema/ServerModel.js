@@ -11,6 +11,7 @@ const server = mongoose.Schema({
   serverIp: { type: String, default: '' },
   port: { type: Number, default: null },
   status: { type: Boolean, default: false },
+  statusMessage: { type: String, default: '' },
   lastChecked: { type: Date, default: null }
 })
 

@@ -3,10 +3,12 @@ import gql from 'graphql-tag'
 const getServers = gql`
   query getServers {
     servers {
+      _id
       serverName
       serverType
       serverIp
       status
+      statusMessage
       lastChecked
       port
     }

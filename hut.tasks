@@ -22,7 +22,8 @@
 ✔ Controllers not loading on menu navigation back and forth. @done (6/19/2018, 6:40:59 PM)
 ☐ Better looking on/off button with css animation (maybe try out emotion)
 ☐ Sensor subscriptions instead of websocket push.
-☐ Server subscriptions, initial graphql query is done.
+✔ Server subscriptions, initial graphql query is done. @done (6/21/2018, 10:03:11 AM)
+☐ Server subscriptions works, but component does not update.
 ☐ Write backend logic to check servers status by checking if the port is responding, expose a graphql endpoint. (should use subscriptions to push data)
 ☐ Serverstatus on item hover, show popover with servername instead of a modal.
 ☐ Sensor and Controllers uses Loading component, should try to have a general position that works for all sizes of components.

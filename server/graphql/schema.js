@@ -15,6 +15,7 @@ const typeDefs = `
     serverIp: String
     port: Float
     status: Boolean
+    statusMessage: String
     lastChecked: String
   }
 
