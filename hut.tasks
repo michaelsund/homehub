@@ -20,6 +20,7 @@
 ✔ Reimplement toggleController mutation, and controller component should use subscriptions @done (6/17/2018, 8:28:50 PM)
 ✔ Use pubsub updates on controller timers to update controllers via subscriptions @done (6/19/2018, 6:40:51 PM)
 ✔ Controllers not loading on menu navigation back and forth. @done (6/19/2018, 6:40:59 PM)
+☐ Side menu is no longer responsive, maybe should use a drawer instead.
 ☐ Better looking on/off button with css animation (maybe try out emotion)
 ☐ Sensor subscriptions instead of websocket push.
 ✔ Server subscriptions, initial graphql query is done. @done (6/21/2018, 10:03:11 AM)

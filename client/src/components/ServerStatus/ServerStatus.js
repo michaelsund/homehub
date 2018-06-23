@@ -55,12 +55,21 @@ class ServerStatus extends React.Component<Props, State> {
           ) : (
             <div className="serverStatus-container">
               {this.props.data.servers.map(server => (
-                <div
+                <div className="tooltip" key={server._id}>
+                  <div
                   className="serverStatus-item"
-                  key={server.serverName}
-                  onClick={() => this.showServerModal(server)}
+                  // onClick={() => this.showServerModal(server)}
                 >
                   {this.renderIconFromStatus(server)}
+                </div>
+                  <span className="tooltiptext">
+                    <div>
+                      <p>{server.serverName}</p>
+                      <p>ip: {server.serverIp}</p>
+                      <p>port: {server.port}</p>
+                      <p>{server.statusMessage}</p>
+                    </div>
+                  </span>
                 </div>
               ))}
             </div>
