@@ -1,3 +1,7 @@
 .bitcoin-graph-container {
   height: 82%;
 }
+
+.bitcoin-text {
+  text-align: center;
+}

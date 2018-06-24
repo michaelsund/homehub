@@ -14,10 +14,10 @@ import { split } from 'apollo-client-preset'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { Provider } from 'react-redux'
-import Menu from './components/Menu'
 import App from './containers/App'
 import Controls from './containers/Controls'
 import Settings from './containers/Settings'
+import Sidebar from './components/Sidebar'
 // import registerServiceWorker from './registerServiceWorker'
 import './css/common.css'
 import settings from './settings.json'
@@ -52,13 +52,7 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div>
-          <input type="checkbox" id="slide" name="" value="" />
-          <div className="container-sidebar">
-            <label htmlFor="slide" className="toggle">☰</label>
-            <nav className="sidebar">
-              <Menu />
-            </nav>
-          </div>
+          <Sidebar />
           <div className="content-area">
             <Switch>
               <Route exact path='/' component={App} />
