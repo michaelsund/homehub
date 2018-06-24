@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { graphql } from 'react-apollo'
-import Modal from 'react-responsive-modal'
 import queries from '../../graphql/queries'
 import subscriptions from '../../graphql/subscriptions'
 import './ServerStatus.css'
@@ -11,35 +10,15 @@ type Props = {
   data: Object
 }
 
-type State = {
-  loading: boolean,
-  data: Array,
-  modalOpen: boolean,
-  currentDisplayedServer: Object
-}
-
-class ServerStatus extends React.Component<Props, State> {
-  state = {
-    modalOpen: false,
-    currentDisplayedServer: {}
-  }
-
+class ServerStatus extends React.Component<Props> {
   componentDidMount = () => {
-    // this.serversChangeSubscription()
+    this.serversChangeSubscription()
   }
 
   serversChangeSubscription = () => {
     this.props.data.subscribeToMore({
-      document: subscriptions.serversUpdated
+      document: subscriptions.serversChanged
     })
-  }
-
-  onCloseModal = () => {
-    this.setState({ modalOpen: false, currentDisplayedServer: {} })
-  }
-
-  showServerModal = server => {
-    this.setState({ modalOpen: true, currentDisplayedServer: server })
   }
 
   renderIconFromStatus = server => server.status ?
@@ -56,12 +35,9 @@ class ServerStatus extends React.Component<Props, State> {
             <div className="serverStatus-container">
               {this.props.data.servers.map(server => (
                 <div className="tooltip" key={server._id}>
-                  <div
-                  className="serverStatus-item"
-                  // onClick={() => this.showServerModal(server)}
-                >
-                  {this.renderIconFromStatus(server)}
-                </div>
+                  <div className="serverStatus-item">
+                    {this.renderIconFromStatus(server)}
+                  </div>
                   <span className="tooltiptext">
                     <div>
                       <p>{server.serverName}</p>
@@ -75,23 +51,6 @@ class ServerStatus extends React.Component<Props, State> {
             </div>
           )}
         </div>
-        <Modal
-          classNames={{ overlay: 'custom-overlay', modal: 'custom-modal' }}
-          open={this.state.modalOpen}
-          onClose={this.onCloseModal}
-          showCloseIcon={false}
-          center
-        >
-          <ul>
-            <li>{this.state.currentDisplayedServer.serverName}</li>
-            <li>{this.state.currentDisplayedServer.serverType}</li>
-            <li>{this.state.currentDisplayedServer.serverIp}</li>
-            <li>{JSON.stringify(this.state.currentDisplayedServer.status)}</li>
-          </ul>
-          <button className="btn" onClick={() => this.onCloseModal()}>
-            <span>Close</span>
-          </button>
-        </Modal>
       </div>
     )
   }

@@ -73,21 +73,6 @@ body {
   line-height: 4px;
 }
 
-@media only screen and (max-width: 600px) {
-  .col-wrapper {
-    margin-top: 8px;
-  }
-
-  .row-style {
-    margin-top: 0 !important;
-  }
-
-  .col-without-row-style {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-}
-
 /* buttons */
 .btn {
   position: relative;
@@ -184,8 +169,8 @@ body {
 .tooltip .tooltiptext {
   visibility: hidden;
   width: 140px;
-  background-color: rgb(28, 27, 27);
-  color: #EBF5EE;
+  background-color: #EBF5EE;
+  color: rgb(28, 27, 27);
   text-align: left;
   border-radius: 6px;
   position: absolute;
@@ -205,7 +190,7 @@ body {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: rgb(28, 27, 27) transparent transparent transparent;
+  border-color: #EBF5EE transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
@@ -271,4 +256,19 @@ body {
 
 .toggle-grow:hover {
   transform: scale(1.5);
+}
+
+@media only screen and (max-width: 600px) {
+  .col-wrapper {
+    margin-top: 8px;
+  }
+
+  .row-style {
+    margin-top: 0 !important;
+  }
+
+  .col-without-row-style {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 }
