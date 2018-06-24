@@ -52,8 +52,12 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <BrowserRouter>
         <div>
-          <div className="sidebar-container">
-            <Menu />
+          <input type="checkbox" id="slide" name="" value="" />
+          <div className="container-sidebar">
+            <label htmlFor="slide" className="toggle">☰</label>
+            <nav className="sidebar">
+              <Menu />
+            </nav>
           </div>
           <div className="content-area">
             <Switch>
