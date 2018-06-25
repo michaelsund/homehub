@@ -202,9 +202,6 @@ body {
   text-decoration: none;
   font-size: 2em;
   color: #FFFFFF;
-  -webkit-transition: all 0.15s ease-out 0;
-  -moz-transition: all 0.15s ease-out 0;
-  transition: all 0.45s ease-out 0;
   position: fixed;
   top: 4px;
   left: 4px;
@@ -225,16 +222,19 @@ body {
   top: 0px;
   bottom: 0px;
   left: -70px;
-  -webkit-transition: all 0.15s ease-out 0;
-  -moz-transition: all 0.15s ease-out 0;
-  transition: all 0.15s ease-out 0;
   width: 70px;
   background: #333232;
   z-index: 100;
+  animation: animateMenuOut .5s;
+  -moz-animation: animateMenuOut .5s;
+  -webkit-animation: animateMenuOut .5s;
 }
 
 #slide:checked + .container-sidebar .sidebar {
   left: 0px;
+  animation: animateMenuIn .5s;
+  -moz-animation: animateMenuIn .5s;
+  -webkit-animation: animateMenuIn .5s;
 }
 
 #slide:checked + .container-sidebar {
@@ -242,12 +242,22 @@ body {
 }
 
 #slide:checked + .container-sidebar .toggle {
-  top: 22px;
+  top: 28px;
   left: 16px;
 }
 
 #slide {
   display: none;
+}
+
+@keyframes animateMenuIn {
+  from { left: -70px; }
+  to { left: 0px; }
+}
+
+@keyframes animateMenuOut {
+  from { left: 0px; }
+  to { left: -70px; }
 }
 
 .toggle-grow {
