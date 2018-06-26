@@ -49,7 +49,6 @@ const portCheck = server => new Promise(resolve => {
 })
 
 const getServers = async () => {
-  console.log('Checking server statuses...')
   const updated = await db.Server.find({}, (err, servers) =>
     Promise.all(servers.map(server => portCheck(server)))
       .then(results => results.map(server => server.save())))
