@@ -144,10 +144,10 @@ class LineChart extends React.Component<Props, State> {
               <Line
                 from={{ x: tooltipLeft, y: 0 }}
                 to={{ x: tooltipLeft, y: yMax }}
-                stroke="rgba(92, 119, 235, 1.000)"
+                stroke="#EBF5EE"
                 strokeWidth={2}
                 style={{ pointerEvents: 'none' }}
-                strokeDasharray="2,2"
+                // strokeDasharray="2,2"
               />
               <circle
                 cx={tooltipLeft}
@@ -164,8 +164,8 @@ class LineChart extends React.Component<Props, State> {
                 cx={tooltipLeft}
                 cy={tooltipTop}
                 r={4}
-                fill="rgba(92, 119, 235, 1.000)"
-                stroke="white"
+                fill="#EBF5EE"
+                stroke="#EBF5EE"
                 strokeWidth={2}
                 style={{ pointerEvents: 'none' }}
               />
@@ -178,8 +178,8 @@ class LineChart extends React.Component<Props, State> {
               top={tooltipTop - 12}
               left={tooltipLeft - 28}
               style={{
-                backgroundColor: 'rgba(92, 119, 235, 1.000)',
-                color: 'white',
+                backgroundColor: '#EBF5EE',
+                color: 'rgb(28, 27, 27)',
               }}
             >
               {`$${yStock(tooltipData)}`}
@@ -188,6 +188,8 @@ class LineChart extends React.Component<Props, State> {
               top={yMax - 14}
               left={tooltipLeft}
               style={{
+                backgroundColor: '#EBF5EE',
+                color: 'rgb(28, 27, 27)',
                 transform: 'translateX(-50%)',
               }}
             >
