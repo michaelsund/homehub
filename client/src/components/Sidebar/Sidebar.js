@@ -28,11 +28,9 @@ class Sidebar extends React.Component<{}, State> {
   }
 
   handleClick = e => {
+    // Handle clicking outside, hiding sidebar
     if (!this.compRef.current.contains(e.target)) {
-      console.log('clicked outside')
       this.setState({ open: false })
-    } else {
-      console.log('clicked inside')
     }
   }
 
@@ -43,7 +41,7 @@ class Sidebar extends React.Component<{}, State> {
   render() {
     return (
       <div ref={this.compRef}>
-        <input type="checkbox" id="slide" value="" onChange={() => this.toggleMenu()} />
+        <input type="checkbox" id="slide" checked={this.state.open} value="" onChange={() => this.toggleMenu()} />
         <div className="container-sidebar">
           <label htmlFor="slide" className="toggle toggle-grow">
             {this.state.open ? <GoChevronLeft /> : <GoChevronRight />}
