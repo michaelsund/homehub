@@ -26,6 +26,7 @@
 ✔ Server subscriptions works, but component does not update. @done (6/26/2018, 1:38:12 PM)
 ✔ Write backend logic to check servers status by checking if the port is responding, expose a graphql endpoint. (should use subscriptions to push data) @done (6/26/2018, 1:38:14 PM)
 ✔ Serverstatus on item hover, show popover with servername instead of a modal. @done (6/26/2018, 1:38:17 PM)
+☐ CuServerStatus playercount if server is online.
 ☐ Sensor alarm acks via gql mutations, also updates subscriptions via the updateSensorsPubSub function.
 ☐ Sensor and Controllers uses Loading component, should try to have a general position that works for all sizes of components.
 ☐ Rework recurring events, they are not working properly.

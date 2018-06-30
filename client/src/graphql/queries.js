@@ -1,5 +1,19 @@
 import gql from 'graphql-tag'
 
+const getCuServerStatus = gql`
+  query {
+    connectedServices {
+      servers {
+        accessLevel
+        name
+        host
+        status
+        apiHost
+      }
+    }
+  }
+`
+
 const getServers = gql`
   query getServers {
     servers {
@@ -60,5 +74,6 @@ const getSensors = gql`
 export default {
   getControllers,
   getSensors,
-  getServers
+  getServers,
+  getCuServerStatus
 }

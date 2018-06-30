@@ -1,0 +1,29 @@
+.cuStatus-container {
+  position: relative;
+}
+
+.status-icon_online::before {
+  background-color: #18D8F0;
+}
+
+.status-icon_offline::before {
+  background-color: #FF1493;
+}
+
+.status-icon::before {
+  display: inline-block;
+  content: '';
+  -webkit-border-radius: 0.375rem;
+  border-radius: 0.375rem;
+  height: 0.75rem;
+  width: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.list-dot_hidden {
+  list-style-type: none;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+}

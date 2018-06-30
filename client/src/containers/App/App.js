@@ -7,6 +7,7 @@ import BitCoinValue from '../../components/BitCoinValue'
 import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
+import CuStatus from '../../components/CuStatus'
 
 class App extends React.Component<{}> {
   render() {
@@ -29,6 +30,9 @@ class App extends React.Component<{}> {
         </Col>
         <Col className="col-without-row-style" lg={3} md={3} sm={3} xs={12}>
           <ServerStatus />
+        </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <CuStatus />
         </Col>
       </Row>
     )

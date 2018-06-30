@@ -56,4 +56,5 @@ class ServerStatus extends React.Component<Props> {
   }
 }
 
+// export default graphql(queries.getServers)(ServerStatus)
 export default graphql(queries.getServers)(ServerStatus)
