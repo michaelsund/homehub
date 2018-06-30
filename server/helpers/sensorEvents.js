@@ -1,6 +1,6 @@
 import db from '../schema'
+import sensorsPubSub from './sensorsPubSub'
 import checkSensorAlarmTrigger from './checkSensorAlarmTrigger'
-import sendWebSocketMessage from './sendWebSocketMessage'
 import settings from '../../client/src/settings.json'
 
 const minUpdateIntervalMinutes = 30
@@ -30,7 +30,6 @@ const sensorEvents = () => {
               if (minutes > minUpdateIntervalMinutes) {
                 const updated = { lastReportedValue: value, lastReportedTime: now }
                 checkSensorAlarmTrigger(sensor, value)
-                sendWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE', sensorId: sensor._id, ...updated })
                 sensor.update(updated, () => {
                   const newSensorValue = new db.SensorValue({
                     sensorId: sensor._id,
@@ -42,10 +41,12 @@ const sensorEvents = () => {
                       console.log(err)
                     }
                     console.log(`added new sensorvalue for ${sensor.name} : ${value}`)
+                    sensorsPubSub()
                   })
                 })
               }
             }
+            return null
           })
         }
       })

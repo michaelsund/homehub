@@ -16,6 +16,32 @@ const controllersUpdated = gql`
   }
 `
 
+const sensorsUpdated = gql`
+  subscription sensorsUpdated {
+    sensorsUpdated {
+      _id
+      name
+      description
+      measurementType
+      measurementUnit
+      scaling
+      identificationId
+      external
+      lastReportedValue
+      lastReportedTime
+      maxAgeMinutes
+      maxAgeAlarm
+      maxAgeAlarmActive
+      maxAgeAlarmManualReset
+      maxValueAlarm
+      maxValueAlarmActive
+      maxValue
+      minValueAlarmActive
+      minValue
+    }
+  }
+`
+
 const serversChanged = gql`
   subscription serversChanged {
     serversChanged {
@@ -33,5 +59,6 @@ const serversChanged = gql`
 
 export default {
   controllersUpdated,
-  serversChanged
+  serversChanged,
+  sensorsUpdated
 }

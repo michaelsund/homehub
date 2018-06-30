@@ -52,7 +52,7 @@ app.use('/api', apiRoutes)
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  subscriptionsEndpoint: 'ws://localhost:5000/subscriptions'
+  subscriptionsEndpoint: `ws://${settings.dev ? 'localhost' : settings.prodIp}:5000/subscriptions`
 }))
 
 // Redirect everything under root to react router

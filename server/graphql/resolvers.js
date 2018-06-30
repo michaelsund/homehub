@@ -1,7 +1,8 @@
 import {
   pubsub,
   CONTROLLERS_UPDATED_TOPIC,
-  SERVERS_CHANGED_TOPIC
+  SERVERS_CHANGED_TOPIC,
+  SENSORS_UPDATED_TOPIC
 } from './pubsub'
 import settings from '../../client/src/settings.json'
 import telldusDeviceToggle from '../helpers/telldusDeviceToggle'
@@ -51,6 +52,9 @@ export const resolvers = {
     },
     controllersUpdated: {
       subscribe: () => pubsub.asyncIterator(CONTROLLERS_UPDATED_TOPIC)
+    },
+    sensorsUpdated: {
+      subscribe: () => pubsub.asyncIterator(SENSORS_UPDATED_TOPIC)
     }
   }
 }

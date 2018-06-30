@@ -71,6 +71,7 @@ const typeDefs = `
   type Subscription {
       serversChanged: [Server],
       controllersUpdated: [Controller]
+      sensorsUpdated: [Sensor]
   }
 `
 

@@ -1,5 +1,5 @@
 import db from '../schema'
-import sendWebSocketMessage from './sendWebSocketMessage'
+import sensorsPubSub from './sensorsPubSub'
 
 const checkSensormaxAge = () => {
   // Starts a timer that runs the below stuff every minute
@@ -14,7 +14,7 @@ const checkSensormaxAge = () => {
               if (minutes > sensor.maxAgeMinutes) {
                 console.log(`setting maxage alarm active for ${sensor.name} -> ${minutes} > ${sensor.maxAgeMinutes}`)
                 sensor.update({ maxAgeAlarmActive: true }, () => {
-                  sendWebSocketMessage({ type: 'SENSOR_ALARM_ACTIVE', sensorId: sensor._id, alarmType: 'maxAge' })
+                  sensorsPubSub()
                 })
               }
             }
