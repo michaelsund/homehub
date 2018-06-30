@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import queries from '../../graphql/queries'
 import { cuClient } from '../../graphql/gqlClients'
+import CuPlayerCount from './CuPlayerCount'
 import Loading from '../Loading'
 import './CuStatus.css'
 
@@ -22,26 +23,22 @@ class CuStatus extends React.Component<Props> {
 
   render() {
     return (
-      <div className="col-wrapper generic-wrapper">
-        <div className="serverstatus-graph-container">
-          {this.props.data.loading ? (
-            <Loading />
+      <div className="col-wrapper generic-wrapper cuStatus-container">
+        {this.props.data.loading ? (
+          <Loading />
+        ) : (
+          this.props.data ? (
+            <ul className="list-dot_hidden">
+              {this.props.data.connectedServices.servers.map(server => (
+                <li className={`status-icon ${this.serverStatusIconColor(server.status)}`} key={server.name}>
+                  {server.name}<CuPlayerCount server={server.name} />
+                </li>
+              ))}
+            </ul>
           ) : (
-            this.props.data ? (
-              <div className="cuStatus-container">
-                <ul className="list-dot_hidden">
-                  {this.props.data.connectedServices.servers.map(server => (
-                    <li className={`status-icon ${this.serverStatusIconColor(server.status)}`} key={server.name}>
-                      {server.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p>Problem getting data</p>
-            )
-          )}
-        </div>
+            <p>Problem getting data</p>
+          )
+        )}
       </div>
     )
   }

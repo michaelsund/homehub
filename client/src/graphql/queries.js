@@ -14,6 +14,19 @@ const getCuServerStatus = gql`
   }
 `
 
+const getCuPlayerCount = gql`
+  query getCuPlayerCount($server: String!) {
+    metrics {
+      currentPlayerCount(server: $server) {
+        arthurian
+        tuatha
+        viking
+        total
+      }
+    }
+  }
+`
+
 const getServers = gql`
   query getServers {
     servers {
@@ -75,5 +88,6 @@ export default {
   getControllers,
   getSensors,
   getServers,
-  getCuServerStatus
+  getCuServerStatus,
+  getCuPlayerCount
 }

@@ -1,5 +1,7 @@
 .cuStatus-container {
   position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .status-icon_online::before {
@@ -13,17 +15,26 @@
 .status-icon::before {
   display: inline-block;
   content: '';
-  -webkit-border-radius: 0.375rem;
-  border-radius: 0.375rem;
-  height: 0.75rem;
-  width: 0.75rem;
-  margin-right: 0.5rem;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  margin-right: 8px;
 }
 
 .list-dot_hidden {
   list-style-type: none;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 23px;
   padding: 0;
   margin: 0;
+}
+
+.more-arrow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: red;
 }
