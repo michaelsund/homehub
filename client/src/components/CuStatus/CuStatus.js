@@ -10,7 +10,21 @@ type Props = {
   data: Object
 }
 
-class CuStatus extends React.Component<Props> {
+type State = {
+  servers: Array
+}
+
+class CuStatus extends React.Component<Props, State> {
+  state = {
+    servers: []
+  }
+
+  componentWillReceiveProps = nextProps => {
+    const sortedServers = [].concat(nextProps.data.connectedServices.servers)
+      .sort(s => s === 'Offline')
+    this.setState({ servers: sortedServers })
+  }
+
   serverStatusIconColor = status => status === 'Online' ? 'status-icon_online' : 'status-icon_offline'
 
   render() {
@@ -21,7 +35,7 @@ class CuStatus extends React.Component<Props> {
         ) : (
           this.props.data ? (
             <ul className="list-dot_hidden">
-              {this.props.data.connectedServices.servers.map(server => (
+              {this.state.servers.map(server => (
                 <li className={`status-icon ${this.serverStatusIconColor(server.status)}`} key={server.name}>
                   <span>{server.name} </span>
                   <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, .25)' }}>{server.accessLevel}</span>
