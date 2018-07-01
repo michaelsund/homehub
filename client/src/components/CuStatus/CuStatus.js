@@ -11,12 +11,9 @@ type Props = {
 }
 
 class CuStatus extends React.Component<Props> {
-  componentDidMount = () => {
-    // Reftech every 5 minutes
-    setInterval(() => {
-      console.log('Refetching CU server status..')
-      this.props.data.refetch()
-    }, 300000)
+  playerCountRef = React.createRef()
+  componentWillUpdate = () => {
+    // this.playerCountRef.current.refetchPlayerCount()
   }
 
   serverStatusIconColor = status => status === 'Online' ? 'status-icon_online' : 'status-icon_offline'
@@ -31,7 +28,7 @@ class CuStatus extends React.Component<Props> {
             <ul className="list-dot_hidden">
               {this.props.data.connectedServices.servers.map(server => (
                 <li className={`status-icon ${this.serverStatusIconColor(server.status)}`} key={server.name}>
-                  {server.name}<CuPlayerCount server={server.name} />
+                  {server.name}<CuPlayerCount serverName={server.name} />
                 </li>
               ))}
             </ul>
@@ -47,6 +44,7 @@ class CuStatus extends React.Component<Props> {
 // export default graphql(queries.getCuServerStatus)(CuStatus)
 export default graphql(queries.getCuServerStatus, {
   options: {
-    client: cuClient
+    client: cuClient,
+    pollInterval: 300000
   }
 })(CuStatus)

@@ -5,12 +5,13 @@ import { cuClient } from '../../graphql/gqlClients'
 
 type Props = {
   data: Array,
-  server: string
+  serverName: string,
+  getCuPlayerCount: Function
 }
 
 class CuPlayerCount extends React.Component<Props> {
   componentDidUpdate = () => {
-    console.log(`${this.props.server} updated!`)
+    console.log(`${this.props.serverName} updated!`)
   }
 
   render() {
@@ -35,9 +36,13 @@ class CuPlayerCount extends React.Component<Props> {
   }
 }
 
-// export default CuPlayerCount
-export default graphql(queries.getCuPlayerCount, {
-  options: {
-    client: cuClient,
+export default graphql(
+  queries.getCuPlayerCount,
+  {
+    options: props => ({
+      variables: { serverName: props.serverName },
+      client: cuClient,
+      pollInterval: 300000
+    })
   }
-})(CuPlayerCount)
+)(CuPlayerCount)

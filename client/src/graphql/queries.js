@@ -15,9 +15,9 @@ const getCuServerStatus = gql`
 `
 
 const getCuPlayerCount = gql`
-  query getCuPlayerCount($server: String!) {
+  query getCuPlayerCount($serverName: String!) {
     metrics {
-      currentPlayerCount(server: $server) {
+      currentPlayerCount(server: $serverName) {
         arthurian
         tuatha
         viking
