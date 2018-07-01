@@ -4,7 +4,7 @@ import queries from '../../graphql/queries'
 import subscriptions from '../../graphql/subscriptions'
 import './ServerStatus.css'
 import Loading from '../Loading'
-import SvgRect from '../SvgRect'
+import SvgCircle from '../SvgCircle'
 
 type Props = {
   data: Object
@@ -22,12 +22,12 @@ class ServerStatus extends React.Component<Props> {
   }
 
   renderIconFromStatus = server => server.status ?
-    <SvgRect color="#18D8F0" width={40} height={40} />
-    : <SvgRect color="#FF1493" width={40} height={40} />
+    <SvgCircle color="#18D8F0" width={44} height={44} />
+    : <SvgCircle color="#FF1493" width={44} height={44} />
 
   render() {
     return (
-      <div className="col-wrapper generic-wrapper">
+      <div className="col-wrapper">
         <div className="serverstatus-graph-container">
           {this.props.data.loading ? (
             <Loading />

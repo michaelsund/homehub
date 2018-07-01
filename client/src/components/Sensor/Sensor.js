@@ -65,7 +65,7 @@ class Sensor extends React.Component<Props, State> {
   sensorRenderer = type => {
     if (type === 'volume') {
       return (
-        <div className="generic-wrapper">
+        <div>
           <Row>
             <Col className="left-container" span={8}>
               <p className="name">{this.props.sensor.name}</p>
@@ -97,7 +97,7 @@ class Sensor extends React.Component<Props, State> {
       )
     } else if (type === 'temperature') {
       return (
-        <div className="generic-wrapper">
+        <div>
           <Row>
             <Col className="left-container" span={8}>
               <p className="name">{this.props.sensor.name}</p>
@@ -130,21 +130,19 @@ class Sensor extends React.Component<Props, State> {
     }
     // Default if type is not defined
     return (
-      <div className="generic-wrapper">
-        <div className="text-container">
-          <p className="name">{this.props.sensor.name}</p>
-          <p className="desc">{this.props.sensor.description}</p>
-          <p>Last raw value: {this.props.sensor.lastReportedValue}</p>
-          <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
-          <p>No sensortype defined</p>
-        </div>
+      <div className="text-container">
+        <p className="name">{this.props.sensor.name}</p>
+        <p className="desc">{this.props.sensor.description}</p>
+        <p>Last raw value: {this.props.sensor.lastReportedValue}</p>
+        <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
+        <p>No sensortype defined</p>
       </div>
     )
   }
 
   render() {
     return (
-      <div className="col-wrapper">
+      <div className="col-wrapper fixed-height">
         {this.state.errorFetchingData ? (
           <div>
             <p>Error fetching sensor data!</p>

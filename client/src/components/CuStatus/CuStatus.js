@@ -29,7 +29,7 @@ class CuStatus extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="col-wrapper generic-wrapper cuStatus-container">
+      <div className="col-wrapper cuStatus-container">
         {this.props.data.loading ? (
           <Loading />
         ) : (

@@ -1,7 +1,6 @@
 .cuStatus-container {
   position: relative;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .status-icon_online::before {

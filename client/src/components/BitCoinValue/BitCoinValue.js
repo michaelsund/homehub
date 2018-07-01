@@ -57,7 +57,7 @@ class BitCoinValue extends React.Component<{}, State> {
 
   render() {
     return (
-      <div className="col-wrapper generic-wrapper">
+      <div className="col-wrapper fixed-height">
         <p className="bitcoin-text">Bitcoin ${this.state.latestValue} @ {this.state.lastUpdated}</p>
         <div className="bitcoin-graph-container">
           {this.state.loading ? (

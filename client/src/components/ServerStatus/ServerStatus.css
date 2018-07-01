@@ -1,10 +1,11 @@
 .serverStatus-container {
   position: relative;
   top: 50%;
+  padding-left: 4px;
 }
 
 .serverStatus-item {
   cursor: pointer;
   display: inline-flex;
-  margin: 10px;
+  margin: 2px;
 }

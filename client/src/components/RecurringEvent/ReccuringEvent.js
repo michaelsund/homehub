@@ -45,7 +45,7 @@ class ReccuringEvent extends React.Component<Props, State> {
 
   render() {
     return (
-      <div className="col-wrapper generic-wrapper">
+      <div className="col-wrapper fixed-height">
         <p className="name">{this.props.title}</p>
         <p className="desc">{this.props.note}</p>
         {this.state.daysToEvent <= 1 ? (
