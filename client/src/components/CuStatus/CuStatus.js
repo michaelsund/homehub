@@ -11,11 +11,6 @@ type Props = {
 }
 
 class CuStatus extends React.Component<Props> {
-  playerCountRef = React.createRef()
-  componentWillUpdate = () => {
-    // this.playerCountRef.current.refetchPlayerCount()
-  }
-
   serverStatusIconColor = status => status === 'Online' ? 'status-icon_online' : 'status-icon_offline'
 
   render() {
@@ -28,7 +23,9 @@ class CuStatus extends React.Component<Props> {
             <ul className="list-dot_hidden">
               {this.props.data.connectedServices.servers.map(server => (
                 <li className={`status-icon ${this.serverStatusIconColor(server.status)}`} key={server.name}>
-                  {server.name}<CuPlayerCount serverName={server.name} />
+                  <span>{server.name} </span>
+                  <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, .25)' }}>{server.accessLevel}</span>
+                  {server.status === 'Online' && <CuPlayerCount serverName={server.name} />}
                 </li>
               ))}
             </ul>
@@ -41,10 +38,9 @@ class CuStatus extends React.Component<Props> {
   }
 }
 
-// export default graphql(queries.getCuServerStatus)(CuStatus)
 export default graphql(queries.getCuServerStatus, {
   options: {
     client: cuClient,
-    pollInterval: 300000
+    pollInterval: 60000
   }
 })(CuStatus)

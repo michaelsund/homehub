@@ -28,10 +28,10 @@ class App extends React.Component<{}> {
             eventDay="fri"
           />
         </Col>
-        <Col className="col-without-row-style" lg={3} md={3} sm={3} xs={12}>
+        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <ServerStatus />
         </Col>
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <CuStatus />
         </Col>
       </Row>

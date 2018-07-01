@@ -217,6 +217,10 @@ body {
   border-radius: 20px;
 }
 
+.toggle:hover {
+  color: #18D8F0;
+}
+
 .sidebar {
   position: fixed;
   top: 0px;

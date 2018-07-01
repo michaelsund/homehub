@@ -6,9 +6,7 @@ const getCuServerStatus = gql`
       servers {
         accessLevel
         name
-        host
         status
-        apiHost
       }
     }
   }

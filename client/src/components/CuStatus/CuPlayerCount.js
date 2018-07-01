@@ -10,28 +10,17 @@ type Props = {
 }
 
 class CuPlayerCount extends React.Component<Props> {
-  componentDidUpdate = () => {
-    console.log(`${this.props.serverName} updated!`)
-  }
-
   render() {
     return (
-      this.props.data.loading ? (
-        <span>Loading...</span>
-      ) : (
-        <span>: {this.props.data.metrics.currentPlayerCount.total}</span>
-        // <div style={{ display: 'inline-block' }}>
-        //   <span>
-        //     A {this.props.data.metrics.currentPlayerCount.arthurian}&nbsp;
-        //   </span>
-        //   <span>
-        //     T {this.props.data.metrics.currentPlayerCount.tuatha}&nbsp;
-        //   </span>
-        //   <span>
-        //     V {this.props.data.metrics.currentPlayerCount.viking}
-        //   </span>
-        // </div>
-      )
+      !this.props.data.loading &&
+        // <span style={{ float: 'right' }}>
+        //   {this.props.data.metrics.currentPlayerCount.total}
+        // </span>
+        <div style={{ display: 'inline-block', float: 'right' }}>
+          <span style={{ color: '#FFC09F' }}>A </span>{this.props.data.metrics.currentPlayerCount.arthurian}&nbsp;
+          <span style={{ color: '#ADF7B6' }}>T </span>{this.props.data.metrics.currentPlayerCount.tuatha}&nbsp;
+          <span style={{ color: '#A0CED9' }}>V </span>{this.props.data.metrics.currentPlayerCount.viking}
+        </div>
     )
   }
 }
@@ -42,7 +31,7 @@ export default graphql(
     options: props => ({
       variables: { serverName: props.serverName },
       client: cuClient,
-      pollInterval: 300000
+      pollInterval: 60000,
     })
   }
 )(CuPlayerCount)
