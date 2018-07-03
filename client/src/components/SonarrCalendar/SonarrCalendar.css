@@ -1,0 +1,23 @@
+.sonarr-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.sonarr-serieitem {
+  margin-bottom: 16px;
+}
+
+.sonarr-seriename {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sonarr-list {
+  margin-bottom: 10px !important;
+}
+
+.sonarr-serieinfo {
+  line-height: 10px;
+}
