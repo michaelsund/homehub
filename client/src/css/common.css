@@ -23,7 +23,7 @@ body {
 
 .content-area {
   height: 100%;
-  padding-right: 10px;
+  /* padding-right: 10px; */
 }
 
 .box-dark {
@@ -64,7 +64,10 @@ body {
 }
 
 .col-without-row-style {
-  padding: 4px !important;
+  padding-top: 4px;
+  padding-bottom: 8px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
 .name {
@@ -187,8 +190,8 @@ body {
   text-align: left;
   border-radius: 6px;
   position: absolute;
-  bottom: 100%;
-  left: 50%;
+  bottom: 90%;
+  left: 40%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -199,18 +202,25 @@ body {
   text-overflow: ellipsis;
 }
 
-.tooltip .tooltiptext::after {
+.tooltip::after {
   content: "";
+  visibility: hidden;
   position: absolute;
-  bottom: -10%;
-  left: 44%;
-  margin-left: -5px;
+  bottom: 68%;
+  left: 40%;
+  opacity: 0;
+  /* margin-left: -5px; */
   border-width: 5px;
   border-style: solid;
   border-color: #EBF5EE transparent transparent transparent;
 }
 
 .tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip:hover::after {
   visibility: visible;
   opacity: 1;
 }
