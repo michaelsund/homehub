@@ -10,6 +10,8 @@ create client/src/settings.json with the following content.
   "mongoServer": "192.168.1.X",
   "mongoUser": "",
   "mongoPass": "",
+  "sonarrIp": "192.168.1.X",
+  "sonarrKey": "",
   "pushBulletKey": "your_api_key",
   "pusBulletChannel": "your_channel"
 }

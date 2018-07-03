@@ -186,6 +186,9 @@ body {
   transition: opacity 0.3s;
   padding: 0 8px 0 8px;
   z-index: 999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tooltip .tooltiptext::after {

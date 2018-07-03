@@ -8,6 +8,7 @@ import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
 import CuStatus from '../../components/CuStatus'
+import SonarrCalendar from '../../components/SonarrCalendar'
 
 class App extends React.Component<{}> {
   render() {
@@ -28,20 +29,14 @@ class App extends React.Component<{}> {
             eventDay="fri"
           />
         </Col>
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
-          <RecurringEvent
-            title="Sophämtning"
-            note="Ställ ut kärl"
-            everyWeek={false}
-            evenWeeks
-            eventDay="fri"
-          />
-        </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <ServerStatus />
         </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <CuStatus />
+        </Col>
+        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
+          <SonarrCalendar />
         </Col>
       </Row>
     )
