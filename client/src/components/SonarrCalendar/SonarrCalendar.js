@@ -1,4 +1,5 @@
 import React from 'react'
+import Moment from 'moment'
 import settings from '../../settings.json'
 import './SonarrCalendar.css'
 
@@ -6,15 +7,33 @@ type State = {
   series: Array
 }
 
-class SonarrCalendar extends React.Component<{}, State> {
+type Props = {
+  updateInterval: number,
+  daysForward: number
+}
+
+class SonarrCalendar extends React.Component<Props, State> {
   state = {
     series: []
   }
 
   componentDidMount = () => {
+    this.fetchSonarrCalendar()
+    setInterval(() => {
+      this.fetchSonarrCalendar()
+    }, this.props.updateInterval * (60 * 1000))
+  }
+
+  fetchSonarrCalendar = () => {
     // Gets the series scheduled to air today and tomorrow, dates can be provided if needed.
     // https://github.com/Sonarr/Sonarr/wiki/Calendar
-    fetch(`http://${settings.sonarrIp}:8989/api/calendar?apikey=${settings.sonarrKey}`)
+    let fetchString = `http://${settings.sonarrIp}:8989/api/calendar?apikey=${settings.sonarrKey}`
+    if (this.props.daysForward !== null) {
+      const today = Moment(new Date())
+      const stopDate = Moment(today).add(this.props.daysForward, 'days')
+      fetchString += `&start=${today.format('YYYY-MM-DD')}&end=${stopDate.format('YYYY-MM-DD')}`
+    }
+    fetch(fetchString)
       .then(res => res.json())
       .then(series => this.setState({ series }))
   }
@@ -43,6 +62,11 @@ class SonarrCalendar extends React.Component<{}, State> {
       </div>
     )
   }
+}
+
+SonarrCalendar.defaultProps = {
+  updateInterval: 5,
+  daysForward: null
 }
 
 export default SonarrCalendar

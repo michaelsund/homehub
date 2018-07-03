@@ -17,9 +17,9 @@ class CuPlayerCount extends React.Component<Props> {
         //   {this.props.data.metrics.currentPlayerCount.total}
         // </span>
         <div style={{ display: 'inline-block', float: 'right' }}>
-          <span style={{ color: '#FFC09F' }}>A </span>{this.props.data.metrics.currentPlayerCount.arthurian}&nbsp;
-          <span style={{ color: '#ADF7B6' }}>T </span>{this.props.data.metrics.currentPlayerCount.tuatha}&nbsp;
-          <span style={{ color: '#A0CED9' }}>V </span>{this.props.data.metrics.currentPlayerCount.viking}
+          <span style={{ color: '#FFC09F' }}>A</span>{this.props.data.metrics.currentPlayerCount.arthurian}&nbsp;
+          <span style={{ color: '#ADF7B6' }}>T</span>{this.props.data.metrics.currentPlayerCount.tuatha}&nbsp;
+          <span style={{ color: '#A0CED9' }}>V</span>{this.props.data.metrics.currentPlayerCount.viking}
         </div>
     )
   }

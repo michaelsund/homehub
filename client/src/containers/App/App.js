@@ -36,7 +36,7 @@ class App extends React.Component<{}> {
           <CuStatus />
         </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
-          <SonarrCalendar />
+          <SonarrCalendar updateInterval={5} daysForward={3} />
         </Col>
       </Row>
     )
