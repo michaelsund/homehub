@@ -17,6 +17,33 @@ const toggleController = gql`
   }
 `
 
+const ackSensorAlarm = gql`
+  mutation ackSensorAlarm($id: ID!) {
+    ackSensorAlarm(id: $id) {
+      _id
+      name
+      description
+      measurementType
+      measurementUnit
+      scaling
+      identificationId
+      external
+      lastReportedValue
+      lastReportedTime
+      maxAgeMinutes
+      maxAgeAlarm
+      maxAgeAlarmActive
+      maxAgeAlarmManualReset
+      maxValueAlarm
+      maxValueAlarmActive
+      maxValue
+      minValueAlarmActive
+      minValue
+    }
+  }
+`
+
 export default {
-  toggleController
+  toggleController,
+  ackSensorAlarm
 }

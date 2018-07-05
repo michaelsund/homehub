@@ -4,8 +4,10 @@ import {
   SERVERS_CHANGED_TOPIC,
   SENSORS_UPDATED_TOPIC
 } from './pubsub'
+import sensorsPubSub from '../helpers/sensorsPubSub'
 import settings from '../../client/src/settings.json'
 import telldusDeviceToggle from '../helpers/telldusDeviceToggle'
+import ackSensorAlarms from '../helpers/ackSensorAlarms'
 import ServerModel from '../schema/ServerModel'
 import SensorModel from '../schema/SensorModel'
 import ControllerModel from '../schema/ControllerModel'
@@ -24,12 +26,6 @@ export const resolvers = {
     controller: (root, { id }) => ControllerModel.findById(id),
   },
   Mutation: {
-    // addChannel: (root, args) => {
-    //   const newChannel = { id: String(nextId += 1), messages: [], name: args.name }
-    //   channels.push(newChannel)
-    //   pubsub.publish(CHANNEL_ADDED_TOPIC, { channelAdded: newChannel })
-    //   return newChannel
-    // }
     toggleController: async (root, args) => {
       if (!settings.dev) {
         return telldusDeviceToggle(args.id)
@@ -44,7 +40,12 @@ export const resolvers = {
       const unmodifiedController = await ControllerModel.findById(args.id)
       pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllersUpdated: unmodifiedControllerList })
       return unmodifiedController
-    }
+    },
+    ackSensorAlarm: async (root, args) => ackSensorAlarms(args.id)
+      .then(updatedSensor => {
+        sensorsPubSub()
+        return updatedSensor
+      })
   },
   Subscription: {
     serversChanged: {

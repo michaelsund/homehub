@@ -66,6 +66,7 @@ const typeDefs = `
 
   type Mutation {
     toggleController(id: ID!): Controller
+    ackSensorAlarm(id: ID!): Sensor
   }
 
   type Subscription {

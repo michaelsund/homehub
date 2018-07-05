@@ -29,8 +29,10 @@
 ✔ CuServerStatus playercount if server is online. @done (6/30/2018, 9:51:00 PM)
 ✔ CuPlayerCount not taking the server parameter, defaults to Hatchery for all calls. @done (7/3/2018, 11:05:44 AM)
 ✔ Sonarr series calendar table for upcoming series. @done (7/3/2018, 8:12:04 PM)
-☐ Sensor alarm acks via gql mutations, also updates subscriptions via the updateSensorsPubSub function.
-☐ Sensor alarms should trigger sensor subscription change.
+✔ Sensor alarm acks via gql mutations, also updates subscriptions via the updateSensorsPubSub function. @done (7/5/2018, 7:45:27 PM)
+☐ Sensor ack mutation clientside, gql endpoint is done.
+☐ Phase out ws middleware in client.
+✔ Sensor alarms should trigger sensor subscription change. @done (7/5/2018, 7:45:19 PM)
 ☐ Remove click outline css.
 ☐ ServerStatus tooltip pushes out the right margin on mobile. has todo with the tooltip, tooltip-text width.
 ☐ CuServerStatus does, the playerscounter activate if a server comes online after page load?

@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react'
-import { connect } from 'react-redux'
 import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
 import './Sensor.css'
@@ -19,8 +18,6 @@ type State = {
   percentage: number,
 }
 
-// const mapStateToProps = state => state
-
 class Sensor extends React.Component<Props, State> {
   state = {
     errorFetchingData: false,
@@ -28,8 +25,6 @@ class Sensor extends React.Component<Props, State> {
   }
 
   componentDidMount = () => {
-    // Initial fetch of sensor
-    // this.fetchSensorAndValues(this.props.sensorId)
     this.setState({
       percentage: this.calcPercentageValue(
         this.props.sensor.lastReportedValue,
@@ -156,4 +151,4 @@ class Sensor extends React.Component<Props, State> {
   }
 }
 
-export default connect(null, null)(Sensor)
+export default Sensor

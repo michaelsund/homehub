@@ -10,4 +10,4 @@ RUN npm install
 RUN npm install telldus
 RUN cd client/ && npm install && npm run build && mv build ../server/build
 CMD sh startscript.sh
-EXPOSE 5000 40510
+EXPOSE 5000

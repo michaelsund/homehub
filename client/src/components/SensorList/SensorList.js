@@ -21,6 +21,9 @@ class SensorList extends React.Component<Props> {
   sensorsUpdatedSubscription = () => {
     this.props.data.subscribeToMore({
       document: subscriptions.sensorsUpdated,
+      // updateQuery: (previous, { subscriptionData }) => {
+      //   console.log(subscriptionData)
+      // }
     })
   }
 
