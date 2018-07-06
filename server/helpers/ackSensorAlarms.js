@@ -1,7 +1,6 @@
 import SensorModel from '../schema/SensorModel'
 
 const ackSensorAlarms = sensorId => new Promise(resolve => {
-  console.log(`acking sensor ${sensorId}`)
   SensorModel.findOneAndUpdate(
     { _id: sensorId },
     {

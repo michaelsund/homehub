@@ -7,5 +7,5 @@
 .serverStatus-item {
   cursor: pointer;
   display: inline-flex;
-  margin: 2px;
+  margin: 4px;
 }
