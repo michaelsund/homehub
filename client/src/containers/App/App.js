@@ -9,6 +9,7 @@ import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
 import CuStatus from '../../components/CuStatus'
 import SonarrCalendar from '../../components/SonarrCalendar'
+import VideoStream from '../../components/VideoStream'
 
 class App extends React.Component<{}> {
   render() {
@@ -37,6 +38,9 @@ class App extends React.Component<{}> {
         </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <SonarrCalendar updateInterval={5} daysForward={3} />
+        </Col>
+        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
+          <VideoStream />
         </Col>
       </Row>
     )
