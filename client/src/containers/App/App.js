@@ -9,11 +9,15 @@ import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
 import CuStatus from '../../components/CuStatus'
 import SonarrCalendar from '../../components/SonarrCalendar'
+import ControllerStatus from '../../components/ControllerStatus'
 
 class App extends React.Component<{}> {
   render() {
     return (
       <Row className="row-style">
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <ControllerStatus />
+        </Col>
         <Col className="col-without-row-style" lg={4} md={3} sm={3} xs={12}>
           <BitCoinValue />
         </Col>

@@ -49,6 +49,7 @@ const getControllers = gql`
       identificationId
       status
       lastReportedTime
+      type
       timer
       onTime
       offTime

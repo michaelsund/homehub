@@ -10,6 +10,7 @@ const toggleController = gql`
       timer
       onTime
       offTime
+      type
       lastReportedTime
       identificationId
       external

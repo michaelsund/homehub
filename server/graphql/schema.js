@@ -50,6 +50,7 @@ const typeDefs = `
     status: Boolean
     lastReportedTime: String
     identificationId: Float
+    type: String
     timer: Boolean
     onTime: String
     offTime: String

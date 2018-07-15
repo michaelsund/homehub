@@ -10,6 +10,7 @@ const controller = mongoose.Schema({
   description: { type: String, default: '' },
   external: { type: Boolean, default: false },
   identificationId: { type: Number, default: null },
+  type: { type: String, default: '' },
   status: { type: Boolean, default: false },
   lastReportedTime: { type: Date, default: null },
   timer: { type: Boolean, default: false },
