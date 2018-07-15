@@ -34,6 +34,7 @@
     "d3-time-format": "^2.1.1",
     "flow-typed": "^2.3.0",
     "graphql-tag": "^2.8.0",
+    "jsmpeg-player": "^1.2.0",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
     "react": "^16.2.0",
@@ -64,6 +65,9 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.67.1"
+  },
+  "resolutions": {
+    "eslint-scope": "3.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
