@@ -22,9 +22,21 @@ import checkServerStatuses from './helpers/checkServerStatuses'
 // remotedev({ hostname: 'localhost', port: 8000 });
 
 if (settings.mongoUser === '') {
-  mongoose.connect(`mongodb://${settings.mongoServer}:27017/hut`)
+  mongoose.connect(
+    `mongodb://${settings.mongoServer}:27017/hut`,
+    {
+      reconnectTries: 900,
+      reconnectInterval: 1000,
+    }
+  )
 } else {
-  mongoose.connect(`mongodb://${settings.mongoUser}:${settings.mongoPass}@${settings.mongoServer}:27017/hut`)
+  mongoose.connect(
+    `mongodb://${settings.mongoUser}:${settings.mongoPass}@${settings.mongoServer}:27017/hut`,
+    {
+      reconnectTries: 900,
+      reconnectInterval: 1000,
+    }
+  )
 }
 
 const db = mongoose.connection
