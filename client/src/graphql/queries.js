@@ -1,5 +1,21 @@
 import gql from 'graphql-tag'
 
+const getTradfriGroupsAndDevices = gql`
+  query {
+    bulbgroups {
+      name
+      instanceId
+      bulbs {
+        name
+        instanceId
+        color
+        dimmer
+        status
+      }
+    }
+  }
+`
+
 const getCuServerStatus = gql`
   query {
     connectedServices {
@@ -89,5 +105,6 @@ export default {
   getSensors,
   getServers,
   getCuServerStatus,
-  getCuPlayerCount
+  getCuPlayerCount,
+  getTradfriGroupsAndDevices,
 }
