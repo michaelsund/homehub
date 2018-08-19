@@ -33,6 +33,8 @@
 ✔ Sensor ack mutation clientside, gql endpoint is done. @done (7/5/2018, 9:49:41 PM)
 ✔ Phase out ws middleware in client. @done (7/5/2018, 9:49:42 PM)
 ✔ Sensor alarms should trigger sensor subscription change. @done (7/5/2018, 7:45:19 PM)
+☐ ikea tradfri auth documentation and helper to get id and psk.
+☐ watch groups and bulbs, no configuration at this stage.
 ☐ ServerStatus tooltip pushes out the right margin on mobile. has todo with the tooltip, tooltip-text width.
 ☐ CuServerStatus does, the playerscounter activate if a server comes online after page load?
 ☐ Sensor and Controllers uses Loading component, should try to have a general position that works for all sizes of components.

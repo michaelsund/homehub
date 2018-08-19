@@ -17,6 +17,7 @@ import sensorEvents from './helpers/sensorEvents'
 import checkSensorMaxAge from './helpers/checkSensorMaxAge'
 import checkControllerTimer from './helpers/checkControllerTimer'
 import checkServerStatuses from './helpers/checkServerStatuses'
+import { tradfriEvents } from './helpers/tradfriHelpers'
 
 // Local remote dev server
 // remotedev({ hostname: 'localhost', port: 8000 });
@@ -65,6 +66,9 @@ checkSensorMaxAge()
 sensorEvents()
 checkControllerTimer()
 checkServerStatuses()
+
+// Test
+tradfriEvents()
 
 const server = createServer(app)
 server.listen(5000, '0.0.0.0', () => {

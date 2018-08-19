@@ -3,11 +3,6 @@ import { makeExecutableSchema } from 'graphql-tools'
 import { resolvers } from './resolvers'
 
 const typeDefs = `
-  type Channel {
-    id: ID!
-    name: String
-  }
-
   type Server {
     _id: ID!
     serverName: String
@@ -51,9 +46,24 @@ const typeDefs = `
     lastReportedTime: String
     identificationId: Float
     type: String
+    groupName: String
     timer: Boolean
     onTime: String
     offTime: String
+  }
+
+  type BulbGroup {
+    name: String
+    instanceId: String
+    bulbs: [Bulb]
+  }
+
+  type Bulb {
+    name: String
+    instanceId: String
+    status: Boolean
+    color: String
+    dimmer: Float
   }
 
   type Query {
@@ -63,6 +73,7 @@ const typeDefs = `
     sensor(id: ID!): Sensor
     controllers: [Controller]
     controller(id: ID!): Controller
+    bulbgroups: [BulbGroup]
   }
 
   type Mutation {

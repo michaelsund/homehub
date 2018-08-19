@@ -8,6 +8,7 @@ import sensorsPubSub from '../helpers/sensorsPubSub'
 import settings from '../../client/src/settings.json'
 import telldusDeviceToggle from '../helpers/telldusDeviceToggle'
 import ackSensorAlarms from '../helpers/ackSensorAlarms'
+import { getBulbStore } from '../helpers/tradfriHelpers'
 import ServerModel from '../schema/ServerModel'
 import SensorModel from '../schema/SensorModel'
 import ControllerModel from '../schema/ControllerModel'
@@ -24,6 +25,7 @@ export const resolvers = {
     sensor: (root, { id }) => SensorModel.findById(id),
     controllers: () => ControllerModel.find({}),
     controller: (root, { id }) => ControllerModel.findById(id),
+    bulbgroups: () => getBulbStore()
   },
   Mutation: {
     toggleController: async (root, args) => {

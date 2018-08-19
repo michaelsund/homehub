@@ -50,6 +50,7 @@ const getControllers = gql`
       status
       lastReportedTime
       type
+      groupName
       timer
       onTime
       offTime

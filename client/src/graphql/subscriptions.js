@@ -10,6 +10,7 @@ const controllersUpdated = gql`
       status
       lastReportedTime
       timer
+      groupName
       onTime
       offTime
     }

@@ -18,4 +18,4 @@ const controller = mongoose.Schema({
   offTime: { type: String, default: '' }
 })
 
-export default mongoose.model('Controller', controller);
+export default mongoose.model('Controller', controller)

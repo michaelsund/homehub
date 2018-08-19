@@ -33,6 +33,7 @@
     "d3-array": "^1.2.1",
     "d3-time-format": "^2.1.1",
     "flow-typed": "^2.3.0",
+    "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
     "jsmpeg-player": "^1.2.0",
     "moment": "^2.21.0",
