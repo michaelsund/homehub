@@ -2,7 +2,8 @@ import {
   pubsub,
   CONTROLLERS_UPDATED_TOPIC,
   SERVERS_CHANGED_TOPIC,
-  SENSORS_UPDATED_TOPIC
+  SENSORS_UPDATED_TOPIC,
+  TRADFRI_UPDATED_TOPIC
 } from './pubsub'
 import sensorsPubSub from '../helpers/sensorsPubSub'
 import settings from '../../client/src/settings.json'
@@ -58,6 +59,9 @@ export const resolvers = {
     },
     sensorsUpdated: {
       subscribe: () => pubsub.asyncIterator(SENSORS_UPDATED_TOPIC)
+    },
+    tradfriUpdated: {
+      subscribe: () => pubsub.asyncIterator(TRADFRI_UPDATED_TOPIC)
     }
   }
 }

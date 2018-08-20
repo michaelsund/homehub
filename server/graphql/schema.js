@@ -64,6 +64,7 @@ const typeDefs = `
     status: Boolean
     color: String
     dimmer: Float
+    alive: Boolean
   }
 
   type Query {
@@ -85,6 +86,7 @@ const typeDefs = `
       serversChanged: [Server],
       controllersUpdated: [Controller]
       sensorsUpdated: [Sensor]
+      tradfriUpdated: [BulbGroup]
   }
 `
 

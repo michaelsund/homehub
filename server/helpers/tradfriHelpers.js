@@ -1,11 +1,15 @@
 import { TradfriClient } from 'node-tradfri-client'
 import settings from '../../client/src/settings.json'
+import {
+  pubsub,
+  TRADFRI_UPDATED_TOPIC
+} from '../graphql/pubsub'
 
 const bulbsStore = []
 const tmpBulbs = []
 export const getBulbStore = () => bulbsStore
 
-const tradfriDeviceUpdated = data => {
+const tradfriDeviceUpdated = async data => {
   console.log(data)
   // Check if the device allready has been added, update it.
   const bulb = {
@@ -14,10 +18,11 @@ const tradfriDeviceUpdated = data => {
     status: data.lightList[0].onOff,
     color: data.lightList[0].color,
     dimmer: data.lightList[0].dimmer,
+    alive: data.alive,
   }
 
   if (bulbsStore.length > 0) {
-    bulbsStore.map(group => {
+    await bulbsStore.map(group => {
       if (group.deviceIDs.includes(data.instanceId)) {
         const index = group.bulbs.findIndex(b => b.instanceId === data.instanceId)
         group.bulbs[index] = bulb
@@ -30,11 +35,13 @@ const tradfriDeviceUpdated = data => {
   if (bulbsStore.length === 0) {
     tmpBulbs.push(bulb)
   }
+
+  pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
 }
 
-const tradfriGroupUpdated = data => {
+const tradfriGroupUpdated = async data => {
   // Groupghanges only considered for first run, needs to handle group updates aswell
-  tmpBulbs.map(b => {
+  await tmpBulbs.map(b => {
     if (data.deviceIDs.includes(b.instanceId)) {
       const index = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
       if (index !== -1) {
@@ -52,6 +59,8 @@ const tradfriGroupUpdated = data => {
     }
     return null
   })
+
+  pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
 }
 
 export const tradfriEvents = async () => {
