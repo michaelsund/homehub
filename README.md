@@ -2,7 +2,7 @@
 
 Install node packages: yarn installdeps
 
-create client/src/settings.json with the following content.
+create client/src/settings.json with the following content, more info needed on tradfri setup.
 ```
 {
   "dev": true,
@@ -13,7 +13,10 @@ create client/src/settings.json with the following content.
   "sonarrIp": "192.168.1.X",
   "sonarrKey": "",
   "pushBulletKey": "your_api_key",
-  "pusBulletChannel": "your_channel"
+  "pusBulletChannel": "your_channel",
+  "tradfriIp": "192.168.1.X",
+  "tradfriId": "",
+  "tradfriPsk": ""
 }
 ```
 

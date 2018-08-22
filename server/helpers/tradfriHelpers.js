@@ -64,7 +64,7 @@ const tradfriGroupUpdated = async data => {
 }
 
 export const tradfriEvents = async () => {
-  const tradfri = new TradfriClient('192.168.1.50')
+  const tradfri = new TradfriClient(settings.tradfriIp)
 
   if (settings.tradfriId && settings.tradfriPsk) {
     try {
