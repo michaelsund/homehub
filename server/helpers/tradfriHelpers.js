@@ -10,7 +10,7 @@ const tmpBulbs = []
 export const getBulbStore = () => bulbsStore
 
 const tradfriDeviceUpdated = async data => {
-  console.log(data)
+  // console.log(data)
   // Check if the device allready has been added, update it.
   const bulb = {
     name: data.name,
@@ -40,26 +40,31 @@ const tradfriDeviceUpdated = async data => {
 }
 
 const tradfriGroupUpdated = async data => {
-  // Groupghanges only considered for first run, needs to handle group updates aswell
-  await tmpBulbs.map(b => {
-    if (data.deviceIDs.includes(b.instanceId)) {
-      const index = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
-      if (index !== -1) {
-        // console.log('using existing group')
-        bulbsStore[index].bulbs.push(b)
+  // Checks if the group exists and removes it before recreating from tmpBulbs
+  const index = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
+  if (index !== -1) {
+    bulbsStore.splice(index, 1)
+  }
+
+  await tmpBulbs.map(bulb => {
+    if (data.deviceIDs.includes(bulb.instanceId)) {
+      const groupIndex = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
+      // Creates the group if none existing whet looping trough tmpBulbs
+      if (groupIndex !== -1) {
+        // Add bulb
+        bulbsStore[groupIndex].bulbs.push(bulb)
       } else {
-        // console.log('creating group')
+        // Create group and add bulb to it
         bulbsStore.push({
           name: data.name,
           instanceId: data.instanceId,
           deviceIDs: data.deviceIDs,
-          bulbs: [b]
+          bulbs: [bulb]
         })
       }
     }
     return null
   })
-
   pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
 }
 
