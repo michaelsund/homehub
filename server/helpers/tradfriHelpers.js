@@ -7,9 +7,8 @@ import {
 
 let tradfri = null
 const bulbsStore = []
-const tmpBulbs = []
-// const rawBulbs = []
 const rawGroups = []
+const rawBulbs = []
 export const getBulbStore = () => bulbsStore
 
 export const toggleBulbOrGroup = (instanceId, onOff) => {
@@ -17,68 +16,87 @@ export const toggleBulbOrGroup = (instanceId, onOff) => {
   group.toggle(onOff)
 }
 
-const tradfriDeviceUpdated = async data => {
-  // Check if the device allready has been added, update it.
-  const bulb = {
-    name: data.name,
-    instanceId: data.instanceId,
-    status: data.lightList[0].onOff,
-    color: data.lightList[0].color,
-    dimmer: data.lightList[0].dimmer,
-    alive: data.alive,
-  }
-
-  if (bulbsStore.length > 0) {
-    await bulbsStore.map(group => {
-      if (group.deviceIDs.includes(data.instanceId)) {
-        const index = group.bulbs.findIndex(b => b.instanceId === data.instanceId)
-        group.bulbs[index] = bulb
+async function regenerateBulbStoreFromDevice(bulb = null) {
+  console.log('in regen Device!!')
+  await bulbsStore.map(g => {
+    g.bulbs.map(b => {
+      if (b.instanceId === bulb.instanceId) {
+        b = {
+          name: bulb.name,
+          instanceId: bulb.instanceId,
+          status: bulb.lightList[0].onOff,
+          color: bulb.lightList[0].color,
+          dimmer: bulb.lightList[0].dimmer,
+          alive: bulb.alive,
+        }
+        console.log('regenerate from dev')
+        console.log(bulb.lightList[0].onOff)
       }
       return null
     })
-  }
-
-  // Only used first run, since tradfri device event is receieved first
-  if (bulbsStore.length === 0) {
-    tmpBulbs.push(bulb)
-  }
-
+    return null
+  })
   // pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
 }
 
+async function regenerateBulbStoreFromGroup(groupIndex) {
+  console.log(`regenerating group with index: ${groupIndex}`)
+  bulbsStore[groupIndex].bulbs = []
+  await rawBulbs.map(b => {
+    if (bulbsStore[groupIndex].deviceIDs.includes(b.instanceId)) {
+      bulbsStore[groupIndex].bulbs.push({
+        name: b.name,
+        instanceId: b.instanceId,
+        status: b.lightList[0].onOff,
+        color: b.lightList[0].color,
+        dimmer: b.lightList[0].dimmer,
+        alive: b.alive,
+      })
+    }
+    return null
+  })
+}
+
+const tradfriDeviceUpdated = async data => {
+  console.log('device event')
+  const index = await rawBulbs.findIndex(b => b.instanceId === data.instanceId)
+  if (index !== -1) {
+    rawBulbs[index] = data
+  } else {
+    rawBulbs.push(data)
+  }
+
+  await regenerateBulbStoreFromDevice(data)
+  console.log('done with update, sending new store')
+  pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
+}
+
 const tradfriGroupUpdated = async data => {
-  // Add to rawGroups for commands
+  console.log('group event')
   if (typeof rawGroups[data.instanceId] === 'undefined') {
     rawGroups[data.instanceId] = data
   }
 
-
-  // Checks if the group exists and removes it before recreating from tmpBulbs
-  const index = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
-  if (index !== -1) {
-    bulbsStore.splice(index, 1)
-  }
-
-  await tmpBulbs.map(bulb => {
-    if (data.deviceIDs.includes(bulb.instanceId)) {
-      const groupIndex = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
-      // Creates the group if none existing whet looping trough tmpBulbs
-      if (groupIndex !== -1) {
-        // Add bulb
-        bulbsStore[groupIndex].bulbs.push(bulb)
-      } else {
-        // Create group and add bulb to it
-        bulbsStore.push({
-          name: data.name,
-          instanceId: data.instanceId,
-          deviceIDs: data.deviceIDs,
-          bulbs: [bulb]
-        })
-      }
+  const index = await bulbsStore.findIndex(g => g.instanceId === data.instanceId)
+  console.log(`g event index: ${index}`)
+  if (index === -1) {
+    bulbsStore.push({
+      name: data.name,
+      instanceId: data.instanceId,
+      deviceIDs: data.deviceIDs,
+      bulbs: []
+    })
+    regenerateBulbStoreFromGroup(bulbsStore.length - 1)
+  } else {
+    const tmpBulbs = bulbsStore[index].bulbs
+    bulbsStore[index] = {
+      name: data.name,
+      instanceId: data.instanceId,
+      bulbs: tmpBulbs,
+      deviceIDs: data.deviceIDs
     }
-    return null
-  })
-  pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
+    regenerateBulbStoreFromGroup(index)
+  }
 }
 
 export const tradfriEvents = async () => {
