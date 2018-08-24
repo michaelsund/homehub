@@ -1,5 +1,22 @@
 import gql from 'graphql-tag'
 
+const tradfriUpdated = gql`
+  subscription tradfriUpdated {
+    tradfriUpdated {
+      name
+      instanceId
+      bulbs {
+        name
+        instanceId
+        status
+        color
+        dimmer
+        alive
+      }
+    }
+  }
+`
+
 const controllersUpdated = gql`
   subscription controllersUpdated {
     controllersUpdated {
@@ -61,5 +78,6 @@ const serversChanged = gql`
 export default {
   controllersUpdated,
   serversChanged,
-  sensorsUpdated
+  sensorsUpdated,
+  tradfriUpdated
 }

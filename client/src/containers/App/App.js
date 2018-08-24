@@ -10,14 +10,12 @@ import ServerStatus from '../../components/ServerStatus'
 import CuStatus from '../../components/CuStatus'
 import SonarrCalendar from '../../components/SonarrCalendar'
 import ControllerStatus from '../../components/ControllerStatus'
+import TradfriList from '../../components/TradfriList'
 
 class App extends React.Component<{}> {
   render() {
     return (
       <Row className="row-style">
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
-          <ControllerStatus />
-        </Col>
         <Col className="col-without-row-style" lg={4} md={3} sm={3} xs={12}>
           <BitCoinValue />
         </Col>
@@ -34,13 +32,19 @@ class App extends React.Component<{}> {
           />
         </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
-          <ServerStatus />
+          <CuStatus />
         </Col>
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
-          <CuStatus />
+          <ServerStatus />
         </Col>
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <SonarrCalendar updateInterval={5} daysForward={3} />
+        </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <ControllerStatus />
+        </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <TradfriList />
         </Col>
       </Row>
     )

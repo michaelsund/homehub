@@ -5,12 +5,19 @@ import {
   TRADFRI_UPDATED_TOPIC
 } from '../graphql/pubsub'
 
+let tradfri = null
 const bulbsStore = []
 const tmpBulbs = []
+// const rawBulbs = []
+const rawGroups = []
 export const getBulbStore = () => bulbsStore
 
+export const toggleBulbOrGroup = (instanceId, onOff) => {
+  const group = rawGroups[instanceId]
+  group.toggle(onOff)
+}
+
 const tradfriDeviceUpdated = async data => {
-  // console.log(data)
   // Check if the device allready has been added, update it.
   const bulb = {
     name: data.name,
@@ -36,10 +43,16 @@ const tradfriDeviceUpdated = async data => {
     tmpBulbs.push(bulb)
   }
 
-  pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
+  // pubsub.publish(TRADFRI_UPDATED_TOPIC, { tradfriUpdated: bulbsStore })
 }
 
 const tradfriGroupUpdated = async data => {
+  // Add to rawGroups for commands
+  if (typeof rawGroups[data.instanceId] === 'undefined') {
+    rawGroups[data.instanceId] = data
+  }
+
+
   // Checks if the group exists and removes it before recreating from tmpBulbs
   const index = bulbsStore.findIndex(group => group.instanceId === data.instanceId)
   if (index !== -1) {
@@ -69,7 +82,7 @@ const tradfriGroupUpdated = async data => {
 }
 
 export const tradfriEvents = async () => {
-  const tradfri = new TradfriClient(settings.tradfriIp)
+  tradfri = new TradfriClient(settings.tradfriIp)
 
   if (settings.tradfriId && settings.tradfriPsk) {
     try {

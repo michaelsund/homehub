@@ -15,9 +15,16 @@ class ServerStatus extends React.Component<Props> {
     this.serversChangeSubscription()
   }
 
+  componentWillReceiveProps = nextProps => {
+    console.log(nextProps)
+  }
+
   serversChangeSubscription = () => {
     this.props.data.subscribeToMore({
-      document: subscriptions.serversChanged
+      document: subscriptions.serversChanged,
+      updateQuery: (previous, { subscriptionData }) => {
+        console.log(subscriptionData)
+      }
     })
   }
 
@@ -32,23 +39,25 @@ class ServerStatus extends React.Component<Props> {
           {this.props.data.loading ? (
             <Loading />
           ) : (
-            <div className="serverStatus-container">
-              {this.props.data.servers.map(server => (
-                <div className="tooltip" key={server._id}>
-                  <div className="serverStatus-item">
-                    {this.renderIconFromStatus(server)}
-                  </div>
-                  <span className="tooltiptext">
-                    <div>
-                      <p>{server.serverName}</p>
-                      <p>ip: {server.serverIp}</p>
-                      <p>port: {server.port}</p>
-                      <p>{server.statusMessage}</p>
+            this.props.data.servers ? (
+              <div className="serverStatus-container">
+                {this.props.data.servers.map(server => (
+                  <div className="tooltip" key={server._id}>
+                    <div className="serverStatus-item">
+                      {this.renderIconFromStatus(server)}
                     </div>
-                  </span>
-                </div>
-              ))}
-            </div>
+                    <span className="tooltiptext">
+                      <div>
+                        <p>{server.serverName}</p>
+                        <p>ip: {server.serverIp}</p>
+                        <p>port: {server.port}</p>
+                        <p>{server.statusMessage}</p>
+                      </div>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : <p>No servers found</p>
           )}
         </div>
       </div>
@@ -56,5 +65,4 @@ class ServerStatus extends React.Component<Props> {
   }
 }
 
-// export default graphql(queries.getServers)(ServerStatus)
 export default graphql(queries.getServers)(ServerStatus)

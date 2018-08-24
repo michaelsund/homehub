@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-const getTradfriGroupsAndDevices = gql`
-  query {
+const getBulbgroups = gql`
+  query getBulbgroups {
     bulbgroups {
       name
       instanceId
@@ -106,5 +106,5 @@ export default {
   getServers,
   getCuServerStatus,
   getCuPlayerCount,
-  getTradfriGroupsAndDevices,
+  getBulbgroups,
 }

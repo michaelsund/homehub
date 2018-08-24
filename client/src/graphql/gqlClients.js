@@ -27,7 +27,9 @@ const link = split(
 
 export const localClient = new ApolloClient({
   link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    addTypename: false
+  }),
 })
 
 export const cuClient = new ApolloClient({

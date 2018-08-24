@@ -1,0 +1,31 @@
+.status-icon_on::before {
+  background-color: #18D8F0;
+}
+
+.status-icon_off::before {
+  background-color: #FF1493;
+}
+
+.status-icon {
+  height: 30px;
+}
+
+.status-icon::before {
+  display: inline-block;
+  content: '';
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  height: 12px;
+  width: 12px;
+  margin-right: 8px;
+}
+
+.status-icon::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  bottom: 26px;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, .05);
+}

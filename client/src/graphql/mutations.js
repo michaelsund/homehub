@@ -1,5 +1,14 @@
 import gql from 'graphql-tag'
 
+const toggleTradfriGroup = gql`
+  mutation toggleTradfriGroup($instanceid: ID!, $onoff: Boolean!) {
+    toggleTradfriGroup(instanceId: $instanceid, onOff: $onoff) {
+      instanceId
+      onOff
+    }
+  }
+`
+
 const toggleController = gql`
   mutation toggleController($id: ID!) {
     toggleController(id: $id) {
@@ -46,5 +55,6 @@ const ackSensorAlarm = gql`
 
 export default {
   toggleController,
-  ackSensorAlarm
+  ackSensorAlarm,
+  toggleTradfriGroup
 }

@@ -52,15 +52,20 @@ const typeDefs = `
     offTime: String
   }
 
+  type TradfriGroupOperation {
+    instanceId: Float
+    onOff: Boolean
+  }
+
   type BulbGroup {
     name: String
-    instanceId: String
+    instanceId: ID!
     bulbs: [Bulb]
   }
 
   type Bulb {
     name: String
-    instanceId: String
+    instanceId: ID!
     status: Boolean
     color: String
     dimmer: Float
@@ -78,15 +83,16 @@ const typeDefs = `
   }
 
   type Mutation {
+    toggleTradfriGroup(instanceId: ID!, onOff: Boolean!): TradfriGroupOperation
     toggleController(id: ID!): Controller
     ackSensorAlarm(id: ID!): Sensor
   }
 
   type Subscription {
-      serversChanged: [Server],
-      controllersUpdated: [Controller]
-      sensorsUpdated: [Sensor]
-      tradfriUpdated: [BulbGroup]
+    serversChanged: [Server],
+    controllersUpdated: [Controller]
+    sensorsUpdated: [Sensor]
+    tradfriUpdated: [BulbGroup]
   }
 `
 

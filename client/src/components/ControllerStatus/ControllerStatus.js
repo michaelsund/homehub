@@ -19,7 +19,7 @@ class ControllerStatus extends React.Component<Props> {
       document: subscriptions.controllersUpdated,
       // updateQuery: (previous, { subscriptionData }) => {
       //   console.log(subscriptionData)
-      //  }
+      // }
     })
   }
 
@@ -31,7 +31,7 @@ class ControllerStatus extends React.Component<Props> {
         {this.props.data.loading ? (
           <Loading />
         ) : (
-          this.props.data ? (
+          this.props.data.controllers ? (
             <ul className="list-dot_hidden">
               {this.props.data.controllers.map(controller => (
                 <li className={`status-icon ${this.controllerStatusIconColor(controller.status)}`} key={controller.name}>
