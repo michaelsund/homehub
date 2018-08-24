@@ -2524,10 +2524,6 @@ lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
-lodash@4.17.4:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
-
 lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.8.0:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
@@ -2821,13 +2817,6 @@ node-tradfri-client@^1.3.2:
     mdns-server "^1.0.5"
     node-coap-client "^1.0.0"
     reflect-metadata "^0.1.12"
-
-node-tradfri@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/node-tradfri/-/node-tradfri-0.2.3.tgz#316fe5a382e1cfd458f60d44e02f2890690a6b49"
-  dependencies:
-    lodash "4.17.4"
-    uuid "3.1.0"
 
 node-uuid@^1.4.0:
   version "1.4.8"
