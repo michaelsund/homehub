@@ -35,6 +35,10 @@
 ✔ Sensor alarms should trigger sensor subscription change. @done (7/5/2018, 7:45:19 PM)
 ✔ ikea tradfri auth documentation and helper to get id and psk. @done (8/19/2018, 9:10:59 PM)
 ✔ watch groups and bulbs, no configuration at this stage. @done (8/19/2018, 9:11:03 PM)
+☐ Acking alarms no longer removes the icon.
+☐ More info on tradfri group.
+☐ ControllerStatus can show onOff timers, if enabled.
+☐ ControllerStatus subscription gets null back in prod on toggle controller.
 ☐ If CU servers query fails start a new one in 10 seconds, display a message doing so.
 ☐ ServerStatus tooltip pushes out the right margin on mobile. has todo with the tooltip, tooltip-text width.
 ☐ CuServerStatus does, the playerscounter activate if a server comes online after page load?
