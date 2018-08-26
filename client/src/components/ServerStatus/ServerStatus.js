@@ -10,20 +10,28 @@ type Props = {
   data: Object
 }
 
-class ServerStatus extends React.Component<Props> {
+type State = {
+  servers: Array
+}
+
+class ServerStatus extends React.Component<Props, State> {
+  state = {
+    servers: []
+  }
+
   componentDidMount = () => {
     this.serversChangeSubscription()
   }
 
   componentWillReceiveProps = nextProps => {
-    console.log(nextProps)
+    this.setState({ servers: nextProps.data.servers })
   }
 
   serversChangeSubscription = () => {
     this.props.data.subscribeToMore({
       document: subscriptions.serversChanged,
       updateQuery: (previous, { subscriptionData }) => {
-        console.log(subscriptionData)
+        this.setState({ servers: subscriptionData.data.serversChanged })
       }
     })
   }
@@ -39,9 +47,9 @@ class ServerStatus extends React.Component<Props> {
           {this.props.data.loading ? (
             <Loading />
           ) : (
-            this.props.data.servers ? (
+            this.state.servers ? (
               <div className="serverStatus-container">
-                {this.props.data.servers.map(server => (
+                {this.state.servers.map(server => (
                   <div className="tooltip" key={server._id}>
                     <div className="serverStatus-item">
                       {this.renderIconFromStatus(server)}

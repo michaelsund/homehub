@@ -134,8 +134,8 @@ ajv@^6.0.1:
     uri-js "^4.2.1"
 
 alcalzone-shared@^1.0.1:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/alcalzone-shared/-/alcalzone-shared-1.0.6.tgz#63c5c40cc158bdb543fc7df0a02016c3c4f9d755"
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/alcalzone-shared/-/alcalzone-shared-1.2.0.tgz#204f32b12e56552b56cba870b8dd86b354b39044"
   dependencies:
     debug "^3.1.0"
 
@@ -4122,15 +4122,15 @@ ws@^0.4.32:
     options ">=0.0.5"
     tinycolor "0.x"
 
-ws@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.0.tgz#9fd95e3ac7c76f6ae8bcc868a0e3f11f1290c33e"
+ws@^5.0.0:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.2.tgz#dffef14866b8e8dc9133582514d1befaf96e980f"
   dependencies:
     async-limiter "~1.0.0"
 
-ws@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.0.0.tgz#eaa494aded00ac4289d455bac8d84c7c651cef35"
+ws@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-5.2.0.tgz#9fd95e3ac7c76f6ae8bcc868a0e3f11f1290c33e"
   dependencies:
     async-limiter "~1.0.0"
 

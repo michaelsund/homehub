@@ -10,14 +10,12 @@ const rawGroups = []
 const rawBulbs = []
 
 export const getBulbStore = async () => {
-  await rawBulbs.map(b =>
-    console.log(`name: ${b.name} onOff: ${JSON.stringify(b.lightList[0].onOff)} dimmer: ${b.lightList[0].dimmer}`))
-
   const store = []
   await rawGroups.map(group => store.push({
     name: group.name,
     instanceId: group.instanceId,
     deviceIDs: group.deviceIDs,
+    status: group.onOff,
     bulbs: [],
   }))
 

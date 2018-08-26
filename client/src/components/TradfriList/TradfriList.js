@@ -13,29 +13,30 @@ type Props = {
   data: Object
 }
 
-class TradfriList extends React.Component<Props> {
-  componentDidMount = () => {
-    this.tradfriUpdatedSubscription()
+type State = {
+  bulbGroups: Array
+}
+
+class TradfriList extends React.Component<Props, State> {
+  state = {
+    bulbGroups: []
   }
 
-  // shouldComponentUpdate = nextProps => {
-  //   if (nextProps !== this.props) {
-  //     return true
-  //   }
-  //   return false
-  // }
-
-  tradfriUpdatedSubscription = () => {
-    this.props.data.subscribeToMore({
-      document: subscriptions.tradfriUpdated,
-      updateQuery: (previous, { subscriptionData }) => {
-        console.log(subscriptionData)
-      }
-    })
+  componentDidMount = () => {
+    this.tradfriBulbgroupUpdatedSubscription()
   }
 
   componentWillReceiveProps = nextProps => {
-    console.log(nextProps)
+    this.setState({ bulbGroups: nextProps.data.bulbgroups })
+  }
+
+  tradfriBulbgroupUpdatedSubscription = () => {
+    this.props.data.subscribeToMore({
+      document: subscriptions.tradfriBulbgroupUpdated,
+      updateQuery: (previous, { subscriptionData }) => {
+        this.setState({ bulbGroups: subscriptionData.data.tradfriUpdated })
+      }
+    })
   }
 
   bulbIconColor = status => status ? 'status-icon_on' : 'status-icon_off'
@@ -46,19 +47,22 @@ class TradfriList extends React.Component<Props> {
         <Loading />
       ) : (
         <div className="col-wrapper bulblist-container">
-          {this.props.data.bulbgroups ? (
-            this.props.data.bulbgroups.map(group =>
+          {this.state.bulbGroups ? (
+            this.state.bulbGroups.map(group =>
               <Mutation key={group.instanceId} mutation={mutations.toggleTradfriGroup}>
                 {toggleTradfriGroup => (
                   <React.Fragment>
-                    <p onClick={() => {
-                      toggleTradfriGroup({
-                        variables: {
-                          instanceid: group.instanceId,
-                          onoff: false
-                        }
-                      })
-                    }}>
+                    <p
+                      className="bulblist-grupname"
+                      onClick={() => {
+                        toggleTradfriGroup({
+                          variables: {
+                            instanceid: group.instanceId,
+                            onoff: !group.status
+                          }
+                        })
+                      }}
+                    >
                       {group.name}
                     </p>
                     <ul className="list-dot_hidden">

@@ -13,17 +13,25 @@ type Props = {
   data: Array
 }
 
-class SensorList extends React.Component<Props> {
+type State = {
+  sensors: Array
+}
+
+class SensorList extends React.Component<Props, State> {
   componentDidMount = () => {
     this.sensorsUpdatedSubscription()
+  }
+
+  componentWillReceiveProps = nextProps => {
+    this.setState({ sensors: nextProps.data.sensors })
   }
 
   sensorsUpdatedSubscription = () => {
     this.props.data.subscribeToMore({
       document: subscriptions.sensorsUpdated,
-      // updateQuery: (previous, { subscriptionData }) => {
-      //   console.log(subscriptionData)
-      // }
+      updateQuery: (previous, { subscriptionData }) => {
+        this.setState({ sensors: subscriptionData.data.sensorsUpdated })
+      }
     })
   }
 

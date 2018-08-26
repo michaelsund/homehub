@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
 import App from './containers/App'
-import Controls from './containers/Controls'
 import Settings from './containers/Settings'
 import Sidebar from './components/Sidebar'
 // import registerServiceWorker from './registerServiceWorker'
@@ -22,7 +21,6 @@ ReactDOM.render(
         <div className="content-area">
           <Switch>
             <Route exact path='/' component={App} />
-            <Route path='/Controls' component={Controls} />
             <Route path='/Settings' component={Settings} />
           </Switch>
         </div>

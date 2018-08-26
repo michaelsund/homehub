@@ -4,8 +4,7 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import {
   GoDashboard,
-  GoGear,
-  GoCircuitBoard
+  GoGear
 } from 'react-icons/lib/go'
 import './Menu.css'
 
@@ -22,9 +21,6 @@ class Menu extends React.Component<Props> {
       <div className="icon-bar">
         <Link to="/" className={this.isActive('/')}>
           <GoDashboard />
-        </Link>
-        <Link to="/controls" className={this.isActive('/controls')}>
-          <GoCircuitBoard />
         </Link>
         <Link to="/settings" className={this.isActive('/settings')}>
           <GoGear />

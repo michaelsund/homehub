@@ -5,12 +5,14 @@ const getBulbgroups = gql`
     bulbgroups {
       name
       instanceId
+      status
       bulbs {
         name
         instanceId
         color
         dimmer
         status
+        alive
       }
     }
   }

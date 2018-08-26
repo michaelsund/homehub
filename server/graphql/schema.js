@@ -60,6 +60,7 @@ const typeDefs = `
   type BulbGroup {
     name: String
     instanceId: ID!
+    status: Boolean
     bulbs: [Bulb]
   }
 

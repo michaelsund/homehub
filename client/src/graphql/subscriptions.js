@@ -1,16 +1,17 @@
 import gql from 'graphql-tag'
 
-const tradfriUpdated = gql`
+const tradfriBulbgroupUpdated = gql`
   subscription tradfriUpdated {
     tradfriUpdated {
       name
       instanceId
+      status
       bulbs {
         name
         instanceId
-        status
         color
         dimmer
+        status
         alive
       }
     }
@@ -79,5 +80,5 @@ export default {
   controllersUpdated,
   serversChanged,
   sensorsUpdated,
-  tradfriUpdated
+  tradfriBulbgroupUpdated
 }
