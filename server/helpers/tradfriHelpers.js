@@ -57,13 +57,20 @@ export const tradfriEvents = async () => {
     } catch (e) {
       console.log(e)
     }
-
     tradfri
       .on('device updated', tradfriDeviceUpdated)
       .observeDevices()
-
     tradfri
       .on('group updated', tradfriGroupUpdated)
       .observeGroupsAndScenes()
   }
+
+  setInterval(() => {
+    tradfri.ping(5000)
+      .then(result => !result && (
+        tradfri.reset({ preserveObservers: true }),
+        tradfri.restoreObservers(),
+        console.log('resetting connection!')
+      ))
+  }, 10000)
 }

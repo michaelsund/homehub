@@ -41,6 +41,8 @@ class TradfriList extends React.Component<Props, State> {
 
   bulbIconColor = status => status ? 'status-icon_on' : 'status-icon_off'
 
+  bulbDeadIconColor = alive => !alive && 'status-icon_dead'
+
   render() {
     return (
       this.props.data.loading ? (
@@ -69,7 +71,7 @@ class TradfriList extends React.Component<Props, State> {
                       {group.bulbs.map(b => (
                       <li
                         key={b.instanceId}
-                        className={`status-icon ${this.bulbIconColor(b.status)}`}
+                        className={`status-icon ${this.bulbIconColor(b.status)} ${this.bulbDeadIconColor(b.alive)}`}
                       >
                         <span>{b.name}</span>
                       </li>))}

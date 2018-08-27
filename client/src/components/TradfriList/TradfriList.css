@@ -14,3 +14,7 @@
 .status-icon_off::before {
   background-color: #FF1493;
 }
+
+.status-icon_dead::before {
+  background-color: #1C1B1B !important;
+}
