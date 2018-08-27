@@ -40,8 +40,8 @@ class SensorList extends React.Component<Props, State> {
       this.props.data.loading ? (
         <Loading />
       ) : (
-        this.props.data.sensors ? (
-          this.props.data.sensors.map(sensor => (
+        this.state.sensors ? (
+          this.state.sensors.map(sensor => (
             <Col className="col-without-row-style" key={sensor._id} lg={2} md={3} sm={3} xs={12}>
               <Sensor sensor={sensor} />
             </Col>
