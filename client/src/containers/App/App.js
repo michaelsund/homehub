@@ -4,7 +4,7 @@ import React from 'react'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
 import BitCoinValue from '../../components/BitCoinValue'
-import RecurringEvent from '../../components/RecurringEvent'
+// import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
 import CuStatus from '../../components/CuStatus'
@@ -21,8 +21,14 @@ class App extends React.Component<{}> {
         </Col>
         {/* Sensors fetched from db */}
         <SensorList />
-        {/* Recurring events are hardcoded */}
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <ControllerStatus />
+        </Col>
+        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+          <TradfriList />
+        </Col>
+        {/* Recurring events are hardcoded */}
+        {/* <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <RecurringEvent
             title="Sophämtning"
             note="Ställ ut kärl"
@@ -30,21 +36,15 @@ class App extends React.Component<{}> {
             evenWeeks
             eventDay="fri"
           />
-        </Col>
-        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
-          <CuStatus />
-        </Col>
-        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
-          <ServerStatus />
-        </Col>
+        </Col> */}
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <SonarrCalendar updateInterval={5} daysForward={3} />
         </Col>
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
-          <ControllerStatus />
+          <CuStatus />
         </Col>
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
-          <TradfriList />
+        <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
+          <ServerStatus />
         </Col>
       </Row>
     )
