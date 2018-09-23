@@ -113,31 +113,28 @@ class LineChart extends React.Component<Props, State> {
             fill="transparent"
             rx={14}
             data={this.state.data}
-            onTouchStart={data => event =>
-              this.handleTooltip({
-                event,
-                data,
-                xStock,
-                xScale,
-                yScale,
-              })}
-            onTouchMove={data => event =>
-              this.handleTooltip({
-                event,
-                data,
-                xStock,
-                xScale,
-                yScale,
-              })}
-            onMouseMove={data => event =>
-              this.handleTooltip({
-                event,
-                data,
-                xStock,
-                xScale,
-                yScale,
-              })}
-              onMouseLeave={data => event => hideTooltip()}
+            onTouchStart={data => event => this.handleTooltip({
+              event,
+              data,
+              xStock,
+              xScale,
+              yScale,
+            })}
+            onTouchMove={data => event => this.handleTooltip({
+              event,
+              data,
+              xStock,
+              xScale,
+              yScale,
+            })}
+            onMouseMove={data => event => this.handleTooltip({
+              event,
+              data,
+              xStock,
+              xScale,
+              yScale,
+            })}
+            onMouseLeave={() => () => hideTooltip()}
           />
           {tooltipData && (
             <g>

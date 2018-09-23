@@ -15,7 +15,7 @@ if (!settings.dev) {
 
 const updateControllersPubSub = () => {
   const updatedControllerList = Controller.find({})
-  pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllerUpdated: updatedControllerList })
+  pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllersUpdated: updatedControllerList })
 }
 
 const telldusDeviceToggle = (controllerId, forcedState = null) => new Promise(resolve => {

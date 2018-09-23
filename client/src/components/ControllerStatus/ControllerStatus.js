@@ -31,7 +31,6 @@ class ControllerStatus extends React.Component<Props, State> {
     this.props.data.subscribeToMore({
       document: subscriptions.controllersUpdated,
       updateQuery: (previous, { subscriptionData }) => {
-        console.log(subscriptionData)
         this.setState({ controllers: subscriptionData.data.controllersUpdated })
       }
     })

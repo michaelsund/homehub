@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 import {
   GoDashboard,
   GoGear
-} from 'react-icons/lib/go'
+} from 'react-icons/go'
 import './Menu.css'
 
 type Props = {
@@ -13,8 +13,8 @@ type Props = {
 }
 
 class Menu extends React.Component<Props> {
-  isActive = route => route === this.props.location.pathname ?
-    'nav-link-active' : 'nav-link'
+  isActive = route => route === this.props.location.pathname
+    ? 'nav-link-active' : 'nav-link'
 
   render() {
     return (

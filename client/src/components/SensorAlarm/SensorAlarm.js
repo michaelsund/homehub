@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react'
-import { GoAlert } from 'react-icons/lib/go'
+import { GoAlert } from 'react-icons/go'
 import Modal from 'react-responsive-modal'
 import { Mutation } from 'react-apollo'
 import mutations from '../../graphql/mutations'
@@ -32,9 +32,9 @@ class SensorAlarm extends React.Component<Props, State> {
       <Mutation mutation={mutations.ackSensorAlarm}>
         {/* Used to be toggleController, { data } */}
         {ackSensorAlarm => (
-          this.props.sensor.maxAgeAlarmActive ||
-          this.props.sensor.maxValueAlarmActive ||
-          this.props.sensor.minValueAlarmActive) && (
+          this.props.sensor.maxAgeAlarmActive
+          || this.props.sensor.maxValueAlarmActive
+          || this.props.sensor.minValueAlarmActive) && (
             <div>
               <GoAlert className="sensor-alarm-icon" onClick={this.onOpenModal} />
               <Modal
@@ -46,14 +46,14 @@ class SensorAlarm extends React.Component<Props, State> {
               >
                 <h2>Alarms for {this.props.sensor.name}</h2>
                 <ul>
-                  {this.props.sensor.maxAgeAlarmActive &&
-                    <li>data max age reached.</li>
+                  {this.props.sensor.maxAgeAlarmActive
+                    && <li>data max age reached.</li>
                   }
-                  {this.props.sensor.maxValueAlarmActive &&
-                    <li>sensor exceeded the maximum value.</li>
+                  {this.props.sensor.maxValueAlarmActive
+                    && <li>sensor exceeded the maximum value.</li>
                   }
-                  {this.props.sensor.minValueAlarmActive &&
-                    <li>sensor exceeded the minimum value.</li>
+                  {this.props.sensor.minValueAlarmActive
+                    && <li>sensor exceeded the minimum value.</li>
                   }
                 </ul>
                 <button
@@ -65,8 +65,7 @@ class SensorAlarm extends React.Component<Props, State> {
                   <span>Acknowledge</span>
                 </button>
               </Modal>
-            </div>
-          )
+            </div>)
         }
       </Mutation>
     )

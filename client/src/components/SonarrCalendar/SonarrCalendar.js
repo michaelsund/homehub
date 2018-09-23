@@ -47,22 +47,21 @@ class SonarrCalendar extends React.Component<Props, State> {
   render() {
     return (
       <div className="col-wrapper sonarr-container">
-        {this.state.series.length === 0 ?
-          <p>No upcoming series in {this.props.daysForward} days..</p> :
-          (
-            <ul className="list-dot_hidden sonarr-list">
-              {this.state.series.map(serie => <li className="sonarr-serieitem" key={serie.id}>
-                <p className="sonarr-seriename">{serie.series.title}</p>
-                <div className="sonarr-serieinfo">
-                  <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, .25)' }}>
-                    {serie.airDate} S{serie.seasonNumber} E{serie.episodeNumber}
-                  </span>
-                  <span>{this.hasFile(serie.hasFile)}</span>
-                  {/* {JSON.stringify(serie.hasFile)} {serie.airDate} - {serie.series.title} */}
-                </div>
-              </li>)}
-            </ul>
-          )
+        {this.state.series.length === 0 ? <p>
+          No upcoming series in {this.props.daysForward} days..
+          </p> : (
+          <ul className="list-dot_hidden sonarr-list">
+            {this.state.series.map(serie => <li className="sonarr-serieitem" key={serie.id}>
+              <p className="sonarr-seriename">{serie.series.title}</p>
+              <div className="sonarr-serieinfo">
+                <span style={{ fontSize: '10px', color: 'rgba(255, 255, 255, .25)' }}>
+                  {serie.airDate} S{serie.seasonNumber} E{serie.episodeNumber}
+                </span>
+                <span>{this.hasFile(serie.hasFile)}</span>
+                {/* {JSON.stringify(serie.hasFile)} {serie.airDate} - {serie.series.title} */}
+              </div>
+            </li>)}
+          </ul>)
         }
       </div>
     )

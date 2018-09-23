@@ -7,7 +7,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import settings from '../settings.json'
 
 const wsLink = new WebSocketLink({
-  uri: settings.dev ? 'ws://localhost:5000/subscriptions' : `ws://${settings.prodIp}:5000/subscriptions`,
+  uri: settings.dev ? 'ws://localhost:5000' : `ws://${settings.prodIp}:5000`,
   options: {
     reconnect: true,
     // connectionParams: {

@@ -4,7 +4,7 @@ import React from 'react'
 import {
   GoChevronRight,
   GoChevronLeft
-} from 'react-icons/lib/go'
+} from 'react-icons/go'
 import './Sidebar.css'
 import Menu from '../Menu'
 

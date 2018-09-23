@@ -12,6 +12,10 @@ const sensorEvents = () => {
   }
 
   if (telldus !== null) {
+    // telldus.addRawDeviceEventListener((deviceId, status) => {
+    //   console.log(deviceId)
+    //   console.log(status)
+    // })
     telldus.addSensorEventListener((
       deviceId,
       protocol,

@@ -39,8 +39,9 @@ class BitCoinValue extends React.Component<{}, State> {
   getHistoricalValue = () => {
     fetch('https://api.coindesk.com/v1/bpi/historical/close.json')
       .then(res => res.json())
-      .then(res => Object.keys(res.bpi).map(key =>
-        ({ date: key, close: Math.round(res.bpi[key]) })))
+      .then(res => Object.keys(res.bpi).map(key => (
+        { date: key, close: Math.round(res.bpi[key]) }
+      )))
       .then(newArr => {
         this.setState({ data: newArr, loading: false })
       })

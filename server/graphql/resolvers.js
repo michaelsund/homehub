@@ -39,11 +39,7 @@ export const resolvers = {
     toggleController: async (root, args) => {
       if (!settings.dev) {
         return telldusDeviceToggle(args.id)
-          .then(result => {
-            const updatedControllerList = ControllerModel.find({})
-            pubsub.publish(CONTROLLERS_UPDATED_TOPIC, { controllerUpdated: updatedControllerList })
-            return result
-          })
+          .then(result => result)
       }
       console.log(`DEV Toggling controller ${args.id}`)
       const unmodifiedControllerList = await ControllerModel.find({})

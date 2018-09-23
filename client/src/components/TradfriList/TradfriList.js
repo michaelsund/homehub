@@ -50,7 +50,7 @@ class TradfriList extends React.Component<Props, State> {
       ) : (
         <div className="col-wrapper bulblist-container">
           {this.state.bulbGroups ? (
-            this.state.bulbGroups.map(group =>
+            this.state.bulbGroups.map(group => (
               <Mutation key={group.instanceId} mutation={mutations.toggleTradfriGroup}>
                 {toggleTradfriGroup => (
                   <React.Fragment>
@@ -77,7 +77,7 @@ class TradfriList extends React.Component<Props, State> {
                       </li>))}
                     </ul>
                   </React.Fragment>)}
-              </Mutation>)
+              </Mutation>))
           ) : <p>No bulbs found</p>}
         </div>
       )

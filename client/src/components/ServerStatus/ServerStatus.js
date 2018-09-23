@@ -36,8 +36,7 @@ class ServerStatus extends React.Component<Props, State> {
     })
   }
 
-  renderIconFromStatus = server => server.status ?
-    <SvgCircle color="#18D8F0" width={44} height={44} />
+  renderIconFromStatus = server => server.status ? <SvgCircle color="#18D8F0" width={44} height={44} />
     : <SvgCircle color="#FF1493" width={44} height={44} />
 
   render() {

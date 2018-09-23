@@ -51,7 +51,8 @@ class Sensor extends React.Component<Props, State> {
     const percent = Math.round(((current - min) * 100) / (max - min))
     if (percent < 0) {
       return 0
-    } else if (percent > 100) {
+    }
+    if (percent > 100) {
       return 100
     }
     return percent
@@ -76,12 +77,12 @@ class Sensor extends React.Component<Props, State> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-            {this.props.sensor.maxValueAlarm ||
-                this.props.sensor.minValueAlarm ||
-                this.props.sensor.maxAgeAlarm ?
-                <SensorAlarm
-                  sensor={this.props.sensor}
-                /> : null
+            {this.props.sensor.maxValueAlarm
+              || this.props.sensor.minValueAlarm
+              || this.props.sensor.maxAgeAlarm
+              ? <SensorAlarm
+                    sensor={this.props.sensor}
+                  /> : null
               }
             </div>
             <div className="bottom-container_right">
@@ -90,7 +91,7 @@ class Sensor extends React.Component<Props, State> {
           </div>
         </div>
       )
-    } else if (type === 'temperature') {
+    } if (type === 'temperature') {
       return (
         <div>
           <Row>
@@ -108,12 +109,12 @@ class Sensor extends React.Component<Props, State> {
           </Row>
           <div className="bottom-container">
             <div className="bottom-container_left">
-              {this.props.sensor.maxValueAlarm ||
-                this.props.sensor.minValueAlarm ||
-                this.props.sensor.maxAgeAlarm ?
-                <SensorAlarm
-                  sensor={this.props.sensor}
-                /> : null
+              {this.props.sensor.maxValueAlarm
+                || this.props.sensor.minValueAlarm
+                || this.props.sensor.maxAgeAlarm
+                ? <SensorAlarm
+                    sensor={this.props.sensor}
+                  /> : null
               }
             </div>
             <div className="bottom-container_right">
