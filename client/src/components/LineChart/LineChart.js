@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { AreaClosed, Line, Bar } from '@vx/shape'
 import { curveMonotoneX } from '@vx/curve'

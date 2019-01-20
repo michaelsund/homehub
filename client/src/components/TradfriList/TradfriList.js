@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { graphql, Mutation } from 'react-apollo'
 import queries from '../../graphql/queries'

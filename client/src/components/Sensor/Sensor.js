@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import Moment from 'moment'
 import { Row, Col } from 'react-simple-flex-grid'
@@ -48,7 +46,13 @@ class Sensor extends React.Component<Props, State> {
   }
 
   calcPercentageValue = (current, min, max) => {
-    const percent = Math.round(((current - min) * 100) / (max - min))
+    let percent = 0
+    // Where farther distance is less percent.
+    if (this.props.sensor.measurementUnit === 'cm') {
+      percent = Math.round(((current - max) * 100) / (min - max))
+    } else {
+      percent = Math.round(((current - min) * 100) / (max - min))
+    }
     if (percent < 0) {
       return 0
     }
@@ -66,6 +70,7 @@ class Sensor extends React.Component<Props, State> {
             <Col className="left-container" span={8}>
               <p className="name">{this.props.sensor.name}</p>
               <p className="desc">{this.props.sensor.description}</p>
+              <p className="desc">Raw value: {this.props.sensor.lastReportedValue}</p>
               <p>{Moment(new Date(this.props.sensor.lastReportedTime)).format('MM-DD HH:mm:ss')}</p>
             </Col>
             <Col className="right-container" span={2} offset={2}>

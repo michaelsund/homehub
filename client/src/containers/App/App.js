@@ -1,13 +1,11 @@
-// @flow
-
 import React from 'react'
 import { Row, Col } from 'react-simple-flex-grid'
 import 'react-simple-flex-grid/lib/main.css'
-import BitCoinValue from '../../components/BitCoinValue'
+// import BitCoinValue from '../../components/BitCoinValue'
 // import RecurringEvent from '../../components/RecurringEvent'
 import SensorList from '../../components/SensorList'
 import ServerStatus from '../../components/ServerStatus'
-import CuStatus from '../../components/CuStatus'
+// import CuStatus from '../../components/CuStatus'
 import SonarrCalendar from '../../components/SonarrCalendar'
 import ControllerStatus from '../../components/ControllerStatus'
 import TradfriList from '../../components/TradfriList'
@@ -16,9 +14,9 @@ class App extends React.Component<{}> {
   render() {
     return (
       <Row className="row-style">
-        <Col className="col-without-row-style" lg={4} md={3} sm={3} xs={12}>
+        {/* <Col className="col-without-row-style" lg={4} md={3} sm={3} xs={12}>
           <BitCoinValue />
-        </Col>
+        </Col> */}
         {/* Sensors fetched from db */}
         <SensorList />
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
@@ -40,9 +38,9 @@ class App extends React.Component<{}> {
         <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <SonarrCalendar updateInterval={5} daysForward={3} />
         </Col>
-        <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
+        {/* <Col className="col-without-row-style" lg={2} md={3} sm={3} xs={12}>
           <CuStatus />
-        </Col>
+        </Col> */}
         <Col className="col-without-row-style" lg={3} md={4} sm={5} xs={12}>
           <ServerStatus />
         </Col>

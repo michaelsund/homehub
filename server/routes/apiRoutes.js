@@ -3,6 +3,8 @@ import { check, validationResult } from 'express-validator/check'
 import db from '../schema'
 import settings from '../../client/src/settings.json'
 import sendWebSocketMessage from '../helpers/sendWebSocketMessage'
+import checkSensorAlarmTrigger from '../helpers/checkSensorAlarmTrigger'
+import sensorsPubSub from '../helpers/sensorsPubSub'
 // const { matchedData, sanitize } = require('express-validator/filter');
 
 const apiRouter = express.Router()
@@ -38,9 +40,9 @@ apiRouter.get('/sensors', (req, res) => {
 apiRouter.post('/sensor', [
   check('sensorId').exists().isLength({ min: 1 })
 ], (req, res) => {
-  const errors = validationResult(req);
+  const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    res.status(422).json({ success: false, errors: errors.mapped() });
+    res.status(422).json({ success: false, errors: errors.mapped() })
   } else {
     db.Sensor.find({ _id: req.body.sensorId }, (err, data) => {
       if (err) {
@@ -54,9 +56,9 @@ apiRouter.post('/sensor', [
 apiRouter.post('/newsensor', [
   check('name').exists().isLength({ min: 1 }).trim()
 ], (req, res) => {
-  const errors = validationResult(req);
+  const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    res.status(422).json({ success: false, errors: errors.mapped() });
+    res.status(422).json({ success: false, errors: errors.mapped() })
   } else {
     const newSensor = new db.Sensor({
       name: req.body.name,
@@ -95,9 +97,9 @@ apiRouter.post(
     check('sensorId').exists().isLength({ min: 1 }).trim(),
   ], (req, res) => {
     console.log(req.body)
-    const errors = validationResult(req);
+    const errors = validationResult(req)
     if (!errors.isEmpty()) {
-      res.status(422).json({ success: false, errors: errors.mapped() });
+      res.status(422).json({ success: false, errors: errors.mapped() })
     } else {
       // Default acks all active alarms on sensor.
       db.Sensor.findByIdAndUpdate(req.body.sensorId, {
@@ -122,9 +124,9 @@ apiRouter.post('/delsensor', (req, res) => {
   if (req.body.sensorId) {
     db.Sensor.findOne({ _id: req.body.sensorId }, (err, sensor) => {
       if (sensor) {
-        db.Sensor.remove({ _id: req.body.sensorId }, () =>
-          db.SensorValue.remove({ sensorId: req.body.sensorId }, () =>
-            res.json({ success: true, status: 'Sensor deleted.' })))
+        db.Sensor.remove({ _id: req.body.sensorId }, () => db.SensorValue.remove({
+          sensorId: req.body.sensorId,
+        }, () => res.json({ success: true, status: 'Sensor deleted.' })))
       } else {
         res.json({ success: false, status: 'Cannot delete sensor.' })
       }
@@ -149,8 +151,11 @@ apiRouter.post('/newsensorvalue', (req, res) => {
             const updated = { lastReportedValue: req.body.value, lastReportedTime: new Date() }
             sensor.update(updated, () => {
               // Update websocket client with the new value
-              helpers.sendWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE', sensorId: req.body.sensorId, ...updated })
-              helpers.checkSensorAlarmTrigger(sensor, req.body.value)
+              // sendWebSocketMessage({ type: 'UPDATE_SENSOR_VALUE',
+              // sensorId: req.body.sensorId, ...updated })
+              sensorsPubSub()
+              checkSensorAlarmTrigger(sensor, req.body.value)
+              console.log(`${sensor.name} got updated with value: ${req.body.value}`)
               res.json({ success: true, status: 'Sensor value saved' })
             })
           } else {

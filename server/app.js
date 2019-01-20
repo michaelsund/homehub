@@ -1,5 +1,5 @@
 import express from 'express'
-// import bodyParser from 'body-parser'
+import bodyParser from 'body-parser'
 import path from 'path'
 // import cors from 'cors'
 // import { createServer } from 'http'
@@ -11,7 +11,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 import { GraphQLServer } from 'graphql-yoga'
 import settings from '../client/src/settings.json'
-// import apiRoutes from './routes/apiRoutes'
+import apiRoutes from './routes/apiRoutes'
 import { schema } from './graphql/schema'
 import { resolvers } from './graphql/resolvers'
 import sensorEvents from './helpers/sensorEvents'
@@ -81,10 +81,10 @@ const server = new GraphQLServer({ schema, resolvers })
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 // })
 // server.express.use(cors())
-// server.express.use(bodyParser.urlencoded({ extended: true }))
-// server.express.use(bodyParser.json())
+server.express.use(bodyParser.urlencoded({ extended: true }))
+server.express.use(bodyParser.json())
 server.express.use(express.static(path.resolve(__dirname, 'build')))
-// server.express.use('/api', apiRoutes)
+server.express.use('/api', apiRoutes)
 
 // Redirect everything under root to react router
 

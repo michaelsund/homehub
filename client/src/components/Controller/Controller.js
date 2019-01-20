@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react'
 import { Row, Col } from 'react-simple-flex-grid'
 import { Mutation } from 'react-apollo'

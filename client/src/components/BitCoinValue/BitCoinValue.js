@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from 'react'
 import { ParentSize } from '@vx/responsive'
 import Moment from 'moment'

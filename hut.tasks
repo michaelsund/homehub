@@ -35,6 +35,7 @@
 ✔ Sensor alarms should trigger sensor subscription change. @done (7/5/2018, 7:45:19 PM)
 ✔ ikea tradfri auth documentation and helper to get id and psk. @done (8/19/2018, 9:10:59 PM)
 ✔ watch groups and bulbs, no configuration at this stage. @done (8/19/2018, 9:11:03 PM)
+Pellets levels 155 is 0% and 110 is 100%.
 ☐ Acking alarms no longer removes the icon.
 ☐ More info on tradfri group.
 ☐ ControllerStatus can show onOff timers, if enabled.

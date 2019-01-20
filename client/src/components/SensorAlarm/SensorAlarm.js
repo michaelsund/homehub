@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react'
 import { GoAlert } from 'react-icons/go'
 import Modal from 'react-responsive-modal'
