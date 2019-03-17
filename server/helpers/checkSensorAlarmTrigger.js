@@ -1,5 +1,6 @@
 import db from '../schema'
 import sensorsPubSub from './sensorsPubSub'
+import Send from './emitPushbulletMessage'
 
 const checkSensorAlarmTrigger = (sensor, currentValue) => {
   if (sensor.maxValueAlarm) {
@@ -7,6 +8,10 @@ const checkSensorAlarmTrigger = (sensor, currentValue) => {
       db.Sensor.findOne({ _id: sensor._id }, (err, sensor) => {
         sensor.update({ maxValueAlarmActive: true }, () => {
           sensorsPubSub()
+          // Avoid spamming, just send if there is no alarm active.
+          if (!sensor.maxValueAlarmActive) {
+            Send(sensor.name, `exceeded max value: ${sensor.maxValue} with ${currentValue}`)
+          }
         })
       })
     }

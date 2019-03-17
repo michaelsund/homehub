@@ -7,7 +7,6 @@ import path from 'path'
 // import { ApolloServer } from 'apollo-server-express'
 // import morgan from 'morgan'
 // import remotedev from 'remotedev-server'
-// import PushBullet from 'pushbullet'
 import mongoose from 'mongoose'
 import { GraphQLServer } from 'graphql-yoga'
 import settings from '../client/src/settings.json'
@@ -48,17 +47,6 @@ if (settings.mongoUser === '') {
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 db.once('open', () => console.log('Connected to db!'))
-
-// const pusher = new PushBullet(settings.pushBulletKey)
-// pusher.note({
-//  channel_tag: settings.pushBulletChannel
-// }, 'Pannan', 'Need moar pelletz!', (err, res) => {
-//   if (err) {
-//     console.log(err)
-//   } else {
-//     console.log(res)
-//   }
-// })
 
 // const app = express()
 
