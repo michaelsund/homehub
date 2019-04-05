@@ -1,4 +1,4 @@
-FROM node:8.12.0
+FROM node:8.15.1-jessie
 WORKDIR /usr/src/app
 COPY . .
 RUN echo "deb http://download.telldus.com/debian/ stable main" >> /etc/apt/sources.list && wget -q http://download.telldus.com/debian/telldus-public.key -O- | apt-key add -
